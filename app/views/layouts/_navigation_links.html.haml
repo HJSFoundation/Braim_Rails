@@ -1,1 +1,10 @@
-= link_to 'Home', root_path, class: 'navbar-brand'
+%li 
+  =link_to "#" , class: "navbar-signal-quality" do
+    =image_tag "epoc-no-signal.png" , name: "signal_quality"
+%li 
+  =link_to "#" do
+    =image_tag "wireless-no-signal.png" , name: "wireless_quality" 
+%li 
+  =link_to "#" do
+    =image_tag "battery-empty.png" , name: "battery_quality"
+
