@@ -1,0 +1,85 @@
+.headset-container{
+  position: relative;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.box_description{
+  position: relative;
+}
+
+#signal-level{
+  margin-top: 100px;
+  ul{
+    list-style: none;
+  }
+}
+
+#headset
+{
+  position:relative;
+  z-index:1;
+  border:2;
+  width: 338px;
+  height: 465px;
+}
+#f3 {
+  position:absolute;
+  left:87px;
+  top:37px;
+  width:46px;
+  height:28px;
+  z-index:1;
+  border:2;
+}
+#f4 {
+  position:absolute;
+  left:207px;
+  top:37px;
+  width:46px;
+  height:28px;
+  z-index:1;
+  border:2;
+}
+#t7 {
+  position:absolute;
+  left:20px;
+  top:196px;
+  width:28px;
+  height:48px;
+  z-index:1;
+  border:2;
+}
+#t8 {
+  position:absolute;
+  left:293px;
+  top:196px;
+  width:28px;
+  height:48px;
+  z-index:1;
+  border:2;
+}
+#pz {
+  position:absolute;
+  left:146px;
+  top:388px;
+  width:50px;
+  height:26px;
+  z-index:1;
+  border:2;
+}
+#text
+{
+  color:#FF0000;
+  text-align:center;
+}
+
+.stepGuide
+{
+  color:white;
+  font-weight:bold;
+}
+
+.box_description{
+  position: relative;
+}
