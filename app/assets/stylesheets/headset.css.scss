@@ -2,10 +2,12 @@
   position: relative;
   text-align: center;
   margin-top: 20px;
+
 }
 
 .box_description{
   position: relative;
+
 }
 
 #signal-level{
@@ -17,6 +19,7 @@
 
 #headset
 {
+  display: inline-block;
   position:relative;
   z-index:1;
   border:2;
