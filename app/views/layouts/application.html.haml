@@ -1,6 +1,8 @@
 !!!
 %html
   %head
+    %object#plugin0{:height => "0", :type => "application/x-emotivlifesciencesbtle", :width => "0"}
+      %param{:name => "onload", :value => "pluginLoaded"}
     %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0"}
     %title= content_for?(:title) ? yield(:title) : 'Braim Browser'
     %meta{:name => "description", :content => "#{content_for?(:description) ? yield(:description) : 'Braim Browser'}"}
