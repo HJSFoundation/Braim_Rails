@@ -3,7 +3,76 @@ function ELSPlugin()
   return document.getElementById('plugin0');
 }
 
-/*Verify Plugin*/
+function onloadPluginEmotiv()
+{
+  var isInternetExplorer = !!navigator.userAgent.match(/Trident.*rv\:11\./);
+  if(!checkPluginExits()&&!isInternetExplorer)
+  {
+    var is_chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
+    if(is_chrome)
+    {
+      var chromeVersion = navigator.userAgent.match(/Chrom(e|ium)\/([0-9]+)\./);
+      chromeVersion = chromeVersion ? parseInt(chromeVersion[2], 10) : false
+      if(chromeVersion>=45)
+      {
+        alert("Your browser is Google's Chrome version 45 or higher which is not support our plugin. Please run the Cpanel website with Google's Chrome version lower 45 or another Web Browsers. Thanks.");
+      }       
+      else
+      {
+        alert("Did you install plugin or enable NPAPI? Please read instruction for more detail.");
+        window.location.href=('Download/instruction.html');
+      }
+    }
+    else
+    {
+      var confirmDownload = confirm("Please download and install Emotiv plugin before continuing. You may need to restart your browser to complete installation.");
+      if (confirmDownload == true)
+      {
+        window.location.href=('Download/download.php');
+      }
+    }
+  }
+  else
+  {
+    var version = ELSPlugin().version;
+    if(version==undefined&&isInternetExplorer)
+    {
+      var confirmDownload = confirm("Please download and install Emotiv plugin before continuing. You may need to restart your browser to complete installation.");
+      if (confirmDownload == true)
+      {
+        window.location.href=('Download/download.php');
+      }
+    }
+    if (version!=null)
+    {
+      if((platform.os.family == "OS X")||(platform.os.family == "iOS"))
+       {
+            if(version != "1.9.1.0")
+      {
+       var confirmUpdate = confirm("Please update new version of Emotiv plugin. You may need to restart your browser to complete installation.");
+       if (confirmUpdate == true)
+       {
+        window.location.href=('Download/download.php');
+       }
+      }
+       }
+       else
+       {
+            if(version != "1.9.0.9")
+      {
+       var confirmUpdate = confirm("Please update new version of Emotiv plugin. You may need to restart your browser to complete installation.");
+       if (confirmUpdate == true)
+       {
+        window.location.href=('Download/download.php');
+       }
+      }
+       }
+    }
+  }
+};
+
+/*
+
 function onloadPluginEmotiv()
 {
   var isInternetExplorer = !!navigator.userAgent.match(/Trident.*rv\:11\./);
@@ -64,13 +133,13 @@ function onloadPluginEmotiv()
        }
        else
        {
-        /*
+        
       <?php
       // load file xml
       $xml = simplexml_load_file ( "https://cpanel.emotivinsight.com/BTLE/Download/version.xml" ) or die ( "Unable to load XML file." );
       foreach ( $xml->version->Windows as $version )
       ?>
-      */
+      
       if(version != "<?php echo $version->number;?>")
       {
        var confirmUpdate = confirm("Please update new version of Emotiv plugin. You may need to restart your browser to complete installation.");
@@ -83,6 +152,8 @@ function onloadPluginEmotiv()
     }
   }
 };
+
+*/
 
 //check plugin is exist
 function checkPluginExits()
@@ -123,15 +194,12 @@ console.log("abc");
   init();
 };*/
 
-  </script>
-
- <script type = "text/javascript">
-// main javascript
 var sysTime;
-var engine = EmoEngine.instance();
+var engine;
 var userIdProfile = 0;
 function init()
 {
+  engine = EmoEngine.instance();
   onloadPluginEmotiv();
   //EdkDll.DebugLog = true;
   AddValidLicenseDoneEvent();
@@ -179,7 +247,7 @@ $(document).bind("UserAdded",function(event,userId){
 });
 // Handle UserRemoved event
 $(document).bind("UserRemoved",function(event,userId){
-  alert("Removed User");
+ //alert("Removed User");
 });
 
 $(document).bind("EmoStateUpdated",function(event,userId,es){
@@ -199,6 +267,17 @@ $(document).bind("EmoStateUpdated",function(event,userId,es){
   loadWirelessQuality(wireSignal);
 });
 
+
+// **************************  MAIN SCRIPT *************************//
+
 $(window).load(function(){
+  if(!checkPluginExits())
+  {
+    var confirmDownload = confirm("Download plugin (Please restart your browser after install plugin)?");
+    if (confirmDownload == true)
+    {
+      window.location.href=('download.php');
+    }
+  }
   init();
 });

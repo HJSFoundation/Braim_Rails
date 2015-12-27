@@ -2,15 +2,22 @@ var isBlack; //++
 var isRed; //++
 var isYellow; //++
 var isGreen; //++
+
+var AF3_VALUE;
+var T7_VALUE;
+var PZ_VALUE;
+var T8_VALUE;
+var AF4_VALUE;
 /*-- Draw Headset --*/
-	var image0 = new Array("images/headset/f3-black.png","images/headset/f3-red.png","images/Headset/f3-yellow.png","images/Headset/f3-green.png");
-	var image1 = new Array("images/headset/f4-black.png","images/headset/f4-red.png","images/Headset/f4-yellow.png","images/Headset/f4-green.png");
-	var image2 = new Array("images/headset/t7-black.png","images/headset/t7-red.png","images/Headset/t7-yellow.png","images/Headset/t7-green.png");
-	var image3 = new Array("images/headset/t8-black.png","images/headset/t8-red.png","images/Headset/t8-yellow.png","images/Headset/t8-green.png");
-	var image4 = new Array("images/headset/pz-black.png","images/headset/pz-red.png","images/Headset/pz-yellow.png","images/Headset/pz-green.png");
+	var image0 = new Array("assets/headset/f3-black.png","assets/headset/f3-red.png","assets/Headset/f3-yellow.png","assets/Headset/f3-green.png");
+	var image1 = new Array("assets/headset/f4-black.png","assets/headset/f4-red.png","assets/Headset/f4-yellow.png","assets/Headset/f4-green.png");
+	var image2 = new Array("assets/headset/t7-black.png","assets/headset/t7-red.png","assets/Headset/t7-yellow.png","assets/Headset/t7-green.png");
+	var image3 = new Array("assets/headset/t8-black.png","assets/headset/t8-red.png","assets/Headset/t8-yellow.png","assets/Headset/t8-green.png");
+	var image4 = new Array("assets/headset/pz-black.png","assets/headset/pz-red.png","assets/Headset/pz-yellow.png","assets/Headset/pz-green.png");
 	//var smallNoteInertial = new Array();
 	//smallNoteInertial = document.getElementsByName("smallNoteInertial");
 	var smallNote = new Array();
+
 	smallNote = document.getElementsByName("smallNote");
 	var noteValue = new Array(); // store value of each note
 	$(document).bind("EmoStateUpdated",function(event,userId,es){
@@ -42,6 +49,7 @@ var isGreen; //++
 		isGreen = 0; //++
 		/*-- End update --*/
 		drawNote();
+		
 	});
 	
 	function noteStatus(noteValue,i)
@@ -197,11 +205,21 @@ var isGreen; //++
 
 	function drawNote()
 	{
-		smallNote[0].src = noteStatus(noteValue[0],0).src; //AF3 = 0, T7 = 1, Pz = 2, T8 = 3, AF4 = 4;
-		smallNote[1].src = noteStatus(noteValue[4],1).src;
-		smallNote[2].src = noteStatus(noteValue[1],2).src;
-		smallNote[3].src = noteStatus(noteValue[3],3).src;
-		smallNote[4].src = noteStatus(noteValue[2],4).src;
+		AF3_VALUE	= noteStatus(noteValue[0],0).src;
+		T7_VALUE = noteStatus(noteValue[4],1).src;
+		PZ_VALUE = noteStatus(noteValue[1],2).src;
+		T8_VALUE = noteStatus(noteValue[3],3).src;
+		AF4_VALUE = noteStatus(noteValue[2],4).src;
+		if ($( "#headset" ).length ){
+			smallNote[0].src = AF3_VALUE; //AF3 = 0, T7 = 1, Pz = 2, T8 = 3, AF4 = 4;
+			smallNote[1].src = T7_VALUE;
+			smallNote[2].src = PZ_VALUE;
+			smallNote[3].src = T8_VALUE;
+			smallNote[4].src = AF4_VALUE;
+		}
+		drawSignalQuality();
+	}
+	function drawSignalQuality(){
 		var maxStatus;
 		maxStatus = Math.max(isBlack,isRed,isYellow,isGreen);
 		if (maxStatus==isBlack) loadSignalQuality(0);

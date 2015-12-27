@@ -5,10 +5,10 @@
 				//2: yellow
 				//3: green
 				// default:no
-				var image = new Array("images/epoc-no-signal.png",
-				"images/epoc-bad-signal.png",
-				"images/epoc-poor-signal.png",
-				"images/epoc-good-signal.png");
+				var image = new Array("assets/epoc-no-signal.png",
+				"assets/epoc-bad-signal.png",
+				"assets/epoc-poor-signal.png",
+				"assets/epoc-good-signal.png");
 				var returnImg = new Image();
 				switch(i)
 				{
@@ -35,8 +35,8 @@
 				// 1: good
 				// 2: no
 				// default:no
-				var image = new Array("images/wireless-no-signal.png",
-				"images/wireless-good-signal.png");
+				var image = new Array("assets/wireless-no-signal.png",
+				"assets/wireless-good-signal.png");
 				var returnImg = new Image();
 				switch(i)
 				{
@@ -64,10 +64,10 @@
 				// 4: full
 				// 5: full
 				// default:empty
-				var image = new Array("images/battery-empty.png",
-				"images/battery-low.png",
-				"images/battery-half.png",
-				"images/battery-full.png"
+				var image = new Array("assets/battery-empty.png",
+				"assets/battery-low.png",
+				"assets/battery-half.png",
+				"assets/battery-full.png"
 				);
 				var returnImg = new Image();
 				switch(i)
