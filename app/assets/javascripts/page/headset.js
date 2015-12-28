@@ -17,40 +17,7 @@ var AF4_VALUE;
 	//var smallNoteInertial = new Array();
 	//smallNoteInertial = document.getElementsByName("smallNoteInertial");
 	var smallNote = new Array();
-
 	smallNote = document.getElementsByName("smallNote");
-	var noteValue = new Array(); // store value of each note
-	$(document).bind("EmoStateUpdated",function(event,userId,es){
-	
-		var signalStatus = es.IS_GetWirelessSignalStatus();
-		//console.log(signalStatus);
-		if(signalStatus !=0)
-		{
-		var contactQualityChannels = new Array();
-		contactQualityChannels = es.IS_GetContactQualities();
-			noteValue[0] = contactQualityChannels[0];
-			noteValue[1] = contactQualityChannels[1];
-			noteValue[2] = contactQualityChannels[2];
-			noteValue[3] = contactQualityChannels[3];
-			noteValue[4] = contactQualityChannels[4];
-		}
-		else
-		{
-			var i =0;
-			for(i=0;i<5;i++)
-			{
-				noteValue[i] =0;
-			}
-		}
-		/*-- Update headset small --*/
-		isBlack = 0; //++
-		isRed = 0; //++
-		isYellow = 0; //++
-		isGreen = 0; //++
-		/*-- End update --*/
-		drawNote();
-		
-	});
 	
 	function noteStatus(noteValue,i)
 	{
@@ -210,7 +177,7 @@ var AF4_VALUE;
 		PZ_VALUE = noteStatus(noteValue[1],2).src;
 		T8_VALUE = noteStatus(noteValue[3],3).src;
 		AF4_VALUE = noteStatus(noteValue[2],4).src;
-		if ($( "#headset" ).length ){
+		if (isHeadset()){
 			smallNote[0].src = AF3_VALUE; //AF3 = 0, T7 = 1, Pz = 2, T8 = 3, AF4 = 4;
 			smallNote[1].src = T7_VALUE;
 			smallNote[2].src = PZ_VALUE;
@@ -228,3 +195,36 @@ var AF4_VALUE;
 		if (maxStatus==isGreen) loadSignalQuality(3);
 	}
 	
+
+	var noteValue = new Array(); // store value of each note
+	$(document).bind("EmoStateUpdated",function(event,userId,es){
+	
+		var signalStatus = es.IS_GetWirelessSignalStatus();
+		//console.log(signalStatus);
+		if(signalStatus !=0)
+		{
+		var contactQualityChannels = new Array();
+		contactQualityChannels = es.IS_GetContactQualities();
+			noteValue[0] = contactQualityChannels[0];
+			noteValue[1] = contactQualityChannels[1];
+			noteValue[2] = contactQualityChannels[2];
+			noteValue[3] = contactQualityChannels[3];
+			noteValue[4] = contactQualityChannels[4];
+		}
+		else
+		{
+			var i =0;
+			for(i=0;i<5;i++)
+			{
+				noteValue[i] =0;
+			}
+		}
+		/*-- Update headset small --*/
+		isBlack = 0; //++
+		isRed = 0; //++
+		isYellow = 0; //++
+		isGreen = 0; //++
+		/*-- End update --*/
+		drawNote();
+		
+	});

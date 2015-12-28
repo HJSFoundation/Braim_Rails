@@ -266,11 +266,16 @@ $(document).bind("EmoStateUpdated",function(event,userId,es){
   loadBatteryQuality(batteryArr["chargeLevel"]);
   loadWirelessQuality(wireSignal);
 });
-
-
+function isPerformance(){
+ return window.location.pathname == "/performance";
+}
+function isHeadset(){
+  return window.location.pathname == "/";
+}
 // **************************  MAIN SCRIPT *************************//
 
 $(window).load(function(){
+  console.log(window.location.pathname);
   if(!checkPluginExits())
   {
     var confirmDownload = confirm("Download plugin (Please restart your browser after install plugin)?");
