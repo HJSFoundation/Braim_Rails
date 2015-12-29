@@ -243,7 +243,7 @@ function updateEmoEngine()
 // Handle UserAdded event
 $(document).bind("UserAdded",function(event,userId){
   userIdProfile = userId;
-  alert("Added User");
+  //alert("Added User");
 });
 // Handle UserRemoved event
 $(document).bind("UserRemoved",function(event,userId){

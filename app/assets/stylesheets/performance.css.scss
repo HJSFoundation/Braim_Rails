@@ -1,0 +1,148 @@
+/*-----------------------------------------------------CSS Page 4-------------------------------------------------*/
+#PerformanceView .title_box{
+  background:#8a8b96;
+}
+#PerformanceView .jplot{background: #afafb3;
+padding-top: 40px;
+min-height: 851px;
+}
+
+.emulator-button{
+  display: block;
+  margin: auto;
+  width: 52%;
+}
+.emulator-button-enable{
+  width:219px;
+  height:34px;
+  background:url("images/emulator-enable.png"); 
+  border:none;
+}
+.emulator-button-recenter{
+  width:217px;
+  height:34px;
+  background:url("images/emulator-recenter.png"); 
+  border:none;
+}
+.highcharts-title{
+  display:none;
+}
+.highcharts-button{
+  display:none;
+}
+.highcharts-legend-item{
+  display:none;
+}
+.colum_bg table{width:100%;}
+.box{
+min-width: 20%;
+height: 100px;
+border: 1px solid #89929c;
+background: #89929c;
+border-radius: 4px;
+margin:auto;
+text-align: center;
+color: white;
+PADDING-TOP: 10PX;
+}
+.box SPAN{padding-top:5px; font-size:12px;font-weight:bold;}
+#PerformanceView label{/* width: 28px; */
+height: 27px;
+padding: 20px;
+line-height: 0px;
+border: 1px solid #b7bcc0;
+background: #565c61;}
+#page4 .colum_bg h4{margin-top: 50px;
+padding-left: 30px;}
+#tlmenu li.special_li:hover {
+cursor: pointer;
+ background-color: white;
+}
+
+
+/*--8/7/2015 Dung--*/
+#PerformanceView .topright-menu li{
+  float:right;
+  
+  height:35px;
+}
+#PerformanceView .topright-menu li button,#log_sessions .topright-menu li button{
+  border: 1px solid #656768;
+  background: #A0A0A0 none repeat scroll 0% 0%;
+
+  font-size: 15px;
+  color: #FFF;
+  outline: medium none;
+  margin-left: 10px;
+  line-height: 2.5em;
+  float: right;
+}
+#PerformanceView .topright-menu .performance-info-button{
+  height:100%;
+  margin-left:10px;
+}
+#PerformanceView .topright-menu .performance-info-button img{
+  height:100%;
+}
+#PerformanceView .topright-menu .performance-help img{
+  margin-top:6px;
+}
+#PerformanceView .visual-art{
+  margin-top: 20px;
+  height: 35px;
+}
+#PerformanceView .visual-art-title{
+  height:100%;
+}
+#PerformanceView .visual-art-title span{
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+}
+#PerformanceView .display-length{
+  padding-right:48px;
+  height:35px;
+  float:right;
+}
+#PerformanceView .display-length li{
+  float:right;
+}
+#PerformanceView .display-length input{
+  height:30px;
+  border:1px solid #656768;
+  background:#a0a0a0;
+  width:80px;
+  outline:none;
+  text-indent: 3px;
+  color: #fff;
+}
+#PerformanceView .display-length span{
+  line-height:35px;
+  color:#000;
+  margin-right:5px;
+}
+#PerformanceView .performance-info {
+  background-color: #fff;
+  width: 50%;
+  right:0;
+  z-index:999;
+  position:absolute;
+  padding-left:15px;
+  text-align:justify;
+  padding-top: 20px;
+    padding-bottom: 20px;
+}
+#PerformanceView .performance-info-content{
+  margin-top: 7px;
+  font-size:14px;
+  color:#000;
+}
+#PerformanceView .info-performance-title{
+  font-size:16px;
+  font-weight:bold;
+}
+#PerformanceView .info-title{
+  font-weight: bold;
+  font-size: 15px;
+}
+

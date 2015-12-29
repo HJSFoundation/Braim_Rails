@@ -1,1 +1,35 @@
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
 %h1 Performance Metrics
+#container{:style => "min-width: 310px; height: 400px; margin: 0 auto"}
+.performance-info
+  .col-xs-12.performance-info-content
+    %p.info-performance-title Performance Metrics
+    %p Control Panel shows a real time graph of cognitive performance as measured by 6 key metrics:
+  .col-xs-12.performance-info-content
+    %span.info-title Interest
+    %img{:src => "assets/performance/interest-color.png"}
+    %p Interest is a measure of your enjoyment of the activity. Mid range scoring means that the task is informative in nature but does not have high emotional content.
+  .col-xs-12.performance-info-content
+    %span.info-title Engagement
+    %img{:src => "assets/performance/engagement-color.png"}
+    %p Engagement is your level of immersion while performing the activity. High engagement levels ensure better retention of information.
+  .col-xs-12.performance-info-content
+    %span.info-title Focus
+    %img{:src => "assets/performance/stress-color.png"}
+    %p Focus is a ability to perform individual task with consistent, sustained levels of concentration.
+  .col-xs-12.performance-info-content
+    %span.info-title Relaxation
+    %img{:src => "assets/performance/relaxation-color.png"}
+    %p Relaxation is your ability to switch of and allow yoursefl to rest and recover from intense concentration. Finding time to relax throughout the day is beneficial to your health.
+  .col-xs-12.performance-info-content
+    %span.info-title Stress
+    %img{:src => "assets/performance/stress-color.png"}
+    %p Stress is measure of your level of comfort with the current challenge. Short term stress improves productivity but sustained long term stress is destructive to your well-being.
+  .col-xs-12.performance-info-content
+    %span.info-title Instantaneous Excitement
+    %img{:src => "assets/performance/instaneous-excitement-color.png"}
+    %p Excitement is related to the degree of emotional intensity or arousal in the current activity. Instantaneous Excitement plots short term changes in excitement levels, such as when you are startled.
+  .col-xs-12.performance-info-content
+    %span.info-title Long Term Excitement
+    %img{:src => "assets/performance/long-term-excitement-color.png"}
+    %p Excitement is related to the degree of emotional intensity or arousal in the current activity. Long Term Excitement is calibrated to the ranges detected in your individual excitement levels, and helps you identify trends over time.
