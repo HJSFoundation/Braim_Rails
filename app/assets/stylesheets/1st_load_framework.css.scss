@@ -31,11 +31,17 @@ img {
   @extend .btn-primary;
   @extend .btn-lg;
   }
+.btn-nav{
+  margin-top: 6px;
+  color: white!important;
+  padding-top: 8px!important;
+  padding-bottom: 8px!important;
+}
 // apply styles to HTML elements
 // to make views framework-neutral
 main {
   @extend .container;
-  background-color: #eee;
+  //background-color: #eee;
   padding-bottom: 80px;
   width: 100%;
   margin-top: 51px; // accommodate the navbar
