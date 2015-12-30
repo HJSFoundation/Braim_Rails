@@ -270,7 +270,7 @@ function isPerformance(){
  return window.location.pathname == "/performance";
 }
 function isHeadset(){
-  return window.location.pathname == "/";
+  return window.location.pathname == "/headset";
 }
 // **************************  MAIN SCRIPT *************************//
 
