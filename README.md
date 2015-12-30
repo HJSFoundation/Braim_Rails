@@ -1,20 +1,7 @@
-Braimbrowser
-================
 
-This application was generated with the [rails_apps_composer](https://github.com/RailsApps/rails_apps_composer) gem
-provided by the [RailsApps Project](http://railsapps.github.io/).
-
-Rails Composer is supported by developers who purchase our RailsApps tutorials.
-
-Problems? Issues?
------------
-
-Need help? Ask on Stack Overflow with the tag 'railsapps.'
-
-Your application contains diagnostics in the README file. Please provide a copy of the README file when reporting any issues.
-
-If the application doesn't work as expected, please [report an issue](https://github.com/RailsApps/rails_apps_composer/issues)
-and include the diagnostics.
+Braim Rails
+=======
+Emotiv Insight test on Ruby on Rails app
 
 Ruby on Rails
 -------------
@@ -23,8 +10,6 @@ This application requires:
 
 - Ruby 2.1.3
 - Rails 4.2.3
-
-Learn more about [Installing Rails](http://railsapps.github.io/installing-rails.html).
 
 Getting Started
 ---------------
@@ -42,7 +27,10 @@ Contributing
 ------------
 
 Credits
+Jesus Eduardo Muñoz
 -------
 
-License
+License MIT
 -------
+=======
+
