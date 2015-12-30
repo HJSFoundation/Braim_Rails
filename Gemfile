@@ -8,6 +8,7 @@ gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'turbolinks'
 gem "highcharts-rails", "~> 3.0.0"
+gem 'devise'
 group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'
