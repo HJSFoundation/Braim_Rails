@@ -4,7 +4,9 @@ Rails.application.routes.draw do
     root :to => "users#profile" , :as => "authenticated_root"
   end
   root to: 'visitors#home'
-  get 'users/profile'
   get "/about" => "visitors#about"
-  get "/performance" => "visitors#performance"
+
+  get '/profile' => "users#profile"
+  get "/performance" => "users#performance"
+  get "/headset" =>  "users#headset" 
 end

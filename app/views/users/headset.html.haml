@@ -1,0 +1,17 @@
+
+%h1 Headset
+.row
+  .col-sm-7
+    =render "headset"
+  .col-sm-5
+    =render "signal_level"
+.row
+  =render "signal_description"
+/ /#page-content-wrapper
+/ /#wrapper
+/ Menu Toggle Script
+:javascript
+  $("#menu-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+  });

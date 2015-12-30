@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def after_sign_in_path_for(resource)
-    users_profile_path
+    profile_path
   end
   def layout_by_resource
     if devise_controller?
