@@ -15,4 +15,3 @@
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require highcharts
-//= require_tree .
