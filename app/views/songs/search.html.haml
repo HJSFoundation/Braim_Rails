@@ -1,2 +1,8 @@
-%h1 Songs#search
-%p Find me in app/views/songs/search.html.haml
+%section.search-song-section
+  .jumbotron
+    %h2 Search songs
+    .search-songs-form
+      =form_tag songs_search_path, method: :get , id: "search_songs" ,remote: true do 
+        =text_field_tag :query, params[:query]
+        =submit_tag "Search", name: nil
+        
