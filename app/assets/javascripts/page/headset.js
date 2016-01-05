@@ -9,11 +9,11 @@ var PZ_VALUE;
 var T8_VALUE;
 var AF4_VALUE;
 /*-- Draw Headset --*/
-	var image0 = new Array("assets/headset/f3-black.png","assets/headset/f3-red.png","assets/Headset/f3-yellow.png","assets/Headset/f3-green.png");
-	var image1 = new Array("assets/headset/f4-black.png","assets/headset/f4-red.png","assets/Headset/f4-yellow.png","assets/Headset/f4-green.png");
-	var image2 = new Array("assets/headset/t7-black.png","assets/headset/t7-red.png","assets/Headset/t7-yellow.png","assets/Headset/t7-green.png");
-	var image3 = new Array("assets/headset/t8-black.png","assets/headset/t8-red.png","assets/Headset/t8-yellow.png","assets/Headset/t8-green.png");
-	var image4 = new Array("assets/headset/pz-black.png","assets/headset/pz-red.png","assets/Headset/pz-yellow.png","assets/Headset/pz-green.png");
+	var image0 = new Array("/assets/headset/f3-black.png","/assets/headset/f3-red.png","/assets/Headset/f3-yellow.png","/assets/Headset/f3-green.png");
+	var image1 = new Array("/assets/headset/f4-black.png","/assets/headset/f4-red.png","/assets/Headset/f4-yellow.png","/assets/Headset/f4-green.png");
+	var image2 = new Array("/assets/headset/t7-black.png","/assets/headset/t7-red.png","/assets/Headset/t7-yellow.png","/assets/Headset/t7-green.png");
+	var image3 = new Array("/assets/headset/t8-black.png","/assets/headset/t8-red.png","/assets/Headset/t8-yellow.png","/assets/Headset/t8-green.png");
+	var image4 = new Array("/assets/headset/pz-black.png","/assets/headset/pz-red.png","/assets/Headset/pz-yellow.png","/assets/Headset/pz-green.png");
 	//var smallNoteInertial = new Array();
 	//smallNoteInertial = document.getElementsByName("smallNoteInertial");
 	var smallNote = new Array();

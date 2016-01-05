@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'songs/search'
+
+  get 'songs/show'
+
   devise_for :users
   authenticated :user do
     root :to => "users#profile" , :as => "authenticated_root"
