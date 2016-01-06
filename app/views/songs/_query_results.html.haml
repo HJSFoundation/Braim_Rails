@@ -1,7 +1,7 @@
 -if query
   %div
     / Nav tabs
-    %h3 
+    %h3
       ="Results for '#{query}'"
     %ul.nav.nav-tabs{:role => "tablist"}
       %li.active{:role => "presentation"}
@@ -16,21 +16,27 @@
         %table.table
           %thead
             %tr
+              %th Preview
               %th Song Name
               %th Artist
-              %th Song Type
+              %th Album
               %th 
           %tbody
             -songs.each_with_index do |song, i|
               %tr
+                %th 
+                  = audio_tag song.preview_url, class: "audio-play"
+                  =link_to "#", class: "btn btn-link audioButton" do
+                    .glyphicon.glyphicon-play
+                  
                 %th{:scope => "row"}
-                  =song.title
+                  =song.name
                 %th
-                  =song.artist_name
-                %td 
-                  -song.song_type.each do |type_tag|
-                    %span.label.label-info.song-type-label
-                      =type_tag
+                  =song.artists.first.name if song.artists.any?
+                %td.album-track-query 
+                  %p 
+                    =song.album.name
+                  =image_tag song.album.images.first["url"] if song.album.images.any?
                 %td
                   =link_to "Record", "#", class: "btn btn-default"
 
@@ -40,13 +46,17 @@
             .lib-panel
               .row.box-shadow
                 .col-md-6
-                  =image_tag artist.images.last.url , class: "lib-img-show"
+                  =image_tag artist.images.first["url"] , class: "lib-img-show" if artist.images.any? 
                 .col-md-6
                   .lib-row.lib-header
                     =artist.name
                     .lib-header-seperator
                   .lib-row.lib-desc
-                    Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor
+                    -if artist.genres.any?
+                      -artist.genres.each do |genre|
+                        %span.label.label-info.song-type-label
+                          =genre
+                      
 
 
 
