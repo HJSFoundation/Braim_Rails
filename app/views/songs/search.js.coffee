@@ -1,0 +1,1 @@
+$("#songs_list").html("<%=escape_javascript(render partial: 'songs_list', locals: {items: @songs, query: params[:query]})%>")

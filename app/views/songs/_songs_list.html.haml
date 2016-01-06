@@ -1,0 +1,19 @@
+-if query
+  .panel.panel-default
+    .panel-heading 
+      ="#{items.size} Results for '#{query}'"
+    %table.table
+      %thead
+        %tr
+          %th Song Name
+          %th Artist
+          %th Username
+      %tbody
+        -items.each_with_index do |song, i|
+          %tr
+            %th{:scope => "row"}
+              =song.title
+            %th
+              =song.artist_name
+            %td Otto
+          
