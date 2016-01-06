@@ -1,0 +1,54 @@
+-if query
+  %div
+    / Nav tabs
+    %h3 
+      ="Results for '#{query}'"
+    %ul.nav.nav-tabs{:role => "tablist"}
+      %li.active{:role => "presentation"}
+        %a{"aria-controls" => "songs_tab", "data-toggle" => "tab", :href => "#songs_tab", :role => "tab"} 
+          ="#{songs.size} Songs found"
+      %li{:role => "presentation"}
+        %a{"aria-controls" => "artists_tab", "data-toggle" => "tab", :href => "#artists_tab", :role => "tab"}
+          ="#{artists.size} Artists found"
+    / Tab panes
+    .tab-content
+      #songs_tab.tab-pane.active{:role => "tabpanel"} 
+        %table.table
+          %thead
+            %tr
+              %th Song Name
+              %th Artist
+              %th Song Type
+              %th 
+          %tbody
+            -songs.each_with_index do |song, i|
+              %tr
+                %th{:scope => "row"}
+                  =song.title
+                %th
+                  =song.artist_name
+                %td 
+                  -song.song_type.each do |type_tag|
+                    %span.label.label-info.song-type-label
+                      =type_tag
+                %td
+                  =link_to "Record", "#", class: "btn btn-default"
+
+      #artists_tab.tab-pane{:role => "tabpanel"} 
+        -artists.each_with_index do |artist, i|
+          .artist-query-container.bs-callout.bs-callout-info.no-padding.lib-item{"data-category" => "view"}
+            .lib-panel
+              .row.box-shadow
+                .col-md-6
+                  =image_tag artist.images.last.url , class: "lib-img-show"
+                .col-md-6
+                  .lib-row.lib-header
+                    =artist.name
+                    .lib-header-seperator
+                  .lib-row.lib-desc
+                    Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor
+
+
+
+
+          

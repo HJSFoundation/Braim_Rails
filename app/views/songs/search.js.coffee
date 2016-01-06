@@ -1,1 +1,1 @@
-$("#songs_list").html("<%=escape_javascript(render partial: 'songs_list', locals: {items: @songs, query: params[:query]})%>")
+$("#songs_list").html("<%=escape_javascript(render partial: 'query_results', locals: {songs: @songs,artists: @artists, query: params[:query]})%>")

@@ -1,14 +1,14 @@
 %section.search-song-section
   #search-box.jumbotron
-    %h2 Search songs
+    %h2 Search Music
     .search-songs-form
       =form_tag songs_search_path, method: :get , id: "search_songs" ,remote: true do 
         .input-group
-          =text_field_tag :query, params[:query], class: "form-control" , placeholder: "Search for songs..."
+          =text_field_tag :query, params[:query], class: "form-control" , placeholder: "Song title or Artist name..."
           %span.input-group-btn
             =submit_tag "Search", name: nil , class: "btn btn-default"
   #ajax_message Loading..
   #songs_list
-    =render partial: "songs_list" , locals: {items: @songs, query: params[:query]}
+    =render partial: "query_results" , locals: {songs: @songs, artists: @artists, query: params[:query]}
         
       
