@@ -17,7 +17,7 @@
     border-left-color: #1b809e;
 }
 .artist-query-container{
-  max-width: 500px;
+  margin-left: 20px;
 }
 .bs-callout {
     padding: 20px;
@@ -34,12 +34,18 @@
   }
   img{
     position: left;
-    width: 100px;
+    width: 60px;
     margin: auto auto!important;
     display: inline-block!important;
   }
 }
-
+.artist-query-container{
+    .artist-image{
+        width: 150px;
+        height: 150px;
+        overflow: hidden;
+    }
+}
 //*** Bootsnip styles ***//
 
 

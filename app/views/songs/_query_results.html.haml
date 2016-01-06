@@ -19,7 +19,8 @@
               %th Preview
               %th Song Name
               %th Artist
-              %th Album
+              %th Album Name
+              %th Album Cover
               %th 
           %tbody
             -songs.each_with_index do |song, i|
@@ -33,32 +34,43 @@
                   =song.name
                 %th
                   =song.artists.first.name if song.artists.any?
-                %td.album-track-query 
+                %td
+                  
                   %p 
                     =song.album.name
-                  =image_tag song.album.images.first["url"] if song.album.images.any?
+                %td
+                  .album-track-query
+                    =image_tag song.album.images.first["url"] if song.album.images.any?
                 %td
                   =link_to "Record", "#", class: "btn btn-default"
 
       #artists_tab.tab-pane{:role => "tabpanel"} 
-        -artists.each_with_index do |artist, i|
-          .artist-query-container.bs-callout.bs-callout-info.no-padding.lib-item{"data-category" => "view"}
-            .lib-panel
-              .row.box-shadow
-                .col-md-6
-                  =image_tag artist.images.first["url"] , class: "lib-img-show" if artist.images.any? 
-                .col-md-6
-                  .lib-row.lib-header
-                    =artist.name
-                    .lib-header-seperator
-                  .lib-row.lib-desc
-                    -if artist.genres.any?
-                      -artist.genres.each do |genre|
-                        %span.label.label-info.song-type-label
-                          =genre
-                      
+        .container-fluid
+          %br
+          .row
+            -artists.each_with_index do |artist, i|
+              .col-md-6
+                .artist-query-container.no-padding.lib-item{"data-category" => "view"}
+                  .lib-panel
+                    .row.box-shadow
+                      .col-md-6
+                        =spotify_image_tag artist
+                      .col-md-6
+                        .lib-row.lib-header
+                          =artist.name
+                          .lib-header-seperator
+                        .lib-row.lib-desc
+                          -if artist.genres.any?
+                            -artist.genres.each do |genre|
+                              %span.label.label-info.song-type-label
+                                =genre
+                          %p.artist-followers-query
+                            %strong Spotify Followers:
+                            %span
+                              =artist.followers["total"]
+                        
 
 
 
 
-          
+            
