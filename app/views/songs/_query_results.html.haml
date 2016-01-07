@@ -21,12 +21,13 @@
               %th Artist
               %th Album Name
               %th Album Cover
+              %th Duration
               %th 
           %tbody
             -songs.each_with_index do |song, i|
               %tr
                 %th 
-                  = audio_tag song.preview_url, class: "audio-play"
+                  =audio_tag song.preview_url, class: "audio-play"
                   =link_to "#", class: "btn btn-link audioButton" do
                     .glyphicon.glyphicon-play
                   
@@ -35,14 +36,16 @@
                 %th
                   =link_to song.artists.first.name ,artist_path(song.artists.first.id) ,class: "loading-link" if song.artists.any? 
                 %td
-                  
                   %p 
                     =song.album.name
                 %td
                   .album-track-query
                     =spotify_image_tag song.album
                 %td
-                  =link_to "Record", "#", class: "btn btn-default"
+                  %p
+                    =Time.at(song.duration_ms/1000).utc.strftime("%M:%S")
+                %td
+                  =link_to "Record", song_path(song.id), class: "btn btn-default loading-link"
 
       #artists_tab.tab-pane{:role => "tabpanel"} 
         .container-fluid

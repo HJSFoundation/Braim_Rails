@@ -1,2 +1,78 @@
-%h1 Songs#show
-%p Find me in app/views/songs/show.html.haml
+=javascript_include_tag "performance/performance"
+#song.container-fluid
+  .song-title
+    %h2.title
+      =@song.name
+      %span
+      =" - #{@song_echonest.artist_name}"
+  .song-content
+    .row
+      .col-md-5
+        %iframe{:allowtransparency => "true", :frameborder => "0", :height => "380", :src => "https://embed.spotify.com/?uri=#{@song_spotify_url}", :width => "100%"}
+      .col-md-7
+        %h3 Song Info
+        %p
+          %strong Duration:
+          %span
+            =Time.at(@song.duration_ms/1000).utc.strftime("%M:%S")
+        %p
+          %strong Album:
+          %span
+            =@song.album.name
+        %p
+          %strong Song type:
+          %span
+            -@song_echonest.song_type.each do |tag|
+              =tag
+
+        %h3 Audio Summary
+        .row
+          .col-md-6
+            %p
+              %strong Energy:
+              %span
+                =@song_echonest.audio_summary.energy
+            %p
+              %strong Liveness:
+              %span
+                =@song_echonest.audio_summary.liveness
+            %p
+              %strong Tempo:
+              %span
+                =@song_echonest.audio_summary.tempo
+            %p
+              %strong Speechiness:
+              %span
+                =@song_echonest.audio_summary.speechiness
+            %p
+              %strong Acousticness:
+              %span
+                =@song_echonest.audio_summary.acousticness
+          .col-md-6
+            %p
+              %strong Instrumentalness:
+              %span
+                =@song_echonest.audio_summary.instrumentalness
+            %p
+              %strong Time signature:
+              %span
+                =@song_echonest.audio_summary.time_signature
+            %p
+              %strong Loudness:
+              %span
+                =@song_echonest.audio_summary.loudness
+            %p
+              %strong Valence:
+              %span
+                =@song_echonest.audio_summary.valence
+            %p
+              %strong Danceability:
+              %span
+                =@song_echonest.audio_summary.danceability
+  .song-insight-records
+    %h3 Emotiv Performance Metrics
+    #container{:style => "min-width: 310px; height: 100px; margin: 0 auto"}
+    %h2 My recordings
+    =link_to "New recording", "#", class: "btn btn-primary  "
+
+            

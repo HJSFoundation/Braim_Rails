@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   get 'songs/search'
 
-  get 'songs/show'
+  get 'songs/:id'=> "songs#show", :as => "song"
 
   devise_for :users
   authenticated :user do

@@ -33,6 +33,7 @@
           %span
             =@artist.followers["total"]
     %br
+    #ajax_message Loading..
     %h4 Top Tracks
     .tab-content
       #songs_tab.tab-pane.active{:role => "tabpanel"} 
@@ -43,6 +44,7 @@
               %th Song Name
               %th Album Name
               %th Album Cover
+              %th Duration
               %th 
           %tbody
             -@songs.each_with_index do |song, i|
@@ -60,8 +62,10 @@
                 %td
                   .album-track-query
                     =spotify_image_tag song.album
-
                 %td
-                  =link_to "Record", "#", class: "btn btn-default"
+                  %p
+                    =Time.at(song.duration_ms/1000).utc.strftime("%M:%S")
+                %td
+                  =link_to "Record", song_path(song.id), class: "btn btn-default loading-link"
               
 
