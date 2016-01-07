@@ -41,7 +41,6 @@
             %tr
               %th Preview
               %th Song Name
-              %th Artist
               %th Album Name
               %th Album Cover
               %th 
@@ -55,10 +54,7 @@
                   
                 %th{:scope => "row"}
                   =song.name
-                %th
-                  =link_to song.artists.first.name ,artist_path(song.artists.first.id) ,class: "loading-link" if song.artists.any? 
                 %td
-                  
                   %p 
                     =song.album.name
                 %td
