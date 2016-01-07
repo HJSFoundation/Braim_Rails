@@ -107,3 +107,14 @@
 .no-padding {
     padding: 0;
 }
+
+
+//****artist page **//
+
+#artist{
+    .artist-image-container{
+        width: 100%;
+        max-height: 200px;
+        overflow: hidden
+    }
+}

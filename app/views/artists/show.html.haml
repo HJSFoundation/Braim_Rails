@@ -1,0 +1,71 @@
+#artist.container-fluid
+  .artist-title
+    %h2
+      =@artist.name
+  .artist-content
+    .row
+      .col-md-4
+        .artist-image-container
+          =spotify_image_tag @artist
+      .col-md-8
+        %p
+          %strong Bio:
+          %span: 
+            =@artist_echonest.biographies.first.text if @artist_echonest.biographies.any?
+            =link_to "Keep reading", @artist_echonest.biographies.first.url  if @artist_echonest.biographies.any?
+        %p
+          %strong Years active:
+          %span: 
+            ="Since #{@artist_echonest.years_active.first.start}" if @artist_echonest.years_active.any?
+        %p
+          %strong Location:
+          %span: 
+            =@artist_echonest.location.location if @artist_echonest.location
+        %p
+          %strong Genres:
+          -if @artist_echonest.attrs[:genres].any?
+            -@artist_echonest.attrs[:genres].each do |genre|
+              %span.label.label-info.song-type-label
+                =genre[:name]
+        %p      
+          %strong 
+            Spotify followers:
+          %span
+            =@artist.followers["total"]
+    %br
+    %h4 Top Tracks
+    .tab-content
+      #songs_tab.tab-pane.active{:role => "tabpanel"} 
+        %table.table
+          %thead
+            %tr
+              %th Preview
+              %th Song Name
+              %th Artist
+              %th Album Name
+              %th Album Cover
+              %th 
+          %tbody
+            -@songs.each_with_index do |song, i|
+              %tr
+                %th 
+                  = audio_tag song.preview_url, class: "audio-play"
+                  =link_to "#", class: "btn btn-link audioButton" do
+                    .glyphicon.glyphicon-play
+                  
+                %th{:scope => "row"}
+                  =song.name
+                %th
+                  =link_to song.artists.first.name ,artist_path(song.artists.first.id) ,class: "loading-link" if song.artists.any? 
+                %td
+                  
+                  %p 
+                    =song.album.name
+                %td
+                  .album-track-query
+                    =spotify_image_tag song.album
+
+                %td
+                  =link_to "Record", "#", class: "btn btn-default"
+              
+

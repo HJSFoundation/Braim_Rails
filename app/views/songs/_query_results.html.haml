@@ -33,14 +33,14 @@
                 %th{:scope => "row"}
                   =song.name
                 %th
-                  =song.artists.first.name if song.artists.any?
+                  =link_to song.artists.first.name ,artist_path(song.artists.first.id) ,class: "loading-link" if song.artists.any? 
                 %td
                   
                   %p 
                     =song.album.name
                 %td
                   .album-track-query
-                    =image_tag song.album.images.first["url"] if song.album.images.any?
+                    =spotify_image_tag song.album
                 %td
                   =link_to "Record", "#", class: "btn btn-default"
 
@@ -50,25 +50,22 @@
           .row
             -artists.each_with_index do |artist, i|
               .col-md-6
-                .artist-query-container.no-padding.lib-item{"data-category" => "view"}
-                  .lib-panel
-                    .row.box-shadow
-                      .col-md-6
-                        =spotify_image_tag artist
-                      .col-md-6
-                        .lib-row.lib-header
-                          =artist.name
-                          .lib-header-seperator
-                        .lib-row.lib-desc
-                          -if artist.genres.any?
-                            -artist.genres.each do |genre|
-                              %span.label.label-info.song-type-label
-                                =genre
-                          %p.artist-followers-query
-                            %strong Spotify Followers:
-                            %span
-                              =artist.followers["total"]
-                        
+                =link_to artist_path(artist.id) do
+                  .artist-query-container.no-padding.lib-item{"data-category" => "view"}
+                    .lib-panel
+                      .row.box-shadow
+                        .col-md-6
+                          =spotify_image_tag artist
+                        .col-md-6
+                          .lib-row.lib-header
+                            =artist.name
+                            .lib-header-seperator
+                          .lib-row.lib-desc
+                            %p.artist-followers-query
+                              %strong Spotify Followers:
+                              %span
+                                =artist.followers["total"]
+                          
 
 
 

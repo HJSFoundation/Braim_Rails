@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'artists/:id' => "artists#show", :as=> "artist"
+
   get 'songs/search'
 
   get 'songs/show'
