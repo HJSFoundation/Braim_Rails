@@ -21,5 +21,6 @@ ready = ->
 
   $(document).on "click", ".loading-link",(event)->
     $("#ajax_message").show()
+
 $(document).ready(ready)
 $(document).on('page:load', ready)

@@ -1,3 +1,4 @@
+
 function ELSPlugin()
 {
   return document.getElementById('plugin0');
@@ -272,6 +273,8 @@ function isPerformance(){
 function isHeadset(){
   return window.location.pathname == "/headset";
 }
+
+
 // **************************  MAIN SCRIPT *************************//
 
 $(window).load(function(){

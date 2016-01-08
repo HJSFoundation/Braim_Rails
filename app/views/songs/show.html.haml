@@ -73,6 +73,7 @@
     %h3 Emotiv Performance Metrics
     #container{:style => "min-width: 310px; height: 100px; margin: 0 auto"}
     %h2 My recordings
-    =link_to "New recording", "#", class: "btn btn-primary  "
+    =link_to "New recording", "#", class: "btn btn-primary",id: "record_performance", "data-song-id"=>@song.id
+    =link_to "Stop recording", "#", class: "btn btn-primary disabled",id: "stop_record_performance"
 
             

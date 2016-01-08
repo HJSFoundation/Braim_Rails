@@ -117,6 +117,14 @@ $(document).ready(function () {
             symbol: 'circle'
           },
           data: []
+        },{
+          name: 'Stress',
+          color: 'rgb(255, 255, 0)',
+          marker: {
+            enabled:false,
+            symbol: 'circle'
+          },
+          data: []
         }]
         
     });
@@ -132,8 +140,8 @@ $(document).ready(function () {
       
       var interest =Math.round(es.IS_PerformanceMetricGetInterestScore()*1000000)/1000000;
       var engagement = Math.round(es.IS_PerformanceMetricGetEngagementBoredomScore()*1000000)/1000000;
-      //var stress = Math.round(EdkDll.ES_AffectivGetFrustrationScore()*1000000)/1000000;
-      var focus = Math.round(ELSPlugin().ELS_IS_PerformanceMetricGetFocusScore()*1000000)/1000000;
+      var stress = Math.round(es.IS_PerformanceMetricGetStressScore()*1000000)/1000000;
+      var focus = Math.round(es.IS_PerformanceMetricGetFocusScore()*1000000)/1000000;
       var relax = Math.round(es.IS_PerformanceMetricGetRelaxationScore()*1000000)/1000000;
       var instantaneousExcitement = Math.round(es.IS_PerformanceMetricGetInstantaneousExcitementScore()*1000000)/1000000;
       var longExcitement = Math.round(es.IS_PerformanceMetricGetExcitementLongTermScore()*1000000)/1000000;
@@ -145,10 +153,11 @@ $(document).ready(function () {
       chart1.series[3].addPoint([currentTime, relax],true,shift);
       chart1.series[4].addPoint([currentTime, instantaneousExcitement],true,shift);
       chart1.series[5].addPoint([currentTime, longExcitement],true,shift);
+      chart1.series[6].addPoint([currentTime, stress],true,shift);
+      }
     }
-  }
    
-});
+  });
 
 });
 
