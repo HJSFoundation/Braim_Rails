@@ -203,14 +203,16 @@ function init()
   engine = EmoEngine.instance();
   onloadPluginEmotiv();
   //EdkDll.DebugLog = true;
-  AddValidLicenseDoneEvent();
   EdkDll.ELS_ValidLicense();
+  AddValidLicenseDoneEvent();
+  
   //sysTime = document.getElementById("txtInputTime");
   //sysTime.value = "00.0000";
 }
 function AddValidLicenseDoneEvent()
 {
   EdkDll.addEvent(ELSPlugin(), 'valid', function(license){
+
     console.log("license");
     console.log(license);
     if(license.indexOf('"License":"EEG"') > -1) console.log("License is EEG License. You can get all data.");
