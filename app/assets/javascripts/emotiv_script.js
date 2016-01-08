@@ -29,7 +29,7 @@ function onloadPluginEmotiv()
       var confirmDownload = confirm("Please download and install Emotiv plugin before continuing. You may need to restart your browser to complete installation.");
       if (confirmDownload == true)
       {
-        window.location.href=('Download/download.php');
+        window.location.href=('https://cpanel.emotivinsight.com/BTLE/Download/download.php');
       }
     }
   }
@@ -41,7 +41,7 @@ function onloadPluginEmotiv()
       var confirmDownload = confirm("Please download and install Emotiv plugin before continuing. You may need to restart your browser to complete installation.");
       if (confirmDownload == true)
       {
-        window.location.href=('Download/download.php');
+        window.location.href=('https://cpanel.emotivinsight.com/BTLE/Download/download.php');
       }
     }
     if (version!=null)
@@ -53,7 +53,7 @@ function onloadPluginEmotiv()
        var confirmUpdate = confirm("Please update new version of Emotiv plugin. You may need to restart your browser to complete installation.");
        if (confirmUpdate == true)
        {
-        window.location.href=('Download/download.php');
+        window.location.href=('https://cpanel.emotivinsight.com/BTLE/Download/download.php');
        }
       }
        }
@@ -64,7 +64,7 @@ function onloadPluginEmotiv()
        var confirmUpdate = confirm("Please update new version of Emotiv plugin. You may need to restart your browser to complete installation.");
        if (confirmUpdate == true)
        {
-        window.location.href=('Download/download.php');
+        window.location.href=('https://cpanel.emotivinsight.com/BTLE/Download/download.php');
        }
       }
        }
@@ -278,14 +278,16 @@ function isHeadset(){
 // **************************  MAIN SCRIPT *************************//
 
 $(window).load(function(){
+  /*
   console.log(window.location.pathname);
   if(!checkPluginExits())
   {
     var confirmDownload = confirm("Download plugin (Please restart your browser after install plugin)?");
     if (confirmDownload == true)
     {
-      window.location.href=('download.php');
+      window.location.href=('https://cpanel.emotivinsight.com/BTLE/Download/download.php');
     }
   }
+  */
   init();
 });
