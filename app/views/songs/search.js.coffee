@@ -1,1 +1,6 @@
 $("#songs_list").html("<%=escape_javascript(render partial: 'query_results', locals: {songs: @songs,artists: @artists, query: params[:query]})%>")
+search_button = $('.search-button')
+icon = search_button.find('i')
+message = search_button.find('span')
+icon.removeClass("fa fa-circle-o-notch fa-spin")
+message.html("Search")

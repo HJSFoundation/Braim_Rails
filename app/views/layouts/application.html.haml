@@ -28,12 +28,6 @@
             =link_to "Performance Metrics", performance_path
           %li
             =link_to "Log out", destroy_user_session_path, method: :delete
-          %li
-            %a{:href => "#"} About
-          %li
-            %a{:href => "#"} Services
-          %li
-            %a{:href => "#"} Contact
       / /#sidebar-wrapper
       / Page Content
       #page-content-wrapper
@@ -43,3 +37,13 @@
           %main{:role => "main"}
             = render 'layouts/messages'
             = yield
+            .bg_load
+              .wrapper
+              / .inner
+              /   %span L
+              /   %span o
+              /   %span a
+              /   %span d
+              /   %span i
+              /   %span n
+              /   %span g

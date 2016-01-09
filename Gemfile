@@ -11,6 +11,7 @@ gem "highcharts-rails", "~> 3.0.0"
 gem 'devise'
 gem 'echowrap'
 gem 'rspotify'
+gem "font-awesome-rails"
 group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'
