@@ -129,3 +129,27 @@
         text-decoration: underline;
     }
 }
+.btn-record{
+   width: 200px;
+}
+#record_message{
+    display: none;
+}
+.record-data {
+    margin-top: 10px;
+    display: none;
+    .emotion{
+        float: left;
+        margin-right: 10px;
+    }
+    
+}
+
+.interest strong{color: rgb(255, 0, 255);}
+.engagement strong{color: #1eb1b1}
+.focus strong{color: #a9d466}
+.relaxation strong{color: rgb(51, 102, 255)}
+.inst-excitement strong{color: #ff792b}
+.long-excitement strong{color: rgb(153, 204, 255)}
+.stress strong{color: rgb(255, 255, 0)}
+      

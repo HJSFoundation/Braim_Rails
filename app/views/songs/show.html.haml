@@ -73,7 +73,36 @@
     %h3 Emotiv Performance Metrics
     #container{:style => "min-width: 310px; height: 100px; margin: 0 auto"}
     %h2 My recordings
-    =link_to "New recording", "#", class: "btn btn-primary",id: "record_performance", "data-song-id"=>@song.id
-    =link_to "Stop recording", "#", class: "btn btn-primary disabled",id: "stop_record_performance"
-
-            
+    .record-buttons
+      =link_to  "#", class: "btn btn-danger btn-record",id: "record_performance", "data-song-id"=>@song.id,"data-song-duration"=>@song.duration_ms do
+        .glyphicon.glyphicon-record
+      =link_to "#", class: "btn btn-primary disabled btn-record",id: "stop_record_performance" do
+        .glyphicon.glyphicon-stop
+      %span#record_message 
+        %span Recording... Time:
+        %span#message_time 0
+        %span 
+          ="Max Duration: #{Time.at(@song.duration_ms/1000).utc.strftime("%M:%S")}"
+    .record-data.disabled
+      .emotion.interest
+        %strong Interest:
+        %span 0
+      .emotion.engagement
+        %strong Engagement/Boredom:
+        %span 0
+      .emotion.focus
+        %strong Focus:
+        %span 0
+      .emotion.relaxation
+        %strong Relaxation:
+        %span 0
+      .emotion.inst-excitement
+        %strong Instantaneous Excitement:
+        %span 0
+      .emotion.long-excitement
+        %strong Long Term Excitement:
+        %span 0
+      .emotion.stress
+        %strong Stress:
+        %span 0
+      
