@@ -96,9 +96,9 @@
         %strong Stress:
         %span 0
     .record-buttons
-      =link_to  "#", class: "btn btn-danger btn-record",id: "record_performance", "data-song-id"=>@song.id,"data-song-duration"=>@song.duration_ms do
+      =link_to  "#", class: "btn btn-danger btn-record",id: "record_performance_button", "data-song-id"=>@song.id,"data-song-duration"=>@song.duration_ms do
         .glyphicon.glyphicon-record
-      =link_to "#", class: "btn btn-primary disabled btn-record",id: "stop_record_performance" do
+      =link_to "#", class: "btn btn-primary disabled btn-record",id: "stop_record_performance_button" do
         .glyphicon.glyphicon-stop
       %span#record_message 
         %span Recording... Time:
