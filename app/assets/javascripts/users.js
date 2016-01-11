@@ -24,7 +24,7 @@ $(document).ready(function(){
       data: []
     }
   }
-  function show_recording_dara(performance_data){
+  function show_recording_data(performance_data){
     $(".interest span").html(performance_data.emotiv_interest);
     $(".engagement span").html(performance_data.emotiv_engagement);
     $(".focus span").html(performance_data.emotiv_focus);
@@ -33,15 +33,26 @@ $(document).ready(function(){
     $(".long-excitement span").html(performance_data.emotiv_longExcitement);
     $(".stress span").html(performance_data.emotiv_stress);
   }
+  $(document).on('click',"#save_recording_modal", function(){
+    console.log('saving recording...');
+    console.log(recording);
+  });
+  $(document).on('click',"#cancel_recording_modal", function(){
+    $("#stop_record_performance").toggleClass('disabled');
+    $("#record_performance").toggleClass('disabled');
+    $("#record_message").toggle();
+    $(".record-data").toggle();
+    clearInterval(interval);
+    $("#save_recording_modal").modal('hide');
+  });
   function draw(){
     time = time+1000;
-    console.log(time);
+    //console.log(time);
     $("#message_time").html(time/1000);
     if(time>currentSongDuration){
       console.log("fin");
       $("#stop_record_performance").click();
     }
-    show_recording_dara(performance_data);
     interest = chart.series[0].data[chart.series[0].data.length-1].y;
     engagement = chart.series[1].data[chart.series[1].data.length-1].y;
     focus = chart.series[2].data[chart.series[2].data.length-1].y; 
@@ -59,32 +70,33 @@ $(document).ready(function(){
       emotiv_stress: stress,
       timestamp: time 
     }
+    show_recording_data(performance_data);
     recording.data.push(performance_data);
     //console.log(recording);
   }
   $("#record_performance").on("click",function(e){
     e.preventDefault();
+    chart =  $("#container").highcharts();
+    if(chart.series[0].data.length<1){
+      alert("connect the device first");
+    }else{
     initialize_recording();
     time = 0;
     $(this).toggleClass('disabled');
     $("#stop_record_performance").toggleClass('disabled');
     $("#record_message").toggle()
     $(".record-data").toggle()
-    chart =  $("#container").highcharts();
     currentSongID = $(this).data("song-id");
     currentSongDuration = $(this).data("song-duration");
     recording.song_id = currentSongID;
     timeStart = (new Date()).getTime();
     console.log("start recording on: "+timeStart+" current song: "+currentSongID+ "song duration: "+currentSongDuration);
     interval = setInterval(draw,1000);
+    }
   });
   $("#stop_record_performance").on("click",function(e){
     e.preventDefault();
-    $(this).toggleClass('disabled');
-    $("#record_performance").toggleClass('disabled');
-    $("#record_message").toggle()
-    $(".record-data").toggle()
-    clearInterval(interval);
+    $("#save_recording_modal").modal('show');
   });
 
   $(document).on("page:load",function(){

@@ -18,4 +18,10 @@ class SongsController < ApplicationController
     @song_spotify_url = "spotify:track:#{@song.id}"
     @song_echonest= Echowrap.song_profile(track_id: @song_spotify_url,bucket: ['audio_summary','song_type'])
   end
+
+  def deal
+    respond_to do |format|
+      format.any { render json: {response: 'ok','License' => "EEG"}, content_type: 'application/json' }
+    end
+  end
 end

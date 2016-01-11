@@ -5,6 +5,8 @@ Rails.application.routes.draw do
 
   get 'songs/:id'=> "songs#show", :as => "song"
 
+  get 'QuickDeal' => "songs#deal", :as =>"deal"
+
   devise_for :users
   authenticated :user do
     root :to => "songs#search" , :as => "authenticated_root"

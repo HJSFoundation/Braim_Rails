@@ -1,0 +1,13 @@
+#save_recording_modal.modal.fade{:role => "dialog", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+        %h4.modal-title Save Performance Metrics Recording
+      .modal-body
+        %p Are you sure to save this recording?
+      .modal-footer
+        %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Keep Recording
+        %button.btn.btn-danger#cancel_recording_modal{:type => "button"} Discard Recording
+        %button.btn.btn-success#save_recording_modal{:type => "button"} Save Recording
