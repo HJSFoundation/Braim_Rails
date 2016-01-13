@@ -7,7 +7,7 @@
     %title= content_for?(:title) ? yield(:title) : 'Braim Browser'
     %meta{:name => "description", :content => "#{content_for?(:description) ? yield(:description) : 'Braim Browser'}"}
     = stylesheet_link_tag 'application', media: 'all'
-    = javascript_include_tag 'application' , "data-turbolinks-track" => true
+    = javascript_include_tag 'application' #, "data-turbolinks-track" => true
     = controller_assets
     = csrf_meta_tags
   %body

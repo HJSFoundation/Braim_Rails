@@ -361,4 +361,5 @@ load_song_page = function(){
 };
 
 $(document).ready(load_song_page);
+
 //$(document).on('page:load', load_song_page)

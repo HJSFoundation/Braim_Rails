@@ -1,6 +1,4 @@
-
 ready = ->
-
   $(document).on "click", ".audioButton",(event)->
     event.preventDefault()
     button = $(this)
@@ -36,4 +34,4 @@ ready = ->
     icon.addClass("fa fa-circle-o-notch fa-spin")
     message.html("Loading...")
 $(document).ready(ready)
-$(document).on('page:load', ready)
+#$(document).on('page:load', ready)
