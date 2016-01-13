@@ -73,6 +73,7 @@
     %h3 Emotiv Performance Metrics
     #container{:style => "min-width: 310px; height: 100px; margin: 0 auto"}
     %h2 My recordings
+    #song_recordings
     .record-data.disabled
       .emotion.interest
         %strong Interest:
@@ -107,3 +108,4 @@
           ="Max Duration: #{Time.at(@song.duration_ms/1000).utc.strftime("%M:%S")}"
 
   =render "save_recording_modal"
+

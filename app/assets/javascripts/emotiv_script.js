@@ -280,8 +280,9 @@ function isHeadset(){
 // **************************  MAIN SCRIPT *************************//
 
 $(window).load(function(){
-  /*
+  
   console.log(window.location.pathname);
+  /*
   if(!checkPluginExits())
   {
     var confirmDownload = confirm("Download plugin (Please restart your browser after install plugin)?");
