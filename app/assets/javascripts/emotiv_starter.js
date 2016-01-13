@@ -236,7 +236,6 @@ $(window).load(function(){
       $("#stop_record_performance_button").toggleClass('disabled');
       $("#record_performance_button").toggleClass('disabled');
       $("#record_message").toggle();
-      $(".record-data").toggle();
       clearInterval(interval);
       $("#song_recordings").html("");
       setTimeout(load_user_recordings,1000);
@@ -295,7 +294,6 @@ $(window).load(function(){
     $("#stop_record_performance_button").toggleClass('disabled');
     $("#record_performance_button").toggleClass('disabled');
     $("#record_message").toggle();
-    $(".record-data").toggle();
     clearInterval(interval);
     $("#save_recording_modal").modal('hide');
   });
@@ -345,7 +343,6 @@ $(window).load(function(){
     $(this).toggleClass('disabled');
     $("#stop_record_performance_button").toggleClass('disabled');
     $("#record_message").toggle()
-    $(".record-data").toggle()
     currentSongDuration = $(this).data("song-duration");
     timeStart = (new Date()).getTime();
     console.log("start recording on: "+timeStart+" current song: "+currentSongID+ "song duration: "+currentSongDuration);
