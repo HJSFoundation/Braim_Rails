@@ -3,7 +3,7 @@
 //= require emotiv_script
 //= require user_forms
 //= require elasticsearch.jquery.min
-$(document).ready(function(){
+load_song_page = function(){
   var interval = null;
   var chart;
   var timeStart;
@@ -27,19 +27,19 @@ $(document).ready(function(){
   function is_song_path(){
     return window.location.pathname.indexOf("/songs") > -1 && window.location.pathname.indexOf("/songs/search") == -1;
   };
-  client.ping({
-    requestTimeout: 30000,
-    // undocumented params are appended to the query string
-    hello: "elasticsearch"
-  }, function (error) {
-    if (error) {
-      console.error('elasticsearch cluster is down!');
-    } else {
-      console.log('All is well');
-    }
-  });
   currentSongID = $("#record_performance_button").data("song-id");
   if(is_song_path()){
+    client.ping({
+      requestTimeout: 30000,
+      // undocumented params are appended to the query string
+      hello: "elasticsearch"
+    }, function (error) {
+      if (error) {
+        console.error('elasticsearch cluster is down!');
+      } else {
+        console.log('All is well');
+      }
+    });
     load_user_recordings();
   }
   function load_user_recordings(){
@@ -57,6 +57,7 @@ $(document).ready(function(){
           }
         }
       },
+      sort: "date:asc",
       size: 1000
     },function get_recordings(error,response){
       //console.log('total recordings');
@@ -329,9 +330,9 @@ $(document).ready(function(){
     show_recording_data(performance_data);
     //console.log(recording);
   }
-  $("#record_performance_button").on("click",function(e){
+  $(document).on("click","#record_performance_button",function(e){
     e.preventDefault();
-    chart =  $("#container").highcharts();
+    chart =  Highcharts.charts[0];
     if(chart.series[0].data.length<1){
       alert("connect the device first");
     }else{
@@ -357,4 +358,7 @@ $(document).ready(function(){
       clearInterval(interval);
     }
   });
-});
+};
+
+$(document).ready(load_song_page);
+$(document).on('page:load', load_song_page)
