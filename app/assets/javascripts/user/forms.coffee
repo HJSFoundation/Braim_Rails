@@ -1,4 +1,4 @@
-ready = ->
+$(document).ready ->
   $(document).on "click", ".audioButton",(event)->
     event.preventDefault()
     button = $(this)
@@ -33,5 +33,3 @@ ready = ->
     message = search_button.find('span')
     icon.addClass("fa fa-circle-o-notch fa-spin")
     message.html("Loading...")
-$(document).ready(ready)
-#$(document).on('page:load', ready)
