@@ -4,6 +4,15 @@
 //= require user_forms
 //= require elasticsearch.jquery.min
 load_song_page = function(){
+  var EdkDll;
+  setupEdk();
+  function ELSPlugin()
+  {
+    return document.getElementById('plugin0');
+  }
+  init();
+  
+
   var interval = null;
   var chart;
   var timeStart;
@@ -360,6 +369,6 @@ load_song_page = function(){
   });
 };
 
-$(document).ready(load_song_page);
+$(window).load(load_song_page);
 
 //$(document).on('page:load', load_song_page)

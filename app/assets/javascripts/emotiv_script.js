@@ -278,7 +278,9 @@ function isHeadset(){
 
 
 // **************************  MAIN SCRIPT *************************//
-
+window.onbeforeunload = function(event) {
+    EdkDll.IEE_EngineDisconnect();
+}
 $(window).load(function(){
   
   console.log(window.location.pathname);
@@ -292,5 +294,5 @@ $(window).load(function(){
     }
   }
   */
-  init();
+  //init();
 });

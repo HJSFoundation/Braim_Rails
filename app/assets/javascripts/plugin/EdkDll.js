@@ -1,5 +1,8 @@
-function EdkDll() {
-	eObj = document.getElementById('ElsPlugin');
+
+function setupEdk(){
+
+EdkDll = function(){
+	eObj= document.getElementById('ElsPlugin');
 }
 
 EdkDll.eObj;
@@ -3923,3 +3926,4 @@ EdkDll.windowing = function(data, type) {
 	return windowing;
 };
 
+}
