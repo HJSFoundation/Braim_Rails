@@ -17,7 +17,7 @@ $(document).ready(function () {
         marginRight: 10
       },
       title: {
-        text: 'Live random data'
+        text: 'Live data'
       },
       xAxis: {
         type: 'datetime',

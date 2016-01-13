@@ -29,7 +29,6 @@ $(document).ready(function(){
   };
   client.ping({
     requestTimeout: 30000,
-
     // undocumented params are appended to the query string
     hello: "elasticsearch"
   }, function (error) {
@@ -70,15 +69,28 @@ $(document).ready(function(){
       display_recordings(user_recordings);
     });
   }
-  function graph_recording(rec_id, response){
+  function graph_recording(rec_id,date, response){
         var entries = response.hits.hits;
         var interest = [];
-        //console.log(entries);
+        var engagement = [];
+        var focus = [];
+        var relax = [];
+        var instantaneousExcitement = [];
+        var longTermExcitement = [];
+        var stress = [];
+        var rec_date = new Date(date);
+        console.log(entries);
         entries.forEach(function(entry,index){
-          interest.push(entry._source.interest)
+          interest.push([(entry._source.timestamp/1000),entry._source.interest]);
+          engagement.push([(entry._source.timestamp/1000),entry._source.engagement]);
+          focus.push([(entry._source.timestamp/1000),entry._source.focus]);
+          relax.push([(entry._source.timestamp/1000),entry._source.relax]);
+          instantaneousExcitement.push([(entry._source.timestamp/1000),entry._source.instantaneousExcitement]);
+          longTermExcitement.push([(entry._source.timestamp/1000),entry._source.longTermExcitement]);
+          stress.push([(entry._source.timestamp/1000),entry._source.stress]);
         });
         var chart_title = "Recording id: "+rec_id
-        
+
         new Highcharts.Chart({
           chart: {
             renderTo: rec_id,
@@ -91,34 +103,110 @@ $(document).ready(function(){
               x: -20 //center
           },
           subtitle: {
-              text: 'Data',
+              text: chart_title,
               x: -20
           },
           yAxis: {
-              title: {
-                  text: 'Probability'
-              },
-              plotLines: [{
-                  value: 0,
-                  width: 1,
-                  color: '#808080'
-              }]
+            title: {
+            style:{display:'none'},
+            text: 'Value'
+          },
+          tickInterval: 0.2,
+          max: 1,
+          min: 0,
+          title: false,
+          lineWidth: 2
+          },
+          exporting: {
+            enabled: true
+          },
+          plotOptions: {
+            series: {
+              states: {
+                hover: {
+                  enabled: true
+                }
+              }
+            }
           },
           tooltip: {
-              valueSuffix: ''
+            enabled: true,
+            headerFormat:'',
+            pointFormat: '<span style="color:{series.color}">{series.name}: {point.y:.1f}</span><br>',
+            style:{
+              color:'white',
+              fontSize:'12px'
+            },
+            backgroundColor:'rgba(0, 0, 0, 0.83)',
+            crosshairs: true,
+            shared: true,
+            borderColor: 'rgba(0, 0, 0, 0.83)'
           },
-          legend: {
-              layout: 'vertical',
-              align: 'right',
-              verticalAlign: 'middle',
-              borderWidth: 0
-          },
+             
+        legend: {
+            enabled: false
+        },
           series: [{
-              name: 'Interest',
-              data: interest
-          }, {
-              name: 'Engagement',
-              data: []
+            name: 'Interest',
+            color: 'rgb(255, 0, 255)',
+            marker: {
+              enabled:false,
+              symbol: 'circle'
+            },
+            data: interest
+          },
+          {
+            name: 'Engagement',
+            color: '#1eb1b1',
+            marker: {
+              enabled:false,
+              symbol: 'circle'
+            },
+            data: engagement
+          },
+          {
+            name: 'Focus',
+            color: '#a9d466',
+            marker: {
+              enabled:false,
+              symbol: 'circle'
+            },
+            data: focus
+          },
+          {
+            name: 'Relaxation',
+            color: 'rgb(51, 102, 255)',
+            marker: {
+              enabled:false,
+              symbol: 'circle'
+            },
+            data: relax
+          },
+          {
+            name: 'Instantaneous Excitement',
+            color: '#ff792b',
+            marker: {
+              enabled:false,
+              symbol: 'circle'
+            },
+            data: instantaneousExcitement
+          },
+          {
+            name: 'Long Term Excitement',
+            color: 'rgb(153, 204, 255)',
+            marker: {
+              enabled:false,
+              symbol: 'circle'
+            },
+            data: longTermExcitement
+          },{
+            name: 'Stress',
+            color: 'rgb(255, 255, 0)',
+            marker: {
+              enabled:false,
+              symbol: 'circle'
+            },
+            data: stress
           }]
       });
   }
@@ -130,7 +218,7 @@ $(document).ready(function(){
     });
   */
     recordings.forEach(function(rec,index){
-      $("#song_recordings").append("<h3>"+(new Date(rec._source.date))+"</h3><a class='song-recording' data-recording-id="+rec._id+"><div id="+rec._id+">View Graph </div></a>");
+      $("#song_recordings").append("<h3>"+(new Date(rec._source.date))+"</h3><a class='song-recording' data-recording-id="+rec._id+" data-recording-date="+rec._source.date+">View Graph</a><div id="+rec._id+"></div>");
     });
   }
   function bulk(bulk_request){
@@ -152,8 +240,10 @@ $(document).ready(function(){
   }
   $(document).on('click','.song-recording',function(e){
     e.preventDefault();
+    $(this).hide();
     var link = $(this);
     var rec_id = link.data('recording-id');
+    var rec_date = link.data('recording-date');
     var query = "recording_id:"+rec_id;
       client.search({
         index: 'braim',
@@ -164,7 +254,7 @@ $(document).ready(function(){
       },function get_recordings(error,response){
         //console.log('total entries');
         //console.log(rec._id);
-        graph_recording(rec_id,response);
+        graph_recording(rec_id,rec_date,response);
         //console.log($("#"+rec._id));
       })
   });
