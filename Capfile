@@ -26,7 +26,7 @@ require 'capistrano/passenger'
 require 'capistrano/nginx'
 
 require 'capistrano/postgresql'
-require 'capistrano/nodenv'
+
 
 # require 'capistrano/rvm'
 # require 'capistrano/rbenv'
