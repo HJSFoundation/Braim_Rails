@@ -1,2 +1,31 @@
-%h1 Users#profile
-%p Find me in app/views/users/profile.html.haml
+.container-fluid
+  .row.user-menu-container.square
+    .col-md-12.user-details
+      .row.coralbg.white
+        .col-md-8.no-pad
+          .user-pad
+            %h3 Welcome back, Jessica
+            %h4.white
+              %i.fa.fa-check-circle-o
+              San Antonio, TX
+            %h4.white
+              %i.fa.fa-twitter
+              CoolesOCool
+            %button.btn.btn-labeled.btn-info{:href => "#", :type => "button"}
+              %span.btn-label>
+                %i.fa.fa-pencil
+              Update
+        .col-md-4.no-pad
+          .user-image
+            %img.img-responsive.thumbnail{:src => "https://farm7.staticflickr.com/6163/6195546981_200e87ddaf_b.jpg"}/
+      .row.overview
+        .col-md-4.user-pad.text-center
+          %h3 RECORDINGS
+          %h4 0
+        .col-md-4.user-pad.text-center
+          %h3 FOLLOWERS
+          %h4 0
+        .col-md-4.user-pad.text-center
+          %h3 FOLLOWING
+          %h4 0
+  %h2 Last song recordings
