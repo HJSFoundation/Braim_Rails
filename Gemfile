@@ -12,6 +12,7 @@ gem 'devise'
 gem 'echowrap'
 gem 'rspotify'
 gem "font-awesome-rails"
+gem 'annotate'
 group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'
