@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   end
   root to: 'visitors#home'
   get "/about" => "visitors#about"
-
+  get "/scroll/:scroll_id" => "users#scroll", as: "scroll"
   get '/profile' => "users#profile"
   get "/performance" => "users#performance"
   get "/headset" =>  "users#headset" 

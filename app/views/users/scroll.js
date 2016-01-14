@@ -1,0 +1,1 @@
+$("#tab_body").append("<%=escape_javascript(render partial: 'query_results', locals: {recordings: @recordings})%>");

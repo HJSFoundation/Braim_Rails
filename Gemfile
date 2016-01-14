@@ -13,6 +13,8 @@ gem 'echowrap'
 gem 'rspotify'
 gem "font-awesome-rails"
 gem 'annotate'
+gem 'elasticsearch', git: 'git://github.com/elasticsearch/elasticsearch-ruby.git'
+gem 'elasticsearch-api', git: 'git://github.com/elasticsearch/elasticsearch-ruby.git'
 group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'

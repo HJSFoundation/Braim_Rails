@@ -29,3 +29,40 @@
           %h3 FOLLOWING
           %h4 0
   %h2 Last song recordings
+  .tab-content
+    #songs_tab.tab-pane.active{:role => "tabpanel"} 
+      %table.table
+        %thead
+          %tr
+            %th Preview
+            %th Song Name
+            %th Album Name
+            %th Album Cover
+            %th Duration
+            %th 
+        %tbody#tab_body
+          -@recordings.each_with_index do |recording, i|
+            %tr
+              %th 
+                = audio_tag recording['song_info'].preview_url, class: "audio-play"
+                =link_to "#", class: "btn btn-link audioButton" do
+                  .glyphicon.glyphicon-play
+                
+              %th{:scope => "row"}
+                =recording['song_info'].name
+              %td
+                %p 
+                  =recording['song_info'].album.name
+              %td
+                .album-track-query
+                  =spotify_image_tag recording['song_info'].album
+              %td
+                %p
+                  =Time.at(recording['song_info'].duration_ms/1000).utc.strftime("%M:%S")
+              %td
+                =link_to song_path(recording['song_info'].id), class: "btn btn-default loading-button" do
+                  %i
+                  %span
+                    Song Profile
+  #ajax_message Loading Recordings ...
+  =link_to "Show older recordings", scroll_path(@scroll_id), id: "#more_recordings", remote: true
