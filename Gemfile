@@ -12,15 +12,18 @@ gem 'devise'
 gem 'echowrap'
 gem 'rspotify'
 gem "font-awesome-rails"
+
 gem 'annotate'
 gem 'elasticsearch', git: 'git://github.com/elasticsearch/elasticsearch-ruby.git'
 gem 'elasticsearch-api', git: 'git://github.com/elasticsearch/elasticsearch-ruby.git'
+
 # Capistrano
 gem 'capistrano', '~> 3.1.0'
 gem 'capistrano-bundler', '~> 1.1.2'
 gem 'capistrano-rails', '~> 1.1.1'
 # We are using rbenv
 gem 'capistrano-rbenv', github: "capistrano/rbenv"
+
 
 group :development, :test do
   gem 'byebug'
