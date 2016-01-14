@@ -56,6 +56,6 @@ production:
   encoding: unicode
   database: BraimBrowser_production
   pool:     5
-  username: braim
-  password: braim
+  username:
+  password:
   template: template0
