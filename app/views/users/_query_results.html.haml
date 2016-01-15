@@ -1,10 +1,15 @@
 -@recordings.each_with_index do |recording, i|
   %tr
+    %th
+      =link_to "#" ,class: "show-graph-btn", "data-rec-id"=>"#{recording['_id']}" do
+        =image_tag "graph_preview.jpg",class: "graph-preview"
+    %th 
+      %p
+        =Date.strptime((recording['_source']['date']/1000).to_s,'%s')
     %th 
       = audio_tag recording['song_info'].preview_url, class: "audio-play"
       =link_to "#", class: "btn btn-link audioButton" do
         .glyphicon.glyphicon-play
-      
     %th{:scope => "row"}
       =recording['song_info'].name
     %td

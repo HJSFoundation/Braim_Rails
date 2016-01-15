@@ -1,3 +1,4 @@
+=javascript_include_tag "performance/performance"
 .container-fluid
   .row.user-menu-container.square
     .col-md-12.user-details
@@ -21,7 +22,8 @@
       .row.overview
         .col-md-4.user-pad.text-center
           %h3 RECORDINGS
-          %h4 0
+          %h4
+            =@scroll_total
         .col-md-4.user-pad.text-center
           %h3 FOLLOWERS
           %h4 0
@@ -34,20 +36,27 @@
       %table.table
         %thead
           %tr
+            %th Graph
+            %th Date
             %th Preview
-            %th Song Name
-            %th Album Name
-            %th Album Cover
+            %th Name
+            %th Album
+            %th Cover
             %th Duration
             %th 
         %tbody#tab_body
           -@recordings.each_with_index do |recording, i|
             %tr
+              %th
+                =link_to "#" ,class: "show-graph-btn", "data-rec-id"=>"#{recording['_id']}" do
+                  =image_tag "graph_preview.jpg",class: "graph-preview" 
+              %th 
+                %p
+                  =Date.strptime((recording['_source']['date']/1000).to_s,'%s')
               %th 
                 = audio_tag recording['song_info'].preview_url, class: "audio-play"
                 =link_to "#", class: "btn btn-link audioButton" do
                   .glyphicon.glyphicon-play
-                
               %th{:scope => "row"}
                 =recording['song_info'].name
               %td
@@ -66,3 +75,16 @@
                     Song Profile
   #ajax_message Loading Recordings ...
   =link_to "Show older recordings", scroll_path(@scroll_id), id: "#more_recordings", remote: true
+
+#graph_modal.modal.fade{:role => "dialog", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+        %h4.modal-title Recording Graph
+      .modal-body
+        #grap_container{:style => "min-width: 650px; height: 300px; margin: 0 auto"}
+        %p#modal-message Loading Graph
+      .modal-footer
+        %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close

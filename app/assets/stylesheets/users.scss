@@ -386,4 +386,17 @@ div.user-menu div.user-menu-content:not(.active){
         max-height: 400px;
     }
 }
+
+//*** User profile ****/
+.graph-preview{
+  width: 60px;
+}
+#graph_modal{
+  .modal-dialog{
+    width: 700px!important;
+  }
+  #grap_container{
+    width: 100%!important;
+  }
+}
       
