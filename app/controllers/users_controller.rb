@@ -28,7 +28,8 @@ class UsersController < ApplicationController
     response = result['hits']['hits']
     response.delete_if{|x| x['_source']['song_id']==nil}
     songs_ids = response.collect {|r| r['_source']['song_id']}
-    put songs_ids
+    puts "songs"
+    puts songs_ids
     @songs = RSpotify::Track.find(songs_ids)
     @recordings = response.map do |r| 
       current_song = @songs.select {|song| song.id == r['_source']['song_id'] }
