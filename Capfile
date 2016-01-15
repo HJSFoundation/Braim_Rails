@@ -35,7 +35,7 @@ require 'capistrano/postgresql'
 # require 'capistrano/rails/assets'
 # require 'capistrano/rails/migrations'
 
-set :rbenv_path , '/home/braim-pro/.rbenv/'
+set :rbenv_path , '$HOME/.rbenv'
 set :rbenv_type, :user
 set :rbenv_ruby, '2.1.3'
 
