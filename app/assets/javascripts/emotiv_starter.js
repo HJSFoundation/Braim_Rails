@@ -25,9 +25,7 @@ $(window).load(function(){
   var user_recordings;
   var new_recording_data_id;
   var userID =1;
-  var client = new $.es.Client({
-    hosts: 'localhost:9200'
-  });
+  var client = get_elastic_client();
   function is_song_path(){
     return window.location.pathname.indexOf("/songs") > -1 && window.location.pathname.indexOf("/songs/search") == -1;
   };

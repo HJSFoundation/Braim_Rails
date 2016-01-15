@@ -36,9 +36,7 @@ $(document).ready ->
   
   $(document).on "click", ".show-graph-btn",(e)->
     e.preventDefault();
-    client = new $.es.Client({
-      hosts: 'localhost:9200'
-    });
+    client = get_elastic_client();
     rec_id =$(this).data("rec-id")
     query = "recording_id:"+rec_id
     $("#graph_modal").modal('show')
