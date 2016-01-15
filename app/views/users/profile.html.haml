@@ -74,7 +74,7 @@
                   %span
                     Song Profile
   #ajax_message Loading Recordings ...
-  =link_to "Show older recordings", scroll_path(@scroll_id), id: "#more_recordings", remote: true
+  =link_to "Show older recordings", scroll_path(@scroll_id), id: "#more_recordings", remote: true if @recordings.any?
 
 #graph_modal.modal.fade{:role => "dialog", :tabindex => "-1"}
   .modal-dialog
