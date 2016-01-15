@@ -36,7 +36,7 @@ require 'capistrano/postgresql'
 # require 'capistrano/rails/migrations'
 
 set :rbenv_type, :braim
-set :rbenv_ruby, '2.1.3'
+set :rbenv_ruby, '2.1.3p242'
 
 # Loads custom tasks from `lib/capistrano/tasks' if you have any defined.
 Dir.glob('lib/capistrano/tasks/*.cap').each { |r| import r }
