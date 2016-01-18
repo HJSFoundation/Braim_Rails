@@ -91,7 +91,7 @@
     %h2 My recordings
     #song_recordings
     .record-buttons
-      =link_to  "#", class: "btn btn-danger btn-record",id: "record_performance_button", "data-song-id"=>@song.id,"data-song-duration"=>@song.duration_ms do
+      =link_to  "#", class: "btn btn-danger btn-record",id: "record_performance_button", "data-song-id"=>@song.id,"data-song-duration"=>@song.duration_ms , "data-user-id"=>@user.id do
         .glyphicon.glyphicon-record
       =link_to "#", class: "btn btn-primary disabled btn-record",id: "stop_record_performance_button" do
         .glyphicon.glyphicon-stop
