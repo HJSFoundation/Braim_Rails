@@ -7,6 +7,7 @@ $(window).load(function(){
     return document.getElementById('plugin0');
   }
   init();
+  /*
   //****** song page scripts
   var interval = null;
   var chart;
@@ -24,7 +25,7 @@ $(window).load(function(){
   var time;
   var user_recordings;
   var new_recording_data_id;
-  var userID;
+  var userID =1;
   var client = get_elastic_client();
   function is_song_path(){
     return window.location.pathname.indexOf("/songs") > -1 && window.location.pathname.indexOf("/songs/search") == -1;
@@ -45,7 +46,6 @@ $(window).load(function(){
     load_user_recordings();
   }
   function load_user_recordings(){
-    userID = parseInt($("#record_performance_button").data("song-id"));
     client.search({
       index: 'braim',
       type: 'recording',
@@ -54,7 +54,7 @@ $(window).load(function(){
         query: {
           bool:{
             "must": [
-              { "match": { user_id: userID }}, 
+              { "match": { user_id:   1 }}, 
               { "match": { song_id: currentSongID }}  
             ]
           }
@@ -215,12 +215,6 @@ $(window).load(function(){
       });
   }
   function display_recordings(recordings){
-    /*
-    recordings.forEach(function(rec,index){
-      //TODO Change for scroll
-      
-    });
-  */
     recordings.forEach(function(rec,index){
       $("#song_recordings").append("<h3>"+(new Date(rec._source.date))+"</h3><a class='song-recording' data-recording-id="+rec._id+" data-recording-date="+rec._source.date+">View Graph</a><div id="+rec._id+"></div>");
     });
@@ -283,7 +277,7 @@ $(window).load(function(){
       bulk_request.push({index: {_index: 'braim', _type: 'entry'}});
       bulk_request.push(recording[i])
     }
-    var new_recording_data = {user_id: userID,date: timeStart, song_id: currentSongID}
+    var new_recording_data = {user_id: 1,date: timeStart, song_id: currentSongID}
     console.log(new_recording_data_id);
     bulk_request.push({index: {_index: 'braim', _type: 'recording',_id: new_recording_data_id}});
     bulk_request.push(new_recording_data);
@@ -314,7 +308,7 @@ $(window).load(function(){
     emotiv_stress = chart.series[6].data[chart.series[6].data.length-1].y;
     var new_date = (new Date()).getTime();
     var performance_data = {
-      user_id: userID,
+      user_id: 1,
       recording_id: new_recording_data_id,
       song_id: currentSongID,
       interest: emotiv_interest,
@@ -358,6 +352,8 @@ $(window).load(function(){
       clearInterval(interval);
     }
   });
+});
+*/
 });
 
 window.onbeforeunload = function(event) {

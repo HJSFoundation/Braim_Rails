@@ -16,6 +16,7 @@ gem "font-awesome-rails"
 gem 'annotate'
 gem 'elasticsearch', git: 'git://github.com/elasticsearch/elasticsearch-ruby.git'
 gem 'elasticsearch-api', git: 'git://github.com/elasticsearch/elasticsearch-ruby.git'
+gem "elasticsearch-persistence", require: 'elasticsearch/persistence/model'
 
 # Capistrano
 gem 'capistrano', '~> 3.1.0'

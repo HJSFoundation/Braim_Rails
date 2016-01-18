@@ -90,6 +90,10 @@
     %br
     %h2 My recordings
     #song_recordings
+      -@recordings.each do |r|
+        %h2 
+          Recording
+          =r.date
     .record-buttons
       =link_to  "#", class: "btn btn-danger btn-record",id: "record_performance_button", "data-song-id"=>@song.id,"data-song-duration"=>@song.duration_ms , "data-user-id"=>@user.id do
         .glyphicon.glyphicon-record
