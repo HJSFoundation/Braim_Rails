@@ -271,7 +271,7 @@ $(document).ready ->
     e.preventDefault()
     currentPage++
     $.ajax
-      url: '/recordings/all_query'
+      url: '/recordings/index'
       type: 'get'
       dataType: 'json'
       success: (data) ->
@@ -288,7 +288,7 @@ $(document).ready ->
   redraw_song_recordings = ->
     currentPage = 1
     $.ajax
-      url: '/recordings/all_query'
+      url: '/recordings/index'
       type: 'get'
       dataType: 'json'
       success: (data) ->

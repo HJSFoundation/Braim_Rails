@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
   get 'recordings/show_data' =>  "recordings#show_data" 
 
-  get 'recordings/all_query' =>  "recordings#all_query" 
+  get 'recordings/index' =>  "recordings#index" 
 
   devise_for :users
   authenticated :user do

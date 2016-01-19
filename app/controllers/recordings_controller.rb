@@ -44,7 +44,7 @@ class RecordingsController < ApplicationController
     end
   end
 
-  def all_query
+  def index
     @recordings = Recording.all_query(  params[:page].to_i,params[:per_page].to_i,params[:user_id].to_i,params[:song_id])
     respond_to do |format|
       format.json { render json:  @recordings.to_json }
