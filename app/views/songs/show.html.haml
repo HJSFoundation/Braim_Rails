@@ -88,12 +88,6 @@
       .emotion.stress
         %strong Stress
     %br
-    %h2 My recordings
-    #song_recordings
-      -@recordings.each do |r|
-        %h2 
-          Recording
-          =r.date
     .record-buttons
       =link_to  "#", class: "btn btn-danger btn-record",id: "record_performance_button", "data-song-id"=>@song.id,"data-song-duration"=>@song.duration_ms , "data-user-id"=>@user.id do
         .glyphicon.glyphicon-record
@@ -104,6 +98,15 @@
         %span#message_time 0
         %span 
           ="Max Duration: #{Time.at(@song.duration_ms/1000).utc.strftime("%M:%S")}"
+    %h2 My recordings
+    #song_recordings
+      -@recordings.each do |r|
+        %h3 
+          =(Time.at(r.date/1000)).strftime("Recording %B %d %Y, %l:%M:%S %P")
+        %div{id:"#{r.id}"}
+        =link_to "View Graph" , "#", "data-recording-id"=>r.id , class: "graph-data-link"
+    =link_to "Show older recordings", "#", id:"older_song_recordings"
+    
 
   =render "save_recording_modal"
 

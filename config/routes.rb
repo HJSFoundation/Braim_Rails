@@ -7,6 +7,12 @@ Rails.application.routes.draw do
 
   get 'QuickDeal' => "songs#deal", :as =>"deal"
 
+  post 'recordings/create' =>  "recordings#create" 
+
+  get 'recordings/show_data' =>  "recordings#show_data" 
+
+  get 'recordings/all_query' =>  "recordings#all_query" 
+
   devise_for :users
   authenticated :user do
     root :to => "songs#search" , :as => "authenticated_root"

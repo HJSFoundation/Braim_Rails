@@ -18,8 +18,9 @@ class SongsController < ApplicationController
     @song_spotify_url = "spotify:track:#{@song.id}"
     @song_echonest= Echowrap.song_profile(track_id: @song_spotify_url,bucket: ['audio_summary','song_type'])
     @user = current_user
-    @recordings = Recording.all query: {bool: { must: [{ match: { user_id: @user.id}},{match: {song_id: @song.id}}]}},sort: [
-      {date: {order: "asc", mode: "avg"}}]
+    #@recordings = Recording.all query: {bool: { must: [{ match: { user_id: @user.id}},{match: {song_id: @song.id}}]}},sort: [
+    #  {date: {order: "asc", mode: "avg"}}]
+    @recordings = Recording.all_query(1,5,@user.id,@song.id)
   end
 
   def deal
