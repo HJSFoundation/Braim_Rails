@@ -103,7 +103,7 @@ $(document).ready ->
         $("#record_performance_button").toggleClass('disabled');
         $("#record_message").toggle();
         $("#save_recording_modal").modal('hide');
-        redraw_song_recordings()
+        setTimeout(redraw_song_recordings,1000)
         return
       contentType: 'application/json',
       data: JSON.stringify({
@@ -286,6 +286,7 @@ $(document).ready ->
         song_id: currentSongID
 
   redraw_song_recordings = ->
+    console.log "redrawing"
     currentPage = 1
     $.ajax
       url: '/recordings/index'
@@ -293,6 +294,7 @@ $(document).ready ->
       dataType: 'json'
       success: (data) ->
         $("#song_recordings").html("")
+        console.log "ok redraw"
         data.forEach (rec) ->
           title_date = moment(rec.date).format('MMMM DD YYYY, h:mm:ss a')
           $("#song_recordings").append("<h3>Recording "+title_date+"</h3><div id="+rec.id+"></div><a href='#' data-recording-id="+rec.id+" class='graph-data-link'>View Graph</a>")

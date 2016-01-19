@@ -4,25 +4,25 @@
     %h2.title
       =@song.name
       %span
-      =" - #{@song_echonest.artist_name}"
+      =" - #{@song.artist_name}"
   .song-content
     .row
       .col-md-5
-        %iframe{:allowtransparency => "true", :frameborder => "0", :height => "380", :src => "https://embed.spotify.com/?uri=#{@song_spotify_url}", :width => "100%"}
+        %iframe{:allowtransparency => "true", :frameborder => "0", :height => "380", :src => "https://embed.spotify.com/?uri=#{@song.song_spotify_url}", :width => "100%"}
       .col-md-7
         %h3 Song Info
         %p
           %strong Duration:
           %span
-            =Time.at(@song.duration_ms/1000).utc.strftime("%M:%S")
+            =Time.at(@song.duration/1000).utc.strftime("%M:%S")
         %p
           %strong Album:
           %span
-            =@song.album.name
+            =@song.album_name
         %p
           %strong Song type:
           %span
-            -@song_echonest.song_type.each do |tag|
+            -@song.echonest_song_type.each do |tag|
               =tag
 
         %h3 Audio Summary
@@ -31,44 +31,44 @@
             %p
               %strong Energy:
               %span
-                =@song_echonest.audio_summary.energy
+                =@song.echonest_energy
             %p
               %strong Liveness:
               %span
-                =@song_echonest.audio_summary.liveness
+                =@song.echonest_liveness
             %p
               %strong Tempo:
               %span
-                =@song_echonest.audio_summary.tempo
+                =@song.echonest_tempo
             %p
               %strong Speechiness:
               %span
-                =@song_echonest.audio_summary.speechiness
+                =@song.echonest_speechiness
             %p
               %strong Acousticness:
               %span
-                =@song_echonest.audio_summary.acousticness
+                =@song.echonest_acousticness
           .col-md-6
             %p
               %strong Instrumentalness:
               %span
-                =@song_echonest.audio_summary.instrumentalness
+                =@song.echonest_instrumentalness
             %p
               %strong Time signature:
               %span
-                =@song_echonest.audio_summary.time_signature
+                =@song.echonest_tempo
             %p
               %strong Loudness:
               %span
-                =@song_echonest.audio_summary.loudness
+                =@song.echonest_loudness
             %p
               %strong Valence:
               %span
-                =@song_echonest.audio_summary.valence
+                =@song.echonest_valence
             %p
               %strong Danceability:
               %span
-                =@song_echonest.audio_summary.danceability
+                =@song.echonest_danceability
   .song-insight-records
     %h3 Emotiv Performance Metrics
     #container{:style => "min-width: 310px; height: 100px; margin: 0 auto"}
@@ -89,7 +89,7 @@
         %strong Stress
     %br
     .record-buttons
-      =link_to  "#", class: "btn btn-danger btn-record",id: "record_performance_button", "data-song-id"=>@song.id,"data-song-duration"=>@song.duration_ms , "data-user-id"=>@user.id do
+      =link_to  "#", class: "btn btn-danger btn-record",id: "record_performance_button", "data-song-id"=>@song.song_spotify_id,"data-song-duration"=>@song.duration , "data-user-id"=>@user.id do
         .glyphicon.glyphicon-record
       =link_to "#", class: "btn btn-primary disabled btn-record",id: "stop_record_performance_button" do
         .glyphicon.glyphicon-stop
@@ -97,7 +97,7 @@
         %span Recording... Time:
         %span#message_time 0
         %span 
-          ="Max Duration: #{Time.at(@song.duration_ms/1000).utc.strftime("%M:%S")}"
+          ="Max Duration: #{Time.at(@song.duration/1000).utc.strftime("%M:%S")}"
     %h2 My recordings
     #song_recordings
       -@recordings.each do |r|
