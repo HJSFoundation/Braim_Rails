@@ -12,8 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require elasticsearch.jquery.min
-//= require elasticsearch.config
 //= require moment.min
 //= require bootstrap-sprockets
 
