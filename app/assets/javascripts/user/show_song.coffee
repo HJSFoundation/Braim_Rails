@@ -287,7 +287,7 @@ $(document).ready ->
 
   add_new_recording = (rec)->
     title_date = moment(rec.date).format('MMMM DD YYYY, h:mm:ss a')
-    $("#song_recordings").prepend("<div class='notice notice-lg'><a href='#' class='delete-recording' data-recording-id="+rec.id+">x</a><h4>Recording "+title_date+"</h4><div id="+rec.id+"></div><a href='#' data-recording-id="+rec.id+" class='graph-data-link'>View Graph</a></div>")
+    $("#song_recordings").prepend("<div class='notice notice-lg recording'><a href='#' class='delete-recording' data-recording-id="+rec.id+">x</a><h4>Recording at "+title_date+", Duration: "+rec.duration+" s</h4><div id="+rec.id+"></div><a href='#' data-recording-id="+rec.id+" class='graph-data-link'>View Graph</a></div>")
     id = "#"+rec.id
     $(id).parent().effect("highlight", {color: '#99CCFF'}, 3000);
 
@@ -317,6 +317,8 @@ $(document).ready ->
       dataType: 'json'
       success: (data) ->
         console.log data.deleted_id
+        id = "#"+data.deleted_id
+        $(id).parent().fadeOut()
         return
       data: 
         recording_id: recording_id

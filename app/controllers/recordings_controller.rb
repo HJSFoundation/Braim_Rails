@@ -65,7 +65,7 @@ class RecordingsController < ApplicationController
     client = Elasticsearch::Client.new log: true
     client.delete index: 'braim', type: 'recording', id: deleted_id
     #TODO Fix delete all entries 
-    client.delete_by_query index: 'braim', type: 'entry', q: "recording_id:#{deleted_id}"
+    #client.delete_by_query index: 'braim', type: 'entry', q: "recording_id:#{deleted_id}"
     respond_to do |format|
       format.json { render json:  {deleted_id: deleted_id}.to_json }
     end

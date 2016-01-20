@@ -67,7 +67,8 @@
                   =spotify_image_tag recording['song_info'].album
               %td
                 %p
-                  =Time.at(recording['song_info'].duration_ms/1000).utc.strftime("%M:%S")
+                  =#Time.at(recording['song_info'].duration_ms/1000).utc.strftime("%M:%S")
+                  ="#{recording['_source']['duration']} s"
               %td
                 =link_to song_path(recording['song_info'].id), class: "btn btn-default loading-button" do
                   %i

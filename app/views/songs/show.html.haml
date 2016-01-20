@@ -69,6 +69,18 @@
               %strong Danceability:
               %span
                 =@song.echonest_danceability
+        %h3 My rating for this song
+        #stars.starrr{"data-rating" => "4"}
+        You gave a rating of
+        %span#count 0
+        star(s)
+        / .row.lead
+        /   %p Also you can give a default rating by adding attribute data-rating
+        /   #stars-existing.starrr{"data-rating" => "4"}
+        /   You gave a rating of
+        /   %span#count-existing 4
+        /   star(s)
+
   .song-insight-records
     %h3 Emotiv Performance Metrics
     .record-data.text-center
@@ -106,7 +118,8 @@
         .notice.notice-lg.recording
           =link_to "x", "#", class: "delete-recording" , "data-recording-id" => r.id
           %h4 
-            =(Time.at(r.date/1000)).strftime("Recording %B %d %Y, %l:%M:%S %P")
+            =(Time.at(r.date/1000)).strftime("Recording at %B %d %Y, %l:%M:%S %P")
+            = ", Duration: #{r.duration} s"
           %div{id:"#{r.id}"}
           =link_to "View Graph" , "#", "data-recording-id"=>r.id , class: "graph-data-link"
     =#link_to "Show older recordings", "#", id:"older_song_recordings"
