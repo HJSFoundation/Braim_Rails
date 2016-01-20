@@ -26,7 +26,7 @@ class RecordingsController < ApplicationController
         entry.save
       end
       respond_to do |format|
-        format.json { render json: { :response => "ok" ,length: data.length}.to_json }
+        format.json { render json: { :response => "ok" ,length: data.length, recording: new_recording}.to_json }
       end
     else
       respond_to do |format|
@@ -44,10 +44,30 @@ class RecordingsController < ApplicationController
     end
   end
 
+  def show
+    id = params[:id]
+    response = Recording.all query: { match: { _id: id  } } 
+    recording = response.results[0]
+    respond_to do |format|
+      format.json { render json:  recording.to_json }
+    end
+  end
+
   def index
     @recordings = Recording.all_query(  params[:page].to_i,params[:per_page].to_i,params[:user_id].to_i,params[:song_id])
     respond_to do |format|
       format.json { render json:  @recordings.to_json }
+    end
+  end
+
+  def destroy
+    deleted_id = params[:recording_id]
+    client = Elasticsearch::Client.new log: true
+    client.delete index: 'braim', type: 'recording', id: deleted_id
+    #TODO Fix delete all entries 
+    client.delete_by_query index: 'braim', type: 'entry', q: "recording_id:#{deleted_id}"
+    respond_to do |format|
+      format.json { render json:  {deleted_id: deleted_id}.to_json }
     end
   end
 end

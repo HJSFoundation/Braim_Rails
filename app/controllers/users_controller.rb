@@ -22,7 +22,7 @@ class UsersController < ApplicationController
   def profile
     @user = current_user
     client = Elasticsearch::Client.new log: true
-    result = client.search(index: 'braim' , type: 'recording',scroll: '1m', body: {query: {match: {user_id: @user.id}},size: 5},sort: "date:asc")
+    result = client.search(index: 'braim' , type: 'recording',scroll: '1m', body: {query: {match: {user_id: @user.id}},size: 5},sort: "date:desc")
     @scroll_id = result['_scroll_id']
     @scroll_total = result['hits']['total']
     response = result['hits']['hits']

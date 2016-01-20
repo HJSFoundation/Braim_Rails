@@ -11,8 +11,12 @@ Rails.application.routes.draw do
 
   get 'recordings/show_data' =>  "recordings#show_data" 
 
+  get 'recordings/show' =>  "recordings#show" 
+
   get 'recordings/index' =>  "recordings#index" 
 
+  match "recordings/destroy", to: "recordings#destroy", via: :delete
+  
   devise_for :users
   authenticated :user do
     root :to => "songs#search" , :as => "authenticated_root"

@@ -14,7 +14,7 @@ gem 'rspotify'
 gem "font-awesome-rails"
 
 gem 'annotate'
-gem 'elasticsearch', git: 'git://github.com/elasticsearch/elasticsearch-ruby.git'
+#gem 'elasticsearch', git: 'git://github.com/elasticsearch/elasticsearch-ruby.git'
 gem 'elasticsearch-api', git: 'git://github.com/elasticsearch/elasticsearch-ruby.git'
 gem "elasticsearch-persistence", require: 'elasticsearch/persistence/model'
 
@@ -24,7 +24,7 @@ gem 'capistrano-bundler', '~> 1.1.2'
 gem 'capistrano-rails', '~> 1.1.1'
 # We are using rbenv
 gem 'capistrano-rbenv', github: "capistrano/rbenv"
-
+gem 'jquery-ui-rails'
 
 group :development, :test do
   gem 'byebug'

@@ -18,9 +18,9 @@ class SongsController < ApplicationController
     @song = Song.get_info(params[:id])
 
     @user = current_user
-    #@recordings = Recording.all query: {bool: { must: [{ match: { user_id: @user.id}},{match: {song_id: @song.id}}]}},sort: [
-    #  {date: {order: "asc", mode: "avg"}}]
-    @recordings = Recording.all_query(1,5,@user.id,@song.song_spotify_id)
+    @recordings = Recording.all query: {bool: { must: [{ match: { user_id: @user.id}},{match: {song_id: @song.song_spotify_id}}]}},sort: [
+      {date: {order: "desc", mode: "avg"}}]
+    #@recordings = Recording.all_query(1,5,@user.id,@song.song_spotify_id)
   end
 
   def deal

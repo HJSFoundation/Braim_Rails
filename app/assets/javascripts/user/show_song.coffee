@@ -99,11 +99,11 @@ $(document).ready ->
       success: (data) ->
         console.log "success!"
         console.log data.length
+        add_new_recording(data.recording)
         $("#stop_record_performance_button").toggleClass('disabled');
         $("#record_performance_button").toggleClass('disabled');
         $("#record_message").toggle();
         $("#save_recording_modal").modal('hide');
-        setTimeout(redraw_song_recordings,1000)
         return
       contentType: 'application/json',
       data: JSON.stringify({
@@ -267,43 +267,58 @@ $(document).ready ->
           }
         ])
   
-  $("#older_song_recordings").on "click", (e)->
+  # $("#older_song_recordings").on "click", (e)->
+  #   e.preventDefault()
+  #   currentPage++
+  #   $.ajax
+  #     url: '/recordings/index'
+  #     type: 'get'
+  #     dataType: 'json'
+  #     success: (data) ->
+  #       data.forEach (rec) ->
+  #         title_date = moment(rec.date).format('MMMM DD YYYY, h:mm:ss a')
+  #         $("#song_recordings").append("<div class='notice notice-lg'><h4>Recording "+title_date+"</h4><div id="+rec.id+"></div><a href='#' data-recording-id="+rec.id+" class='graph-data-link'>View Graph</a></div>")
+  #       return
+  #     data: 
+  #       page: currentPage
+  #       per_page: 5
+  #       user_id: userID
+  #       song_id: currentSongID
+
+  add_new_recording = (rec)->
+    title_date = moment(rec.date).format('MMMM DD YYYY, h:mm:ss a')
+    $("#song_recordings").prepend("<div class='notice notice-lg'><a href='#' class='delete-recording' data-recording-id="+rec.id+">x</a><h4>Recording "+title_date+"</h4><div id="+rec.id+"></div><a href='#' data-recording-id="+rec.id+" class='graph-data-link'>View Graph</a></div>")
+    id = "#"+rec.id
+    $(id).parent().effect("highlight", {color: '#99CCFF'}, 3000);
+
+  $(document).on "click",".delete-recording",(e)->
     e.preventDefault()
-    currentPage++
+    recording_id = $(this).data "recording-id"
+    $('#dialog_delete_recording').html 'You are about to delete this recording, are you sure?'
+    $('#dialog_delete_recording').dialog
+      resizable: false
+      modal: true
+      title: 'Delete recording'
+      height: 250
+      width: 400
+      buttons:
+        'Yes': ->
+          $(this).dialog 'close'
+          delete_recording(recording_id)
+          return
+        'No': ->
+          $(this).dialog 'close'
+          return
+
+  delete_recording = (recording_id)->
     $.ajax
-      url: '/recordings/index'
-      type: 'get'
+      url: '/recordings/destroy'
+      type: 'delete'
       dataType: 'json'
       success: (data) ->
-        data.forEach (rec) ->
-          title_date = moment(rec.date).format('MMMM DD YYYY, h:mm:ss a')
-          $("#song_recordings").append("<h3>Recording "+title_date+"</h3><div id="+rec.id+"></div><a href='#' data-recording-id="+rec.id+" class='graph-data-link'>View Graph</a>")
+        console.log data.deleted_id
         return
       data: 
-        page: currentPage
-        per_page: 5
-        user_id: userID
-        song_id: currentSongID
-
-  redraw_song_recordings = ->
-    console.log "redrawing"
-    currentPage = 1
-    $.ajax
-      url: '/recordings/index'
-      type: 'get'
-      dataType: 'json'
-      success: (data) ->
-        $("#song_recordings").html("")
-        console.log "ok redraw"
-        data.forEach (rec) ->
-          title_date = moment(rec.date).format('MMMM DD YYYY, h:mm:ss a')
-          $("#song_recordings").append("<h3>Recording "+title_date+"</h3><div id="+rec.id+"></div><a href='#' data-recording-id="+rec.id+" class='graph-data-link'>View Graph</a>")
-        return
-      data: 
-        page: currentPage
-        per_page: 5
-        user_id: userID
-        song_id: currentSongID
-
-
-
+        recording_id: recording_id
+       
+        
