@@ -21,7 +21,7 @@ function onloadPluginEmotiv()
       else
       {
         alert("Did you install plugin or enable NPAPI? Please read instruction for more detail.");
-        window.location.href=('Download/instruction.html');
+        window.location.href=('https://cpanel.emotivinsight.com/BTLE/Download/instruction.html');
       }
     }
     else
