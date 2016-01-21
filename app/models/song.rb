@@ -27,6 +27,17 @@ class Song
   attribute :echonest_valence, Float, mapping: {analyzer: 0.436083}
   attribute :echonest_danceability, Float, mapping: {analyzer: 0.601529}
 
+
+  def get_rating(user_id)
+    request = Rating.all query: {bool: { must: [{ match: { user_id: user_id}},{match: {song_id: self.song_spotify_id}}]}}
+    rating = request.results[0]
+    if rating 
+      return rating.value
+    else
+      return 0
+    end
+  end
+
   def self.get_info(id)
     current_song = (search query: { match: { song_spotify_id: id  } }).results
     if current_song.any?
@@ -58,6 +69,16 @@ class Song
       #byebug
       #puts ""
       return current_song
+    end
+  end
+
+  def self.update_rating(song_id,user_id,value)
+    request = Rating.all query: {bool: { must: [{ match: { user_id: user_id}},{match: {song_id: song_id}}]}}
+    rating = request.results[0]
+    if rating 
+      rating.update value: value
+    else
+      rating = Rating.create(user_id: user_id,song_id: song_id,value: value)
     end
   end
  

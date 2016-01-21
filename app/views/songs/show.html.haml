@@ -70,9 +70,10 @@
               %span
                 =@song.echonest_danceability
         %h3 My rating for this song
-        #stars.starrr{"data-rating" => "4"}
+        #stars.starrr{"data-rating" => "#{@rating}"}
         You gave a rating of
-        %span#count 0
+        %span#count
+          =@rating
         star(s)
         / .row.lead
         /   %p Also you can give a default rating by adding attribute data-rating

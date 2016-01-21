@@ -13,11 +13,20 @@ class SongsController < ApplicationController
     end
   end
 
-  def show
-    
-    @song = Song.get_info(params[:id])
+  def rate
+    id = params[:song_id]
+    value = params[:rating]
+    Song.update_rating(id,current_user.id,value)
+    respond_to do |format|
+      format.any { render json: {response: 'ok',rating: value}, content_type: 'application/json' }
+    end
+  end
 
+  def show
+    @song = Song.get_info(params[:id])
     @user = current_user
+    @rating =@song.get_rating(@user.id)
+    #byebug
     @recordings = Recording.all query: {bool: { must: [{ match: { user_id: @user.id}},{match: {song_id: @song.song_spotify_id}}]}},sort: [
       {date: {order: "desc", mode: "avg"}}]
     #@recordings = Recording.all_query(1,5,@user.id,@song.song_spotify_id)

@@ -5,6 +5,8 @@ Rails.application.routes.draw do
 
   get 'songs/:id'=> "songs#show", :as => "song"
 
+  post 'songs/rate'=> "songs#rate", :as => "song_rate"
+
   get 'QuickDeal' => "songs#deal", :as =>"deal"
 
   post 'recordings/create' =>  "recordings#create" 
