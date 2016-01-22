@@ -1,4 +1,5 @@
 class ArtistsController < ApplicationController
+  before_action :authenticate_user!
   def show
     @artist = RSpotify::Artist.find(params[:id])
     @songs = @artist.top_tracks("US")

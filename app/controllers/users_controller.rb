@@ -23,6 +23,9 @@
 require 'elasticsearch'
 
 class UsersController < ApplicationController
+
+  before_action :authenticate_user!
+
   def profile
     @user = current_user
     client = Elasticsearch::Client.new log: true

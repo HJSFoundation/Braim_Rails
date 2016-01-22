@@ -1,5 +1,6 @@
 require 'rspotify'
 class SongsController < ApplicationController
+  before_action :authenticate_user!
   def search
     if params[:query]
       #@songs =  Echowrap.song_search(title: params[:query], results:20, bucket: 'song_type', sort: "artist_hotttnesss-desc")

@@ -1,4 +1,5 @@
 class RecordingsController < ApplicationController
+  before_action :authenticate_user!
   def create
     data = params[:data]
     recording = params[:recording]
