@@ -5,15 +5,15 @@
       .row.coralbg.white
         .col-md-8.no-pad
           .user-pad
-            %h3 Welcome back, Jessica
+            %h3 
+              Welcome back,
+              =@user.full_name
             %h4.white
               %i.fa.fa-check-circle-o
-              San Antonio, TX
-            %h4.white
-              %i.fa.fa-twitter
-              CoolesOCool
-            %button.btn.btn-labeled.btn-info{:href => "#", :type => "button"}
-              %span.btn-label>
+              =@user.country_name
+              
+            =link_to edit_user_registration_path, class: "btn btn-labeled btn-info" do 
+              %span.btn-label
                 %i.fa.fa-pencil
               Update
         .col-md-4.no-pad

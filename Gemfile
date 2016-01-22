@@ -26,6 +26,8 @@ gem 'capistrano-rails', '~> 1.1.1'
 gem 'capistrano-rbenv', github: "capistrano/rbenv"
 gem 'jquery-ui-rails'
 
+gem 'country_select'
+
 group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'

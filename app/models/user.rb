@@ -15,6 +15,9 @@
 #  last_sign_in_ip        :inet
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  name                   :string
+#  last_name              :string
+#  country                :string
 #
 
 class User < ActiveRecord::Base
@@ -22,4 +25,17 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+
+  has_one :profile, dependent: :destroy
+
+  accepts_nested_attributes_for :profile
+
+  def full_name
+    (self.name || "").capitalize
+  end
+  
+  def country_name
+    country = ISO3166::Country[self.country]
+    country ? country.translations[I18n.locale.to_s].capitalize : ""
+  end
 end

@@ -19,7 +19,7 @@ Rails.application.routes.draw do
 
   match "recordings/destroy", to: "recordings#destroy", via: :delete
   
-  devise_for :users
+  devise_for :users, :controllers => {:registrations => "registrations"}
   authenticated :user do
     root :to => "songs#search" , :as => "authenticated_root"
   end

@@ -22,5 +22,13 @@ module BraimBrowser
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    config.to_prepare do
+        Devise::SessionsController.layout "visitors"
+        Devise::RegistrationsController.layout proc{ |controller| user_signed_in? ? "application"   : "visitors" }
+        Devise::ConfirmationsController.layout "visitors"
+        Devise::UnlocksController.layout "visitors"            
+        Devise::PasswordsController.layout "visitors"        
+    end
   end
 end
