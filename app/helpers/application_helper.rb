@@ -10,4 +10,12 @@ module ApplicationHelper
       javascript_include_tag('users') + stylesheet_link_tag('users')
     end
   end
+
+  def gravatar_url(user)
+
+    default_url = "http://santetotal.com/wp-content/uploads/2014/05/default-user-450x450.png"
+    gravatar_id = Digest::MD5.hexdigest(user.email.downcase)
+    "http://gravatar.com/avatar/#{gravatar_id}.png?s=200&d=#{CGI.escape(default_url)}"
+  
+  end
 end
