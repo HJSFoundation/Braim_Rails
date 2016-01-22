@@ -27,6 +27,7 @@ gem 'capistrano-rbenv', github: "capistrano/rbenv"
 gem 'jquery-ui-rails'
 
 gem 'country_select'
+gem 'rails_admin'
 
 group :development, :test do
   gem 'byebug'
