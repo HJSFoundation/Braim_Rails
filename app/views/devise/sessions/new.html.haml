@@ -1,0 +1,24 @@
+.container
+  #loginbox.mainbox.col-md-4.col-md-offset-4.col-sm-8.col-sm-offset-2{:style => "margin-top:50px;"}
+    .panel.panel-default
+      .panel-heading
+        .panel-title Sign In
+        .text-rigth
+          - if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations'
+            = link_to "Forgot your password?", new_password_path(resource_name)
+      .panel-body{:style => "padding-top:30px"}
+        #login-alert.alert.alert-danger.col-sm-12{:style => "display:none"}
+        = simple_form_for(resource, as: resource_name, url: session_path(resource_name),class: "form-horizontal") do |f|
+          =f.input :email, required: false, autofocus: true
+          = f.input :password, required: false
+          = f.input :remember_me, as: :boolean if devise_mapping.rememberable?
+          .form-group{:style => "margin-top:10px"}
+            / Button
+            .text-left
+              = f.button :submit, "Log in"
+          .form-group
+            .col-md-12.control
+              %div{:style => "border-top: 1px solid#888; padding-top:15px; font-size:85%"}
+                Don't have an account!
+                = link_to "Sign up", new_registration_path(resource_name)
+  
