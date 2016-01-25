@@ -28,6 +28,9 @@ gem 'jquery-ui-rails'
 
 gem 'country_select'
 gem 'rails_admin'
+group :development, :test do
+  gem 'rspec-rails', '~> 3.0'
+end
 
 group :development, :test do
   gem 'byebug'
