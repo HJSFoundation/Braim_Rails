@@ -3418,3 +3418,34 @@ Caused by: org.apache.hadoop.hbase.ipc.RemoteWithExtrasException(org.apache.hado
 2016-01-27 01:33:58,580 INFO  io.prediction.tools.console.App$ [main] -                braim |    2 | AZusbrZwZBM3xv6O5JsFUoM3kgwjdVYZpbeFm9HdngYtigbo2qTWjTapsO3aKYj6 | (all)
 2016-01-27 01:33:58,587 INFO  io.prediction.tools.console.App$ [main] -           braim-test |    1 | oQnr8DqeiWsz1zJn2nSHdq7QmOoNIrQueKZ2Ps5WrYDBE1pwzorlRBsQjFsj6UPw | (all)
 2016-01-27 01:33:58,588 INFO  io.prediction.tools.console.App$ [main] - Finished listing 2 app(s).
+2016-01-27 09:32:34,312 WARN  org.apache.hadoop.hbase.client.HConnectionManager$HConnectionImplementation [main-EventThread] - This client just lost it's session with ZooKeeper, closing it. It will be recreated next time someone needs it
+org.apache.zookeeper.KeeperException$SessionExpiredException: KeeperErrorCode = Session expired
+	at org.apache.hadoop.hbase.zookeeper.ZooKeeperWatcher.connectionEvent(ZooKeeperWatcher.java:401)
+	at org.apache.hadoop.hbase.zookeeper.ZooKeeperWatcher.process(ZooKeeperWatcher.java:319)
+	at org.apache.zookeeper.ClientCnxn$EventThread.processEvent(ClientCnxn.java:522)
+	at org.apache.zookeeper.ClientCnxn$EventThread.run(ClientCnxn.java:498)
+2016-01-27 09:34:18,581 INFO  io.prediction.tools.console.Console$ [main] - Creating Event Server at 0.0.0.0:7070
+2016-01-27 09:34:25,268 INFO  spray.can.server.HttpListener [EventServerSystem-akka.actor.default-dispatcher-4] - Bound to /0.0.0.0:7070
+2016-01-27 09:34:25,269 INFO  io.prediction.data.api.EventServerActor [EventServerSystem-akka.actor.default-dispatcher-4] - Bound received. EventServer is ready.
+2016-01-27 11:44:27,675 INFO  io.prediction.tools.console.App$ [main] - Data of the following app (default channel only) will be deleted. Are you sure?
+2016-01-27 11:44:27,676 INFO  io.prediction.tools.console.App$ [main] -     App Name: braim-test
+2016-01-27 11:44:27,677 INFO  io.prediction.tools.console.App$ [main] -       App ID: 1
+2016-01-27 11:44:27,677 INFO  io.prediction.tools.console.App$ [main] -  Description: None
+2016-01-27 11:44:32,289 INFO  io.prediction.data.storage.hbase.HBLEvents [main] - Removing table pio_event:events_1...
+2016-01-27 11:44:33,626 INFO  io.prediction.tools.console.App$ [main] - Removed Event Store for this app ID: 1
+2016-01-27 11:44:33,795 INFO  io.prediction.data.storage.hbase.HBLEvents [main] - The table pio_event:events_1 doesn't exist yet. Creating now...
+2016-01-27 11:44:34,107 INFO  io.prediction.tools.console.App$ [main] - Initialized Event Store for this app ID: 1.
+2016-01-27 11:44:34,211 INFO  io.prediction.tools.console.App$ [main] - Done.
+2016-01-27 11:47:54,796 INFO  io.prediction.tools.console.App$ [main] - Data of the following app (default channel only) will be deleted. Are you sure?
+2016-01-27 11:47:54,797 INFO  io.prediction.tools.console.App$ [main] -     App Name: braim
+2016-01-27 11:47:54,797 INFO  io.prediction.tools.console.App$ [main] -       App ID: 2
+2016-01-27 11:47:54,798 INFO  io.prediction.tools.console.App$ [main] -  Description: None
+2016-01-27 11:47:58,398 INFO  io.prediction.data.storage.hbase.HBLEvents [main] - Removing table pio_event:events_2...
+2016-01-27 11:47:59,671 INFO  io.prediction.tools.console.App$ [main] - Removed Event Store for this app ID: 2
+2016-01-27 11:47:59,803 INFO  io.prediction.data.storage.hbase.HBLEvents [main] - The table pio_event:events_2 doesn't exist yet. Creating now...
+2016-01-27 11:48:00,082 INFO  io.prediction.tools.console.App$ [main] - Initialized Event Store for this app ID: 2.
+2016-01-27 11:48:00,190 INFO  io.prediction.tools.console.App$ [main] - Done.
+2016-01-27 11:51:24,609 INFO  io.prediction.tools.console.App$ [main] -                 Name |   ID |                                                       Access Key | Allowed Event(s)
+2016-01-27 11:51:24,671 INFO  io.prediction.tools.console.App$ [main] -                braim |    2 | AZusbrZwZBM3xv6O5JsFUoM3kgwjdVYZpbeFm9HdngYtigbo2qTWjTapsO3aKYj6 | (all)
+2016-01-27 11:51:24,677 INFO  io.prediction.tools.console.App$ [main] -           braim-test |    1 | oQnr8DqeiWsz1zJn2nSHdq7QmOoNIrQueKZ2Ps5WrYDBE1pwzorlRBsQjFsj6UPw | (all)
+2016-01-27 11:51:24,678 INFO  io.prediction.tools.console.App$ [main] - Finished listing 2 app(s).

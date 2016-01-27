@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160122165138) do
+ActiveRecord::Schema.define(version: 20160127145645) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,33 @@ ActiveRecord::Schema.define(version: 20160122165138) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "user_id"
+  end
+
+  create_table "songs", force: :cascade do |t|
+    t.string   "song_spotify_id"
+    t.string   "song_spotify_url"
+    t.string   "name"
+    t.string   "preview_url"
+    t.string   "album_cover_url"
+    t.string   "album_name"
+    t.integer  "duration"
+    t.string   "artist_name"
+    t.string   "artist_spotify_id"
+    t.string   "echonest_song_type",                     array: true
+    t.integer  "echonest_key"
+    t.float    "echonest_energy"
+    t.float    "echonest_liveness"
+    t.float    "echonest_tempo"
+    t.float    "echonest_speechiness"
+    t.float    "echonest_acousticness"
+    t.float    "echonest_instrumentalness"
+    t.integer  "echonest_mode"
+    t.integer  "echonest_time_signature"
+    t.float    "echonest_loudness"
+    t.float    "echonest_valence"
+    t.float    "echonest_danceability"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
   create_table "users", force: :cascade do |t|

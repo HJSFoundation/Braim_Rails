@@ -1,3 +1,34 @@
+# == Schema Information
+#
+# Table name: songs
+#
+#  id                        :integer          not null, primary key
+#  song_spotify_id           :string
+#  song_spotify_url          :string
+#  name                      :string
+#  preview_url               :string
+#  album_cover_url           :string
+#  album_name                :string
+#  duration                  :integer
+#  artist_name               :string
+#  artist_spotify_id         :string
+#  echonest_song_type        :string           is an Array
+#  echonest_key              :integer
+#  echonest_energy           :float
+#  echonest_liveness         :float
+#  echonest_tempo            :float
+#  echonest_speechiness      :float
+#  echonest_acousticness     :float
+#  echonest_instrumentalness :float
+#  echonest_mode             :integer
+#  echonest_time_signature   :integer
+#  echonest_loudness         :float
+#  echonest_valence          :float
+#  echonest_danceability     :float
+#  created_at                :datetime         not null
+#  updated_at                :datetime         not null
+#
+
 require 'rspotify'
 class SongsController < ApplicationController
   before_action :authenticate_user!
@@ -24,13 +55,11 @@ class SongsController < ApplicationController
   end
 
   def show
-    @song = Song.get_info(params[:id])
+    @song = Song.find_or_register(params[:id])
     @user = current_user
     @rating =@song.get_rating(@user.id)
-    #byebug
     @recordings = Recording.all query: {bool: { must: [{ match: { user_id: @user.id}},{match: {song_id: @song.song_spotify_id}}]}},sort: [
       {date: {order: "desc", mode: "avg"}}]
-    #@recordings = Recording.all_query(1,5,@user.id,@song.song_spotify_id)
   end
 
   def deal

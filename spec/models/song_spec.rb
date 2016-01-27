@@ -29,5 +29,34 @@
 #  updated_at                :datetime         not null
 #
 
-module SongsHelper
+require 'rails_helper'
+
+RSpec.describe Song, type: :model do
+  it "has a valid factory" do
+    expect(FactoryGirl.build(:song)).to be_valid
+  end
+  context "class methods" do
+    context "find_or_register(song_spotify_id)" do
+      describe "if song does not exists" do
+        it "should get song info from spotify and echonest APIS and register it to database" do
+          song = Song.find_or_register("2Foc5Q5nqNiosCNqttzHof")
+          expect(song.name).to eq "Get Lucky - Radio Edit"
+        end
+      end
+      describe "if song already exists" do
+        it "should get the song" do
+          song = FactoryGirl.create(:song)
+          expect(Song.find_or_register(song.song_spotify_id)).to eq song
+        end
+      end
+    end
+  end
+  context "instance methods" do
+    context "save_prediction_info" do
+      it "set index on prediction io" do
+        song = FactoryGirl.create(:song)
+        expect(song.save_prediction_info).not_to be_falsey
+      end
+    end
+  end
 end
