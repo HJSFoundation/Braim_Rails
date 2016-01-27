@@ -28,8 +28,18 @@ gem 'jquery-ui-rails'
 
 gem 'country_select'
 gem 'rails_admin'
+gem 'predictionio', '0.9.6'
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'
+  gem 'factory_girl_rails'
+end
+
+group :test do
+  gem 'shoulda-matchers', '~> 3.0'
+  gem 'faker'
+  gem 'capybara'
+  gem 'database_cleaner', git: 'git@github.com:DatabaseCleaner/database_cleaner.git'
+  gem 'launchy'
 end
 
 group :development, :test do

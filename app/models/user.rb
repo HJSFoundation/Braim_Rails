@@ -38,4 +38,35 @@ class User < ActiveRecord::Base
     country = ISO3166::Country[self.country]
     country ? country.translations[I18n.locale.to_s].capitalize : ""
   end
+  # def save_and_index
+  #   if self.save
+  #     user_info = {'email'=> self.email, 'name'=> self.name, 'last_name'=> self.last_name, 'country'=> self.country}
+  #     profile_info = {}
+  #     profile_info = {'birthday'=>self.profile.birthday,'gender'=>self.profile.gender} if self.profile
+  #     request = PIO_CLIENT.create_event(
+  #       '$set',
+  #       'user',
+  #       self.id,
+  #       { 'properties' => user_info.merge(profile_info)}
+  #     )
+  #     return JSON.parse(request.body)['eventId']
+  #   else
+  #     return false
+  #   end
+  # end
+  def save_prediction_info
+   user_info = {'email'=> self.email, 'name'=> self.name, 'last_name'=> self.last_name, 'country'=> self.country}
+    profile_info = {}
+    profile_info = {'birthday'=>self.profile.birthday,'gender'=>self.profile.gender} if self.profile
+    request = PioClient.new_client.create_event(
+      '$set',
+      'user',
+      self.id,
+      { 'properties' => user_info.merge(profile_info)}
+    )
+    return JSON.parse(request.body)['eventId']
+  end
+  validates :name , presence: true
+  validates :last_name , presence: true
+  validates :country , presence: true
 end
