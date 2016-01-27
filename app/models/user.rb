@@ -30,7 +30,8 @@ class User < ActiveRecord::Base
 
   has_many :ratings
   has_many :songs, :through => :ratings
-
+  has_many :recordings
+  
   accepts_nested_attributes_for :profile
 
   def full_name

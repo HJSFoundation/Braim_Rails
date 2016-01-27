@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: recordings
+#
+#  id         :integer          not null, primary key
+#  user_id    :integer
+#  song_id    :integer
+#  date       :datetime
+#  duration   :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 class RecordingsController < ApplicationController
   before_action :authenticate_user!
   def create
@@ -7,25 +20,25 @@ class RecordingsController < ApplicationController
     new_recording.user_id = recording['user_id']
     new_recording.song_id = recording['song_id']
     new_recording.duration = recording['duration']
-    new_recording.date = recording['date']
-
+    new_recording.date = Time.at(recording['date']/1000)
+    #byebug
     if new_recording.save
-      data.each do |r|
-        entry = Entry.new
-        entry.recording_id = new_recording.id
-        entry.user_id = r['user_id']
-        entry.song_id = r['song_id']
-        entry.interest = r['interest']
-        entry.engagement = r['engagement']
-        entry.focus = r['focus']
-        entry.relaxation = r['relaxation']
-        entry.instantaneousExcitement = r['instantaneousExcitement']
-        entry.longTermExcitement = r['longTermExcitement']
-        entry.stress = r['stress']
-        entry.timestamp = r['timestamp']
-        entry.date = r['date']
-        entry.save
-      end
+      # data.each do |r|
+      #   entry = Entry.new
+      #   entry.recording_id = new_recording.id
+      #   entry.user_id = r['user_id']
+      #   entry.song_id = r['song_id']
+      #   entry.interest = r['interest']
+      #   entry.engagement = r['engagement']
+      #   entry.focus = r['focus']
+      #   entry.relaxation = r['relaxation']
+      #   entry.instantaneousExcitement = r['instantaneousExcitement']
+      #   entry.longTermExcitement = r['longTermExcitement']
+      #   entry.stress = r['stress']
+      #   entry.timestamp = r['timestamp']
+      #   entry.date = r['date']
+      #   entry.save
+      # end
       respond_to do |format|
         format.json { render json: { :response => "ok" ,length: data.length, recording: new_recording}.to_json }
       end
@@ -45,26 +58,9 @@ class RecordingsController < ApplicationController
     end
   end
 
-  def show
-    id = params[:id]
-    response = Recording.all query: { match: { _id: id  } } 
-    recording = response.results[0]
-    respond_to do |format|
-      format.json { render json:  recording.to_json }
-    end
-  end
-
-  def index
-    @recordings = Recording.all_query(  params[:page].to_i,params[:per_page].to_i,params[:user_id].to_i,params[:song_id])
-    respond_to do |format|
-      format.json { render json:  @recordings.to_json }
-    end
-  end
-
   def destroy
     deleted_id = params[:recording_id]
-    client = Elasticsearch::Client.new log: true
-    client.delete index: 'braim', type: 'recording', id: deleted_id
+    Recording.find(deleted_id).destroy
     #TODO Fix delete all entries 
     #client.delete_by_query index: 'braim', type: 'entry', q: "recording_id:#{deleted_id}"
     respond_to do |format|

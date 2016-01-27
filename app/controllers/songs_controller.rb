@@ -67,7 +67,8 @@ class SongsController < ApplicationController
     @song = Song.find_or_register(params[:id])
     @user = current_user
     @rating =@song.get_rating(@user)
-    @recordings = []
+    #byebug
+    @recordings = @song.recordings.where(user: @user)
     #@recordings = Recording.all query: {bool: { must: [{ match: { user_id: @user.id}},{match: {song_id: @song.song_spotify_id}}]}},sort: [
     #  {date: {order: "desc", mode: "avg"}}]
   end

@@ -11,11 +11,11 @@
 #  updated_at :datetime         not null
 #
 
-class Recording < ActiveRecord::Base
-  belongs_to :song
-  belongs_to :user
-  validates :song_id, presence: true
-  validates :user_id, presence: true
-  validates :date, presence: true
-  validates :duration, presence: true
+FactoryGirl.define do
+  factory :recording do
+    user_id 1
+    song_id 1
+    date Time.now
+    duration 1
+  end
 end

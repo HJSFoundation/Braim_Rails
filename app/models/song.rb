@@ -32,6 +32,7 @@
 class Song < ActiveRecord::Base
   has_many :ratings
   has_many :users, :through => :ratings
+  has_many :recordings
   def self.find_or_register(query_id)
     song = Song.find_by(song_spotify_id: query_id)
     if song
