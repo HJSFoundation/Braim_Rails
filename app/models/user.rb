@@ -28,6 +28,9 @@ class User < ActiveRecord::Base
 
   has_one :profile, dependent: :destroy
 
+  has_many :ratings
+  has_many :songs, :through => :ratings
+
   accepts_nested_attributes_for :profile
 
   def full_name

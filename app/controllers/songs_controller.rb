@@ -48,7 +48,16 @@ class SongsController < ApplicationController
   def rate
     id = params[:song_id]
     value = params[:rating]
-    Song.update_rating(id,current_user.id,value)
+    song = Song.find_by(song_spotify_id: id)
+    current_rating = song.ratings.find_by(user: current_user)
+    if current_rating
+      current_rating.value = value
+      current_rating.save
+    else
+      current_rating = song.ratings.create(user: current_user, value: value)
+    end
+    current_rating.save_prediction_info
+    #byebug
     respond_to do |format|
       format.any { render json: {response: 'ok',rating: value}, content_type: 'application/json' }
     end
@@ -57,9 +66,10 @@ class SongsController < ApplicationController
   def show
     @song = Song.find_or_register(params[:id])
     @user = current_user
-    @rating =@song.get_rating(@user.id)
-    @recordings = Recording.all query: {bool: { must: [{ match: { user_id: @user.id}},{match: {song_id: @song.song_spotify_id}}]}},sort: [
-      {date: {order: "desc", mode: "avg"}}]
+    @rating =@song.get_rating(@user)
+    @recordings = []
+    #@recordings = Recording.all query: {bool: { must: [{ match: { user_id: @user.id}},{match: {song_id: @song.song_spotify_id}}]}},sort: [
+    #  {date: {order: "desc", mode: "avg"}}]
   end
 
   def deal

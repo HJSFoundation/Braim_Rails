@@ -30,6 +30,8 @@
 #
 
 class Song < ActiveRecord::Base
+  has_many :ratings
+  has_many :users, :through => :ratings
   def self.find_or_register(query_id)
     song = Song.find_by(song_spotify_id: query_id)
     if song
@@ -40,9 +42,8 @@ class Song < ActiveRecord::Base
       return song
     end
   end
-   def get_rating(user_id)
-    request = Rating.all query: {bool: { must: [{ match: { user_id: user_id}},{match: {song_id: self.song_spotify_id}}]}}
-    rating = request.results[0]
+   def get_rating(current_user)
+    rating = ratings.find_by(user: current_user)
     if rating 
       return rating.value
     else
