@@ -28,25 +28,7 @@ class UsersController < ApplicationController
 
   def profile
     @user = current_user
-    client = Elasticsearch::Client.new log: true
-    result = client.search(index: 'braim' , type: 'recording',scroll: '1m', body: {query: {match: {user_id: @user.id}},size: 5},sort: "date:desc")
-    @scroll_id = result['_scroll_id']
-    @scroll_total = result['hits']['total']
-    response = result['hits']['hits']
-    response.delete_if{|x| x['_source']['song_id']==nil}
-    songs_ids = response.collect {|r| r['_source']['song_id']}
-    if songs_ids.any?
-      @songs = RSpotify::Track.find(songs_ids)
-      @recordings = response.map do |r| 
-        current_song = @songs.select {|song| song.id == r['_source']['song_id'] }
-        r['song_info'] = current_song[0]
-        r
-      end
-    else
-      @songs = []
-      @recordings = []
-    end
-    
+    @recordings = @user.recordings
   end
 
   def scroll

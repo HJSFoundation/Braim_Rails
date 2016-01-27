@@ -24,7 +24,7 @@
         .col-md-4.user-pad.text-center
           %h3 RECORDINGS
           %h4
-            =@scroll_total
+            =@recordings.count
         .col-md-4.user-pad.text-center
           %h3 FOLLOWERS
           %h4 0
@@ -49,34 +49,34 @@
           -@recordings.each_with_index do |recording, i|
             %tr
               %th
-                =link_to "#" ,class: "show-graph-btn", "data-rec-id"=>"#{recording['_id']}" do
+                =link_to "#" ,class: "show-graph-btn", "data-rec-id"=>"#{recording.id}" do
                   =image_tag "graph_preview.jpg",class: "graph-preview" 
               %th 
                 %p
-                  =Date.strptime((recording['_source']['date']/1000).to_s,'%s')
+                  =recording.date.to_s
               %th 
-                = audio_tag recording['song_info'].preview_url, class: "audio-play"
+                = audio_tag recording.song.preview_url, class: "audio-play"
                 =link_to "#", class: "btn btn-link audioButton" do
                   .glyphicon.glyphicon-play
               %th{:scope => "row"}
-                =recording['song_info'].name
+                =recording.song.name
               %td
                 %p 
-                  =recording['song_info'].album.name
+                  =recording.song.album_name
               %td
                 .album-track-query
-                  =spotify_image_tag recording['song_info'].album
+                  =image_tag recording.song.album_cover_url
               %td
                 %p
                   =#Time.at(recording['song_info'].duration_ms/1000).utc.strftime("%M:%S")
-                  ="#{recording['_source']['duration']} s"
+                  ="#{recording.duration} s"
               %td
-                =link_to song_path(recording['song_info'].id), class: "btn btn-default loading-button" do
+                =link_to song_path(recording.song.song_spotify_id), class: "btn btn-default loading-button" do
                   %i
                   %span
                     Song Profile
   #ajax_message Loading Recordings ...
-  =link_to "Show older recordings", scroll_path(@scroll_id), id: "#more_recordings", remote: true if @recordings.any?
+  =#link_to "Show older recordings", scroll_path(@scroll_id), id: "#more_recordings", remote: true if @recordings.any?
 
 #graph_modal.modal.fade{:role => "dialog", :tabindex => "-1"}
   .modal-dialog

@@ -48,7 +48,7 @@ class SongsController < ApplicationController
   def rate
     id = params[:song_id]
     value = params[:rating]
-    song = Song.find_by(song_spotify_id: id)
+    song = Song.find(id)
     current_rating = song.ratings.find_by(user: current_user)
     if current_rating
       current_rating.value = value
