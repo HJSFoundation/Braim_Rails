@@ -23,22 +23,22 @@ class RecordingsController < ApplicationController
     new_recording.date = Time.at(recording['date']/1000)
     #byebug
     if new_recording.save
-      # data.each do |r|
-      #   entry = Entry.new
-      #   entry.recording_id = new_recording.id
-      #   entry.user_id = r['user_id']
-      #   entry.song_id = r['song_id']
-      #   entry.interest = r['interest']
-      #   entry.engagement = r['engagement']
-      #   entry.focus = r['focus']
-      #   entry.relaxation = r['relaxation']
-      #   entry.instantaneousExcitement = r['instantaneousExcitement']
-      #   entry.longTermExcitement = r['longTermExcitement']
-      #   entry.stress = r['stress']
-      #   entry.timestamp = r['timestamp']
-      #   entry.date = r['date']
-      #   entry.save
-      # end
+      data.each do |r|
+        entry = Entry.new
+        entry.recording_id = new_recording.id
+        entry.user_id = r['user_id']
+        entry.song_id = r['song_id']
+        entry.interest = r['interest']
+        entry.engagement = r['engagement']
+        entry.focus = r['focus']
+        entry.relaxation = r['relaxation']
+        entry.instantaneousExcitement = r['instantaneousExcitement']
+        entry.longTermExcitement = r['longTermExcitement']
+        entry.stress = r['stress']
+        entry.timestamp = r['timestamp']
+        entry.date = r['date']
+        entry.save_prediction_info
+      end
       respond_to do |format|
         format.json { render json: { :response => "ok" ,length: data.length, recording: new_recording}.to_json }
       end
