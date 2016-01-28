@@ -28,7 +28,7 @@ class UsersController < ApplicationController
 
   def profile
     @user = current_user
-    @recordings = @user.recordings
+    @recordings = @user.recordings.order(created_at: :desc)
   end
 
   def scroll
