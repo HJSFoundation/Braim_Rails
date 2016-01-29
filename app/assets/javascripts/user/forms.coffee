@@ -14,8 +14,10 @@ $(document).ready ->
 
   $(document).bind("ajaxSend", ->
     $("#ajax_message").show()
+    $("#loading_modal").modal('show')
    ).bind "ajaxComplete", ->
     $("#ajax_message").hide()
+    $("#loading_modal").modal('hide')
 
   $(document).on "click", ".loading-link",(event)->
     $("#ajax_message").show()

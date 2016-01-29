@@ -173,12 +173,12 @@ $(document).ready ->
           entry.stress
         ]
         return
-      console.log interest
       chart_title = "Recording id: "+rec_id
 
       new (Highcharts.Chart)(
+
         chart:
-          renderTo: rec_id
+          renderTo: rec_id.toString()
           type: 'spline'
           animation: Highcharts.svg
           marginRight: 10
@@ -219,6 +219,7 @@ $(document).ready ->
               enabled: false
               symbol: 'circle'
             data: interest
+            
           }
           {
             name: 'Engagement'
@@ -227,6 +228,7 @@ $(document).ready ->
               enabled: false
               symbol: 'circle'
             data: engagement
+          
           }
           {
             name: 'Focus'
@@ -235,6 +237,7 @@ $(document).ready ->
               enabled: false
               symbol: 'circle'
             data: focus
+            
           }
           {
             name: 'Relaxation'
@@ -243,6 +246,7 @@ $(document).ready ->
               enabled: false
               symbol: 'circle'
             data: relax
+            
           }
           {
             name: 'Instantaneous Excitement'
@@ -251,6 +255,7 @@ $(document).ready ->
               enabled: false
               symbol: 'circle'
             data: instantaneousExcitement
+            
           }
           {
             name: 'Long Term Excitement'
@@ -259,6 +264,7 @@ $(document).ready ->
               enabled: false
               symbol: 'circle'
             data: longTermExcitement
+            
           }
           {
             name: 'Stress'
@@ -267,6 +273,7 @@ $(document).ready ->
               enabled: false
               symbol: 'circle'
             data: stress
+            
           }
         ])
   
