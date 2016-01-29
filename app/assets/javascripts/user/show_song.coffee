@@ -128,6 +128,8 @@ $(document).ready ->
       dataType: 'json'
       success: (data) ->
         console.log "success!"
+        console.log recording_id
+        console.log data
         graph_data(data,recording_id)
         return
       data: 
@@ -171,6 +173,7 @@ $(document).ready ->
           entry.stress
         ]
         return
+      console.log interest
       chart_title = "Recording id: "+rec_id
 
       new (Highcharts.Chart)(

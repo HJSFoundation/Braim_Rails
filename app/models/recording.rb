@@ -14,6 +14,8 @@
 class Recording < ActiveRecord::Base
   belongs_to :song
   belongs_to :user
+  has_many :entries
+  
   validates :song_id, presence: true
   validates :user_id, presence: true
   validates :date, presence: true

@@ -11,10 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160127202532) do
+ActiveRecord::Schema.define(version: 20160128225531) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "entries", force: :cascade do |t|
+    t.string   "event_id"
+    t.integer  "user_id"
+    t.integer  "song_id"
+    t.integer  "recording_id"
+    t.float    "interest"
+    t.float    "engagement"
+    t.float    "focus"
+    t.float    "relaxation"
+    t.float    "instantaneousExcitement"
+    t.float    "longTermExcitement"
+    t.float    "stress"
+    t.integer  "timestamp"
+    t.datetime "date"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
 
   create_table "profiles", force: :cascade do |t|
     t.date     "birthday"

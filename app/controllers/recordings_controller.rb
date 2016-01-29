@@ -23,6 +23,7 @@ class RecordingsController < ApplicationController
     new_recording.date = Time.at(recording['date']/1000)
     #byebug
     if new_recording.save
+      client = PioClient.new_client
       data.each do |r|
         entry = Entry.new
         entry.recording_id = new_recording.id
@@ -36,8 +37,8 @@ class RecordingsController < ApplicationController
         entry.longTermExcitement = r['longTermExcitement']
         entry.stress = r['stress']
         entry.timestamp = r['timestamp']
-        entry.date = r['date']
-        entry.save_prediction_info
+        entry.date = Time.at(r['date'])
+        entry.save_and_index(client)
       end
       respond_to do |format|
         format.json { render json: { :response => "ok" ,length: data.length, recording: new_recording}.to_json }
@@ -51,8 +52,7 @@ class RecordingsController < ApplicationController
 
   def show_data
     id = params[:id]
-    entries = Entry.all query: { match: { recording_id: id  } } ,sort: [
-      {timestamp: {order: "asc", mode: "avg"}}]
+    entries = Recording.find(id).entries
     respond_to do |format|
       format.json { render json:  entries.to_json }
     end

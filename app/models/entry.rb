@@ -1,30 +1,41 @@
-class Entry
-  include ActiveModel::Model
+# == Schema Information
+#
+# Table name: entries
+#
+#  id                      :integer          not null, primary key
+#  event_id                :string
+#  user_id                 :integer
+#  song_id                 :integer
+#  recording_id            :integer
+#  interest                :float
+#  engagement              :float
+#  focus                   :float
+#  relaxation              :float
+#  instantaneousExcitement :float
+#  longTermExcitement      :float
+#  stress                  :float
+#  timestamp               :integer
+#  date                    :datetime
+#  created_at              :datetime         not null
+#  updated_at              :datetime         not null
+#
 
-  attr_accessor :user_id, :song_id , :recording_id , :interest ,:engagement , :focus , :relaxation,
-   :instantaneousExcitement ,:longTermExcitement , :stress , :timestamp , :date
-
-
-  # attribute :user_id,  Integer, mapping: { type: 'integer' }
-  # attribute :song_id,  String,  mapping: { analyzer: 'snowball' }
-  # attribute :recording_id ,String, mapping: { analyzer: '4VqPOruhp5EdPBeR92t6lQ'}
-  # attribute :interest,  Float,  mapping: { analyzer: 0.553663 }
-  # attribute :engagement,  Float,  mapping: { analyzer: 0.553663 }
-  # attribute :focus,  Float,  mapping: { analyzer: 0.553663 }
-  # attribute :relaxation,  Float,  mapping: { analyzer: 0.553663 }
-  # attribute :instantaneousExcitement,  Float,  mapping: { analyzer: 0.553663 }
-  # attribute :longTermExcitement,  Float,  mapping: { analyzer: 0.553663 }
-  # attribute :stress,  Float,  mapping: { analyzer: 0.553663 }
-  # attribute :timestamp,  Integer,  mapping: { type: 'integer'  }
-  # attribute :date, Date
-  
-  # Validate the presence of the `title` attribute
-  #
-  validates :user_id, presence: true
-  validates :song_id, presence: true
-  validates :recording_id, presence: true
-
-  def save_prediction_info
+class Entry < ActiveRecord::Base
+  belongs_to :recording
+  validates :event_id , presence: true
+  validates :user_id , presence: true
+  validates :song_id , presence: true
+  validates :recording_id , presence: true
+  validates :interest , presence: true
+  validates :engagement , presence: true
+  validates :focus , presence: true
+  validates :relaxation , presence: true
+  validates :instantaneousExcitement , presence: true
+  validates :longTermExcitement , presence: true
+  validates :stress , presence: true
+  validates :timestamp , presence: true
+  validates :date , presence: true
+  def save_and_index(client)
     entry_info = {
       recording_id: self.recording_id,
       interest: self.interest,
@@ -37,7 +48,7 @@ class Entry
       timestamp: self.timestamp,
       date: self.date
     }
-    request = PioClient.new_client.create_event(
+    request = client.create_event(
       'emotion_rate',
       'user',
       self.user_id, {
@@ -46,9 +57,7 @@ class Entry
         'properties' => entry_info
       }
     )
+    self.event_id = JSON.parse(request.body)['eventId']
+    save if self.event_id
   end
-
-  # Execute code after saving the model.
-  #
-  #after_save { puts "Successfully saved: #{self}" }
 end
