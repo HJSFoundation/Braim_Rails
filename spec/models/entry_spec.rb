@@ -43,7 +43,8 @@ RSpec.describe Entry, type: :model do
     context "save_prediction_info" do
       it "set entry on prediction io" do
         entry = FactoryGirl.create(:entry)
-        expect(entry.save_prediction_info).not_to be_falsey
+        client = PioClient.new_client
+        expect(entry.save_prediction_info(client)).not_to be_falsey
       end
     end
   end

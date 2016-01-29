@@ -35,7 +35,7 @@ class Entry < ActiveRecord::Base
   validates :stress , presence: true
   validates :timestamp , presence: true
   validates :date , presence: true
-  def save_and_index(client)
+  def save_prediction_info(client)
     entry_info = {
       recording_id: self.recording_id,
       interest: self.interest,
@@ -58,6 +58,14 @@ class Entry < ActiveRecord::Base
       }
     )
     self.event_id = JSON.parse(request.body)['eventId']
-    save if self.event_id
   end
+
+  def self.masive_record(total_entries)
+    ActiveRecord::Base.transaction do
+      total_entries.each do |entry|
+        entry.save
+      end
+    end
+  end
+
 end
