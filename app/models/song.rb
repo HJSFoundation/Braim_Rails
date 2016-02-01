@@ -54,7 +54,7 @@ class Song < ActiveRecord::Base
   def save_prediction_info
     song_info = self.attributes
     song_info.delete('id')
-    request = PioClient.new_client.create_event(
+    request = PioClient.create_event(
       '$set',
       'item',
       self.id,

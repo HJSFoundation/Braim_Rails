@@ -39,9 +39,10 @@ class RecordingsController < ApplicationController
         entry.stress = r['stress']
         entry.timestamp = r['timestamp']
         entry.date = Time.at(r['date'])
+        entry.event_id = entry.save_prediction_info
         total_entries.push(entry)
       end
-      Entry.save_prediction_batch(new_recording.id,total_entries)
+      #Entry.save_prediction_batch(new_recording.id,total_entries)
       Entry.masive_record(total_entries)
       respond_to do |format|
         format.json { render json: { :response => "ok" ,length: data.length, recording: new_recording}.to_json }

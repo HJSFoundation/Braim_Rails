@@ -62,7 +62,7 @@ class User < ActiveRecord::Base
    user_info = {'email'=> self.email, 'name'=> self.name, 'last_name'=> self.last_name, 'country'=> self.country}
     profile_info = {}
     profile_info = {'birthday'=>self.profile.birthday,'gender'=>self.profile.gender} if self.profile
-    request = PioClient.new_client.create_event(
+    request = PioClient.create_event(
       '$set',
       'user',
       self.id,

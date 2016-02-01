@@ -35,7 +35,7 @@ class Entry < ActiveRecord::Base
   validates :stress , presence: true
   validates :timestamp , presence: true
   validates :date , presence: true
-  def save_prediction_info(client)
+  def save_prediction_info
     entry_info = {
       recording_id: self.recording_id,
       interest: self.interest,
@@ -48,7 +48,7 @@ class Entry < ActiveRecord::Base
       timestamp: self.timestamp,
       date: self.date
     }
-    request = client.create_event(
+    request = PioClient.create_event(
       'emotion_rate',
       'user',
       self.user_id, {
