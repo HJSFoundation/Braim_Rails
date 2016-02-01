@@ -87,3 +87,4 @@ pickle-email-*.html
 /config/database.yml
 /app/assets/javascripts/elasticsearch.config.js
 pio.log
+/import_entries/**

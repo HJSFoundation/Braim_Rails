@@ -23,7 +23,7 @@ class RecordingsController < ApplicationController
     new_recording.date = Time.at(recording['date']/1000)
     #byebug
     if new_recording.save
-      client = PioClient.new_client
+      #client = PioClient.new_client
       total_entries = []
       data.each do |r|
         entry = Entry.new
@@ -39,10 +39,9 @@ class RecordingsController < ApplicationController
         entry.stress = r['stress']
         entry.timestamp = r['timestamp']
         entry.date = Time.at(r['date'])
-        entry.save_prediction_info(client)
-        sleep(0.05)
         total_entries.push(entry)
       end
+      Entry.save_prediction_batch(new_recording.id,total_entries)
       Entry.masive_record(total_entries)
       respond_to do |format|
         format.json { render json: { :response => "ok" ,length: data.length, recording: new_recording}.to_json }

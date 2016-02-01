@@ -22,7 +22,7 @@
 
 class Entry < ActiveRecord::Base
   belongs_to :recording
-  validates :event_id , presence: true
+  #validates :event_id , presence: true
   validates :user_id , presence: true
   validates :song_id , presence: true
   validates :recording_id , presence: true
@@ -58,6 +58,27 @@ class Entry < ActiveRecord::Base
       }
     )
     self.event_id = JSON.parse(request.body)['eventId']
+  end
+
+  def self.save_prediction_batch(recording_id,total_entries) 
+    exporter = PredictionIO::FileExporter.new("import_entries/#{recording_id}")
+    total_entries.each do |entry|
+      prediction_entry = {}
+      prediction_entry['targetEntityType'] = "item"
+      prediction_entry['targetEntityId'] = entry.song_id
+      prediction_entry['properties'] = {}
+      prediction_entry['properties']['interest'] = entry.interest
+      prediction_entry['properties']['engagement'] = entry.engagement
+      prediction_entry['properties']['focus'] = entry.focus
+      prediction_entry['properties']['relaxation'] = entry.relaxation
+      prediction_entry['properties']['instantaneousExcitement'] = entry.instantaneousExcitement
+      prediction_entry['properties']['longTermExcitement'] = entry.longTermExcitement
+      prediction_entry['properties']['stress'] = entry.stress
+      prediction_entry['properties']['timestamp'] = entry.timestamp
+      prediction_entry['properties']['date'] = entry.date.to_i
+      exporter.create_event('emotion_rate','user',entry.user_id,prediction_entry)
+    end
+    exporter.close
   end
 
   def self.masive_record(total_entries)

@@ -26,7 +26,7 @@ RSpec.describe Entry, type: :model do
   it "has a valid factory" do
     expect(FactoryGirl.build(:entry)).to be_valid
   end
-  it {should validate_presence_of(:event_id)}
+  #it {should validate_presence_of(:event_id)}
   it {should validate_presence_of(:user_id)}
   it {should validate_presence_of(:song_id)}
   it {should validate_presence_of(:recording_id)}
