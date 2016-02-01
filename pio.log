@@ -3958,3 +3958,6 @@ io.prediction.data.storage.StorageClientException: Data source HBASE was not pro
 2016-01-29 17:12:40,357 INFO  io.prediction.data.storage.hbase.HBLEvents [main] - Removing table pio_event:events_0...
 2016-01-29 17:12:41,823 INFO  io.prediction.tools.console.Console$ [main] - (sleeping 5 seconds for all messages to show up...)
 2016-01-29 17:12:46,831 INFO  io.prediction.tools.console.Console$ [main] - Your system is all ready to go.
+2016-02-01 10:16:49,426 INFO  io.prediction.tools.console.Console$ [main] - Creating Event Server at 0.0.0.0:7070
+2016-02-01 10:16:53,894 INFO  spray.can.server.HttpListener [EventServerSystem-akka.actor.default-dispatcher-4] - Bound to /0.0.0.0:7070
+2016-02-01 10:16:53,896 INFO  io.prediction.data.api.EventServerActor [EventServerSystem-akka.actor.default-dispatcher-4] - Bound received. EventServer is ready.
