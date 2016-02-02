@@ -89,4 +89,8 @@ class Entry < ActiveRecord::Base
     end
   end
 
+  def delete_from_prediction
+    system("curl -i -X DELETE http://localhost:7070/events/#{self.event_id}.json?accessKey=#{Rails.application.secrets.prdictionio_access_key}")
+  end
+
 end

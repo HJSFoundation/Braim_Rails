@@ -64,7 +64,13 @@ class RecordingsController < ApplicationController
 
   def destroy
     deleted_id = params[:recording_id]
-    Recording.find(deleted_id).destroy
+    recording = Recording.find(deleted_id)
+    entries = recording.entries
+    recording.destroy
+    entries.each do |entry|
+      entry.delete_from_prediction
+      entry.destroy
+    end
     #TODO Fix delete all entries 
     #client.delete_by_query index: 'braim', type: 'entry', q: "recording_id:#{deleted_id}"
     respond_to do |format|
