@@ -18,6 +18,7 @@
 #  date                    :datetime
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
+#  signal_quality          :integer
 #
 
 require 'rails_helper'
@@ -39,6 +40,7 @@ RSpec.describe Entry, type: :model do
   it {should validate_presence_of(:stress)}
   it {should validate_presence_of(:timestamp)}
   it {should validate_presence_of(:date)}
+  it {should validate_presence_of(:signal_quality)}
   context "instance methods" do
     context "save_prediction_info" do
       it "set entry on prediction io" do

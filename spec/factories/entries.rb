@@ -18,6 +18,7 @@
 #  date                    :datetime
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
+#  signal_quality          :integer
 #
 
 FactoryGirl.define do
@@ -35,5 +36,6 @@ FactoryGirl.define do
     stress 0.2
     timestamp 1000
     date Time.now
+    signal_quality 0
   end
 end

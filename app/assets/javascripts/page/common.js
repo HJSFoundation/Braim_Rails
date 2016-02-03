@@ -10,6 +10,7 @@
 				"/assets/epoc-poor-signal.png",
 				"/assets/epoc-good-signal.png");
 				var returnImg = new Image();
+				$("#signalQuality").text(i.toString());
 				switch(i)
 				{
 					case 0:
@@ -38,6 +39,7 @@
 				var image = new Array("/assets/wireless-no-signal.png",
 				"/assets/wireless-good-signal.png");
 				var returnImg = new Image();
+
 				switch(i)
 				{
 					case 0:

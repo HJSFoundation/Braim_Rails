@@ -18,6 +18,7 @@
 #  date                    :datetime
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
+#  signal_quality          :integer
 #
 
 class Entry < ActiveRecord::Base
@@ -35,6 +36,7 @@ class Entry < ActiveRecord::Base
   validates :stress , presence: true
   validates :timestamp , presence: true
   validates :date , presence: true
+  validates :signal_quality , presence: true
   def save_prediction_info
     entry_info = {
       recording_id: self.recording_id,
@@ -46,7 +48,8 @@ class Entry < ActiveRecord::Base
       longTermExcitement: self.longTermExcitement,
       stress: self.stress,
       timestamp: self.timestamp,
-      date: self.date
+      date: self.date,
+      signal_quality: self.signal_quality,
     }
     request = PioClient.create_event(
       'emotion_rate',
@@ -76,6 +79,7 @@ class Entry < ActiveRecord::Base
       prediction_entry['properties']['stress'] = entry.stress
       prediction_entry['properties']['timestamp'] = entry.timestamp
       prediction_entry['properties']['date'] = entry.date.to_i
+      prediction_entry['properties']['signal_quality'] = entry.signal_quality
       exporter.create_event('emotion_rate','user',entry.user_id,prediction_entry)
     end
     exporter.close

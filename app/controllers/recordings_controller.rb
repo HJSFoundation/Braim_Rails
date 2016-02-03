@@ -39,6 +39,7 @@ class RecordingsController < ApplicationController
         entry.stress = r['stress']
         entry.timestamp = r['timestamp']
         entry.date = Time.at(r['date'])
+        entry.signal_quality = r['signal_quality']
         entry.event_id = entry.save_prediction_info
         total_entries.push(entry)
       end

@@ -27,7 +27,7 @@ $(document).ready ->
   draw = ->
     time = time+1000
     $("#message_time").html(time/1000)
-
+    currentSignalQuality  =  parseInt($("#signalQuality").text())
     if time > currentSongDuration
       console.log 'fin'
       $("#save_recording_button").click()
@@ -51,7 +51,8 @@ $(document).ready ->
       longTermExcitement: emotiv_longExcitement,
       stress: emotiv_stress,
       timestamp: time,
-      date: new_date
+      date: new_date,
+      signal_quality: currentSignalQuality
     }
     #console.log performance_data
     data.push(performance_data);
