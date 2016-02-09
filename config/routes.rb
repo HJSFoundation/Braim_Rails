@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   get 'songs/search'
 
+  get 'recommendations' =>"recommendations#index",as: "recommendations"
+
   get 'songs/:id'=> "songs#show", :as => "song"
 
   post 'songs/rate'=> "songs#rate", :as => "song_rate"

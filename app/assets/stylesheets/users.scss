@@ -462,3 +462,27 @@ div.user-menu div.user-menu-content:not(.active){
 .notice-danger>strong {
     color: #d73814;
 }
+.recommendations-list{
+  width: 100%;
+  max-width: 500px;
+  a{
+    text-decoration: none;
+  }
+  .recommendation{
+    color: black;
+    position: relative;
+    width: 100%;
+    height: 150px;
+    margin-bottom: 20px;
+    border: 1px solid #eee;
+  }
+  .album{
+    width: 150px;
+    height: 150px;
+    float: left;
+    margin-right: 20px;
+  }
+  .song-info{
+   
+  }
+}

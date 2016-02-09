@@ -1,0 +1,13 @@
+%h1 Recommendations
+%br
+.recommendations-list
+  -@recommendations.each do |rec|
+    =link_to song_path(rec.song.song_spotify_id) do
+      .recommendation
+        .album
+          =image_tag rec.song.album_cover_url
+        .song-info
+          %h2 
+            =rec.song.name
+          %strong.artist-name
+            =rec.song.artist_name
