@@ -1,0 +1,7 @@
+%section#discoverSongs
+  %h1 See what Braim users are listening
+  -@recordings.each do |recording|
+    %li
+      ="#{recording.user.name} record emotions for #{recording.song.name}"
+      
+

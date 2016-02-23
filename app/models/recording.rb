@@ -20,4 +20,6 @@ class Recording < ActiveRecord::Base
   validates :user_id, presence: true
   validates :date, presence: true
   validates :duration, presence: true
+  
+  scope :all_except, ->(user){where.not(user: user)}
 end

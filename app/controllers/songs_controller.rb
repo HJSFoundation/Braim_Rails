@@ -78,4 +78,7 @@ class SongsController < ApplicationController
       format.any { render json: {response: 'ok','License' => "EEG"}, content_type: 'application/json' }
     end
   end
+  def discover
+    @recordings = Recording.all_except(current_user)
+  end
 end
