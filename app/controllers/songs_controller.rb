@@ -79,6 +79,6 @@ class SongsController < ApplicationController
     end
   end
   def discover
-    @recordings = Recording.all_except(current_user)
+    @songs = Song.songs_to_discover(current_user).shuffle
   end
 end

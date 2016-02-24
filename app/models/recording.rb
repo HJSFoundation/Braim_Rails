@@ -21,5 +21,5 @@ class Recording < ActiveRecord::Base
   validates :date, presence: true
   validates :duration, presence: true
   
-  scope :all_except, ->(user){where.not(user: user)}
+  scope :all_except, ->(user){where.not(user_id: user.id)}
 end

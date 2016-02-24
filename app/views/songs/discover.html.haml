@@ -1,7 +1,22 @@
 %section#discoverSongs
   %h1 See what Braim users are listening
-  -@recordings.each do |recording|
-    %li
-      ="#{recording.user.name} record emotions for #{recording.song.name}"
+  .container-fluid
+    .row
+      -@songs.each do |song|
+        .col-sm-6
+          =link_to song_path(song.song_spotify_id) do
+            .discover-song
+              =image_tag song.album_cover_url , class: "discover-song-image"
+              .discover-song-info
+                ="#{song.name} - #{song.artist_name}"
+              %br
+              %strong Last recording:
+              .discover-song-last-user
+                =image_tag gravatar_url(song.last_recording.user), class: "img-responsive mini-thumb"
+                =song.last_recording.user.full_name
+                ="at: #{song.last_recording.created_at.strftime("%d %B")}"
+              
+
+              
       
 

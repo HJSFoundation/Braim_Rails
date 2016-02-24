@@ -33,6 +33,22 @@ class Song < ActiveRecord::Base
   has_many :ratings
   has_many :users, :through => :ratings
   has_many :recordings
+  
+  def last_recording
+    recordings.last
+  end
+  
+  def self.songs_to_discover(user)
+    recordings = Recording.all_except(user)
+    songs = recordings.collect{|r| r.song}
+    discover_songs = songs.uniq
+    user_recordings = user.recordings
+    user_songs = user_recordings.collect{|r| r.song}
+    user_songs.each do |user_song| 
+      discover_songs.delete_if {|song| song == user_song}
+    end
+    discover_songs
+  end
   def self.find_or_register(query_id)
     song = Song.find_by(song_spotify_id: query_id)
     if song
