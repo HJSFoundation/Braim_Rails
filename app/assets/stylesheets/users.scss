@@ -510,8 +510,13 @@ div.user-menu div.user-menu-content:not(.active){
   }
   .discover-song-last-user{
     img{
-      float: left
+      margin-right: 5px;
+      float: left;
     }
+  }
+  .discover-song-info{
+    height: 25px;
+    overflow: hidden;
   }
 }
 
