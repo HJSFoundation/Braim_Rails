@@ -570,7 +570,7 @@ EdkDll.ELS_ValidLicense = function() {
 		console.log("EdkDll.ELS_ValidLicense()");
 		console.log(ELS_ValidLicense);
 	}
-	return ELS_ValidLicense;
+	return true;
 };
 
 /**

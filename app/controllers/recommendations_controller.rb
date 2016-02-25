@@ -6,5 +6,10 @@ class RecommendationsController < ApplicationController
       recommendation = Recommendation.new(r["item"].to_i,r["score"])
       @recommendations.push(recommendation)
     end
+    user_recordings = current_user.recordings
+    user_songs = user_recordings.collect{|r| r.song}
+    user_songs.each do |user_song| 
+      @recommendations.delete_if {|rec| rec.item == user_song.id}
+    end
   end
 end
