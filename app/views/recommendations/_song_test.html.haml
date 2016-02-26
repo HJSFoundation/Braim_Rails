@@ -1,0 +1,17 @@
+%section#song-info{"data-song-id"=>"#{song.id}","data-user-id"=>"#{current_user.id}"}
+  %h3
+    ="#{song.name} - #{song.artist_name}"
+  .row
+    .col-sm-4
+      =image_tag song.album_cover_url
+    .col-sm-8
+      %h3 My rating for this song
+      #stars.starrr{"data-rating" => "#{@rating}"}
+      You gave a rating of
+      %span#count
+        =@rating
+      star(s)
+      %h3 Recording...
+      %h4
+        = audio_tag song.preview_url, class: "audio-test"
+        .song-time

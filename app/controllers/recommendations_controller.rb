@@ -12,4 +12,11 @@ class RecommendationsController < ApplicationController
       @recommendations.delete_if {|rec| rec.item == user_song.id}
     end
   end
+
+  def test
+    offset = rand(Song.count)
+    song_id = params[:id] || offset
+    @song = Song.find(song_id)
+    @rating = @song.get_rating(current_user)
+  end
 end

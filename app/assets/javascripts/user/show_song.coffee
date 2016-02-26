@@ -335,7 +335,7 @@ $(document).ready ->
         recording_id: recording_id
 
   $('#stars').on 'starrr:change', (e, value) ->
-    song_id = $("#record_performance_button").data("song-id")
+    song_id = $("#song-info").data("song-id")
     $.ajax
       url: '/songs/rate'
       type: 'post'

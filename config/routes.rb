@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   get 'songs/search'
 
+  get 'braim_test' => "recommendations#test", as: 'test'
+
   get 'recommendations' =>"recommendations#index",as: "recommendations"
 
   get 'discover' =>"songs#discover",as: "discover"

@@ -1,5 +1,6 @@
 =javascript_include_tag "performance/performance"
 #song.container-fluid
+  %section#song-info{"data-song-id"=>"#{@song.id}","data-user-id"=>"#{current_user.id}"}
   .song-title
     %h2.title
       =@song.name
