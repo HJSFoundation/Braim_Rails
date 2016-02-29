@@ -27,6 +27,7 @@
 #  echonest_danceability     :float
 #  created_at                :datetime         not null
 #  updated_at                :datetime         not null
+#  echonest_id               :string
 #
 
 FactoryGirl.define do

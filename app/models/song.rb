@@ -27,6 +27,7 @@
 #  echonest_danceability     :float
 #  created_at                :datetime         not null
 #  updated_at                :datetime         not null
+#  echonest_id               :string
 #
 
 class Song < ActiveRecord::Base
@@ -49,12 +50,22 @@ class Song < ActiveRecord::Base
     end
     discover_songs
   end
-  def self.find_or_register(query_id)
+  def self.register_from_echonest(echonest_id)
+    song = Song.find_by(echonest_id: echonest_id)
+    if song == nil 
+      song_profile = Echowrap.song_profile(id:echonest_id, bucket: ['id:spotify','tracks','audio_summary','song_type'],limit:true)
+      if song_profile
+        new_song_id = song_profile.tracks[0].foreign_id.split('spotify:track:')[1]
+        Song.find_or_register(new_song_id,echonest_id,song_profile)
+      end
+    end
+  end
+  def self.find_or_register(query_id,echonest_id=nil,song_profile=nil)
     song = Song.find_by(song_spotify_id: query_id)
     if song
       return song
     else
-      song = SongApi.get_song_from_apis(query_id)
+      song = SongApi.get_song_from_apis(query_id,echonest_id,song_profile)
       song.save_prediction_info
       return song
     end

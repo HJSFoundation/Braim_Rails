@@ -14,9 +14,13 @@ class RecommendationsController < ApplicationController
   end
 
   def test
-    offset = rand(Song.count)
-    song_id = params[:id] || offset
-    @song = Song.find(song_id)
+    if params[:id]
+      song_id = params[:id] 
+      @song = Song.find(song_id)
+    else
+      offset = rand(Song.count)
+      @song = Song.offset(offset).first
+    end
     @rating = @song.get_rating(current_user)
   end
 end
