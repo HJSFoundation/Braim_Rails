@@ -2,6 +2,7 @@ $(window).load ->
   if window.location.pathname == "/braim_test"
     currentPage = 1;
     interval = null
+    next_song_interval = null
     chart = null
     timeStart= null
     currentSongID= null
@@ -20,11 +21,14 @@ $(window).load ->
     userID= null
     nextTimeCounter = 5
 
-    currentSongID = $("#song-info").data("song-id")
-    userID = $("#song-info").data("user-id")
+    initialize_song_values = ->
+      currentSongID = $("#song-info").data("song-id")
+      userID = $("#song-info").data("user-id")
 
+    initialize_song_values() 
     play_song = ->
       song = $('.audio-test')[0]
+      console.log song
       time = song.currentTime % 60
       duration = $('.song-time')
       duration.text("0.0")
@@ -76,6 +80,7 @@ $(window).load ->
       if chart.series[0].data.length < 1
         alert("the device isnt connected, please reload the page");
       else
+        $("#recordingMessage").html "Recording..."
         play_song()
         initialize_recording()
         time = 0
@@ -87,10 +92,22 @@ $(window).load ->
         interval = setInterval(draw,1000)
       
     playNextSong = ->
-      nextTimeCounter = nextTimeCounter-1
-      $("#nextSongCounter").text(" ("+ nextTimeCounter+") ")
-      if nextTimeCounter == 0
-        window.location.href = "braim_test"
+      #nextTimeCounter = nextTimeCounter-1
+      #$("#nextSongCounter").text(" ("+ nextTimeCounter+") ")
+      #if nextTimeCounter == 0
+      #  nextTimeCounter = 5
+      #window.location.href = "braim_test"
+      #clearInterval(next_song_interval);
+      $.ajax
+        url: '/braim_test'
+        type: 'get'
+        dataType: 'script'
+        success: (data) ->
+          initialize_song_values()
+          $("#recordingMessage").html "Waiting..."
+          setTimeout(->
+            start_recording()
+          ,7000)
 
     save_recording = ->
       console.log('saving recording...');
@@ -115,7 +132,7 @@ $(window).load ->
           $("#record_message").toggle();
           $("#testModal").modal('show')
           #$("#save_recording_modal").modal('hide');
-          setInterval(playNextSong,1000);
+          #next_song_interval = setInterval(playNextSong,1000);
           return
         contentType: 'application/json',
         data: JSON.stringify({
@@ -125,12 +142,14 @@ $(window).load ->
 
     setTimeout(->
       start_recording()
-    ,3000)
+    ,7000)
 
-  $("#btnTestAgain").on "click", (e)->
-    window.location.href = "braim_test?id=#{currentSongID}";
+  $("#btnTestFinish").on "click", (e)->
+    window.location.href = "profile";
   $("#btnTestNext").on "click", (e)->
-    window.location.href = "braim_test";
+    #window.location.href = "braim_test";
+    playNextSong()
+
     
 
 

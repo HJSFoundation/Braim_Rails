@@ -5,13 +5,28 @@
     .col-sm-4
       =image_tag song.album_cover_url
     .col-sm-8
-      %h3 My rating for this song
-      #stars.starrr{"data-rating" => "#{@rating}"}
-      You gave a rating of
-      %span#count
-        =@rating
-      star(s)
-      %h3 Recording...
+      %h3#recordingMessage Waiting...
       %h4
         = audio_tag song.preview_url, class: "audio-test"
         .song-time
+
+#testModal.modal.fade{"aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog{:role => "document"}
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+        %h4#myModalLabel.modal-title My rating for this song
+      .modal-body
+        #stars.starrr{"data-rating" => "#{@rating}"}
+        You gave a rating of
+        %span#count
+          =@rating
+        star(s)
+        %span#nextSongCounter
+      .modal-footer
+        %button.btn.btn-primary#btnTestFinish{:type => "button"} Finish
+        %button.btn.btn-primary#btnTestNext{:type => "button"} 
+          Next
+
+

@@ -2,7 +2,7 @@
 %h1 Braim Test
 %div#songTest
   =render partial: "song_test", locals: {song: @song}
-%section.perfomance
+%section.perfomance{style: "visibility: hidden;"}
   .song-insight-records
     %h3 Emotiv Performance Metrics
     .record-data.text-center
@@ -20,23 +20,5 @@
         %strong Long Term Excitement
       .emotion.stress
         %strong Stress
-    #container{:style => "min-width: 310px; height: 100px; margin: 0 auto"}
-
-#testModal.modal.fade{"aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
-  .modal-dialog{:role => "document"}
-    .modal-content
-      .modal-header
-        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
-          %span{"aria-hidden" => "true"} ×
-        %h4#myModalLabel.modal-title Modal title
-      .modal-body
-        Recording Saved!
-        %h2
-          Next Song in
-          %span#nextSongCounter
-      .modal-footer
-        %button.btn.btn-primary#btnTestAgain{:type => "button"} Record Again
-        %button.btn.btn-primary#btnTestNext{:type => "button"} 
-          Next
-
+    #container{:style => "min-width: 310px; height: 100px; margin: 0 auto;"}
 

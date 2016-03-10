@@ -9,7 +9,7 @@
   .song-content
     .row
       .col-md-5
-        %iframe{:allowtransparency => "true", :frameborder => "0", :height => "380", :src => "https://embed.spotify.com/?uri=#{@song.song_spotify_url}", :width => "100%"}
+        %iframe#app-player{:allowtransparency => "true", :frameborder => "0", :height => "380", :src => "https://embed.spotify.com/?uri=#{@song.song_spotify_url}", :width => "100%"}
       .col-md-7
         %h3 Song Info
         %p
@@ -20,56 +20,57 @@
           %strong Album:
           %span
             =@song.album_name
-        %p
-          %strong Song type:
-          %span
-            -@song.echonest_song_type.each do |tag|
-              =tag
+        -if @song.echonest_song_type
+          %p
+            %strong Song type:
+            %span
+              -@song.echonest_song_type.each do |tag|
+                =tag
 
-        %h3 Audio Summary
-        .row
-          .col-md-6
-            %p
-              %strong Energy:
-              %span
-                =@song.echonest_energy
-            %p
-              %strong Liveness:
-              %span
-                =@song.echonest_liveness
-            %p
-              %strong Tempo:
-              %span
-                =@song.echonest_tempo
-            %p
-              %strong Speechiness:
-              %span
-                =@song.echonest_speechiness
-            %p
-              %strong Acousticness:
-              %span
-                =@song.echonest_acousticness
-          .col-md-6
-            %p
-              %strong Instrumentalness:
-              %span
-                =@song.echonest_instrumentalness
-            %p
-              %strong Time signature:
-              %span
-                =@song.echonest_tempo
-            %p
-              %strong Loudness:
-              %span
-                =@song.echonest_loudness
-            %p
-              %strong Valence:
-              %span
-                =@song.echonest_valence
-            %p
-              %strong Danceability:
-              %span
-                =@song.echonest_danceability
+          %h3 Audio Summary
+          .row
+            .col-md-6
+              %p
+                %strong Energy:
+                %span
+                  =@song.echonest_energy
+              %p
+                %strong Liveness:
+                %span
+                  =@song.echonest_liveness
+              %p
+                %strong Tempo:
+                %span
+                  =@song.echonest_tempo
+              %p
+                %strong Speechiness:
+                %span
+                  =@song.echonest_speechiness
+              %p
+                %strong Acousticness:
+                %span
+                  =@song.echonest_acousticness
+            .col-md-6
+              %p
+                %strong Instrumentalness:
+                %span
+                  =@song.echonest_instrumentalness
+              %p
+                %strong Time signature:
+                %span
+                  =@song.echonest_tempo
+              %p
+                %strong Loudness:
+                %span
+                  =@song.echonest_loudness
+              %p
+                %strong Valence:
+                %span
+                  =@song.echonest_valence
+              %p
+                %strong Danceability:
+                %span
+                  =@song.echonest_danceability
         %h3 My rating for this song
         #stars.starrr{"data-rating" => "#{@rating}"}
         You gave a rating of

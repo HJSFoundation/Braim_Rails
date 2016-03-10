@@ -18,9 +18,13 @@ class RecommendationsController < ApplicationController
       song_id = params[:id] 
       @song = Song.find(song_id)
     else
-      offset = rand(Song.count)
-      @song = Song.offset(offset).first
+      offset = rand(Song.where.not(preview_url: nil).count)
+      @song = Song.where.not(preview_url: nil).offset(offset).first
     end
     @rating = @song.get_rating(current_user)
+    respond_to do |format| 
+      format.html
+      format.js
+    end
   end
 end
