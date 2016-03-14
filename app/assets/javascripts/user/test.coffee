@@ -146,7 +146,7 @@ $(window).load ->
 
   $("#btnTestFinish").on "click", (e)->
     window.location.href = "profile";
-  $("#btnTestNext").on "click", (e)->
+  $(document).on "click", "#btnTestNext", (e)->
     #window.location.href = "braim_test";
     playNextSong()
 
