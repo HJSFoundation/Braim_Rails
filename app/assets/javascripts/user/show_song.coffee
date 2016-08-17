@@ -267,15 +267,15 @@ $(document).ready ->
             data: longTermExcitement
             
           }
-          {
-            name: 'Stress'
-            color: 'rgb(255, 255, 0)'
-            marker:
-              enabled: false
-              symbol: 'circle'
-            data: stress
+          # {
+          #   name: 'Stress'
+          #   color: 'rgb(255, 255, 0)'
+          #   marker:
+          #     enabled: false
+          #     symbol: 'circle'
+          #   data: stress
             
-          }
+          # }
         ])
   
   # $("#older_song_recordings").on "click", (e)->

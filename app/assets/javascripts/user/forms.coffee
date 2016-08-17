@@ -176,13 +176,13 @@ $(document).ready ->
               symbol: 'circle'
             data: longTermExcitement
           }
-          {
-            name: 'Stress'
-            color: 'rgb(255, 255, 0)'
-            marker:
-              enabled: false
-              symbol: 'circle'
-            data: stress
-          }
+          # {
+          #   name: 'Stress'
+          #   color: 'rgb(255, 255, 0)'
+          #   marker:
+          #     enabled: false
+          #     symbol: 'circle'
+          #   data: stress
+          # }
         ])
   

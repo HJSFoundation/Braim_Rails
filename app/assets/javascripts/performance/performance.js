@@ -117,15 +117,17 @@ $(document).ready(function () {
             symbol: 'circle'
           },
           data: []
-        },{
-          name: 'Stress',
-          color: 'rgb(255, 255, 0)',
-          marker: {
-            enabled:false,
-            symbol: 'circle'
-          },
-          data: []
-        }]
+        }
+        // ,{
+        //   name: 'Stress',
+        //   color: 'rgb(255, 255, 0)',
+        //   marker: {
+        //     enabled:false,
+        //     symbol: 'circle'
+        //   },
+        //   data: []
+        // }
+        ]
         
     });
 
