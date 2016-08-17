@@ -76,22 +76,15 @@ class User < ActiveRecord::Base
 
 
   def neighborhood
-    all_users = User.where.not(id: id)
-    neighbors = []
-    all_users.each do |user|
-      neighbors << Neighbor.new(user,Similarity.new(self,user).total)
-    end
-    neighbors.sort_by(&:score).reverse
+    Neighborhood.new(self)
   end
 
   def recommendations
     colab_filtering = ColabFiltering.new(self)
     unknown_songs = Song.all - songs
-    total_neighbors = neighborhood
-    sum = neighbor_sum(total_neighbors)
     recommendation_list = []
     unknown_songs.each do |song|
-      score = colab_filtering.prediction(song,sum,total_neighbors)
+      score = colab_filtering.traditional_prediction(song)
       #byebug
       if score
         recommendation_list << Prediction.new(song,score)
@@ -108,13 +101,5 @@ class User < ActiveRecord::Base
       0.0
     end
   end
-
   
-  def neighbor_sum(neighbors)
-    sum = 0.0
-    neighbors.each do |neighbor|
-      sum = sum + neighbor.score.abs
-    end
-    sum
-  end
 end

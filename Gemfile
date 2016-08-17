@@ -12,6 +12,7 @@ gem 'devise'
 gem 'echowrap'
 gem 'rspotify'
 gem "font-awesome-rails"
+gem 'gsl'
 
 gem 'annotate'
 #gem 'elasticsearch', git: 'git://github.com/elasticsearch/elasticsearch-ruby.git'

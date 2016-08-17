@@ -1,31 +1,31 @@
 class ColabFiltering
   attr_accessor :user
+  attr_reader :neighborhood
 
   def initialize(user)  
     @user = user  
+    @neighborhood = user.neighborhood
   end 
 
-  def prediction(song, neighborhood_sum, neighborhood)
+  def traditional_prediction(song)
     score = 0.0
-    if @user.songs.include? song
-      puts "Already known song"
-    end
+    
+    puts "The user already known song" if @user.songs.include? song
     #rating = Rating.search_value_by(@user,song)
-    difference = numerator(song,neighborhood) / neighborhood_sum
+    difference = numerator(song) / @neighborhood.neighbors_sum
     if difference > 0.0
       score =  @user.rating_average + difference
     else
       score = nil
     end
-    
     score
   end 
 
-  #private
+  private
 
-  def numerator(song,neighborhood)
+  def numerator(song)
     sum = 0.0
-    neighborhood.each do |neighbor|
+    @neighborhood.neighbors.each do |neighbor|
       if neighbor.score >= 0.4
         neighbor_rating = Rating.search_value_by(neighbor.user,song)
         if neighbor_rating
@@ -36,12 +36,4 @@ class ColabFiltering
     end
     sum
   end
-
-  # def denumerator(song)
-  #   sum = 0.0
-  #   user.neighborhood.each do |neighbor|
-  #     sum = sum + neighbor.score.abs
-  #   end
-  #   sum
-  # end
 end
