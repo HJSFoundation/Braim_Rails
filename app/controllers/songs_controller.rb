@@ -74,7 +74,7 @@ class SongsController < ApplicationController
     #  {date: {order: "desc", mode: "avg"}}]
   end
 
-  def deal
+  def license
     respond_to do |format|
       format.any { render json: {response: 'ok','License' => "EEG"}, content_type: 'application/json' }
     end

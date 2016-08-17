@@ -73,4 +73,48 @@ class User < ActiveRecord::Base
   validates :name , presence: true
   validates :last_name , presence: true
   validates :country , presence: true
+
+
+  def neighborhood
+    all_users = User.where.not(id: id)
+    neighbors = []
+    all_users.each do |user|
+      neighbors << Neighbor.new(user,Similarity.new(self,user).total)
+    end
+    neighbors.sort_by(&:score).reverse
+  end
+
+  def recommendations
+    colab_filtering = ColabFiltering.new(self)
+    unknown_songs = Song.all - songs
+    total_neighbors = neighborhood
+    sum = neighbor_sum(total_neighbors)
+    recommendation_list = []
+    unknown_songs.each do |song|
+      score = colab_filtering.prediction(song,sum,total_neighbors)
+      #byebug
+      if score
+        recommendation_list << Prediction.new(song,score)
+        #byebug
+      end
+    end
+    recommendation_list.sort_by(&:score).reverse
+  end
+
+  def rating_average
+    if ratings.any?
+      ratings.inject(0){ |sum, n| sum + n.value}.to_f / ratings.size 
+    else
+      0.0
+    end
+  end
+
+  
+  def neighbor_sum(neighbors)
+    sum = 0.0
+    neighbors.each do |neighbor|
+      sum = sum + neighbor.score.abs
+    end
+    sum
+  end
 end

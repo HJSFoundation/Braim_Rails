@@ -16,7 +16,7 @@ function onloadPluginEmotiv()
       chromeVersion = chromeVersion ? parseInt(chromeVersion[2], 10) : false
       if(chromeVersion>=45)
       {
-        alert("Your browser is Google's Chrome version 45 or higher which is not support our plugin. Please run the Cpanel website with Google's Chrome version lower 45 or another Web Browsers. Thanks.");
+        //alert("Your browser is Google's Chrome version 45 or higher which is not support our plugin. Please run the Cpanel website with Google's Chrome version lower 45 or another Web Browsers. Thanks.");
       }       
       else
       {
@@ -46,28 +46,28 @@ function onloadPluginEmotiv()
     }
     if (version!=null)
     {
-      if((platform.os.family == "OS X")||(platform.os.family == "iOS"))
-       {
-            if(version != "1.9.1.0")
-      {
-       var confirmUpdate = confirm("Please update new version of Emotiv plugin. You may need to restart your browser to complete installation.");
-       if (confirmUpdate == true)
-       {
-        window.location.href=('https://cpanel.emotivinsight.com/BTLE/Download/download.php');
-       }
-      }
-       }
-       else
-       {
-            if(version != "1.9.0.9")
-      {
-       var confirmUpdate = confirm("Please update new version of Emotiv plugin. You may need to restart your browser to complete installation.");
-       if (confirmUpdate == true)
-       {
-        window.location.href=('https://cpanel.emotivinsight.com/BTLE/Download/download.php');
-       }
-      }
-       }
+      // if((platform.os.family == "OS X")||(platform.os.family == "iOS"))
+      //  {
+      //       if(version != "1.9.1.0")
+      // {
+      //  var confirmUpdate = confirm("Please update new version of Emotiv plugin. You may need to restart your browser to complete installation.");
+      //  if (confirmUpdate == true)
+      //  {
+      //   window.location.href=('https://cpanel.emotivinsight.com/BTLE/Download/download.php');
+      //  }
+      // }
+      //  }
+      //  else
+      //  {
+      //       if(version != "1.9.0.9")
+      // {
+      //  var confirmUpdate = confirm("Please update new version of Emotiv plugin. You may need to restart your browser to complete installation.");
+      //  if (confirmUpdate == true)
+      //  {
+      //   window.location.href=('https://cpanel.emotivinsight.com/BTLE/Download/download.php');
+      //  }
+      // }
+      //  }
     }
   }
 };
@@ -100,6 +100,10 @@ function checkPluginExits()
 var sysTime;
 var engine;
 var userIdProfile = 0;
+var  c;
+var ctx;
+var x;    
+
 function init()
 {
   engine = EmoEngine.instance();
@@ -107,6 +111,10 @@ function init()
   //EdkDll.DebugLog = true;
   EdkDll.ELS_ValidLicense();
   AddValidLicenseDoneEvent();
+
+  c = document.getElementById("myCanvas");
+  ctx = c.getContext("2d");
+  x = 0;       
   
   //sysTime = document.getElementById("txtInputTime");
   //sysTime.value = "00.0000";
@@ -180,5 +188,40 @@ $(document).bind("EmoStateUpdated",function(event,userId,es){
   
   loadBatteryQuality(batteryArr["chargeLevel"]);
   loadWirelessQuality(wireSignal);
+  //**Draw Raw Signal**//
+
+  EdkDll.IEE_DataUpdateHandle(userId);
+  channelData = EdkDll.IEE_DataGet();
+  lpf = 4090;
+  processSignal(channelData.IED_AF3);
 });
+
+function processSignal(data){
+  if (data != undefined)
+  {
+    console.log(data.length);
+    for (i = 1; i<data.length; i++){
+      sam = Number(data[i]); 
+      //console.log(sam);
+      var new_sample = sam/200;
+      //console.log(new_sample);
+      //ctx.lineTo(x+100, sam);
+      // lpf = lpf * 0.92 + 0.08 * sam; // weighted running average == low pass filter 
+      // hpf = sam-lpf; // high pass filter is data - running average
+      // ctx.lineTo(x, 50-hpf);
+      // //ctx.lineTo(x,sam);
+      // x++;
+      // if(x==1000){
+      //   x=0;
+      //   ctx.clearRect(0, 0, c.width, c.height);
+      // }
+    }
+  }
+  else
+  {
+    console.log("undefined");
+  }
+  ctx.stroke();
+}             
+
 

@@ -30,4 +30,8 @@ class Rating < ActiveRecord::Base
     )
     return JSON.parse(request.body)['eventId']
   end
+
+  def self.search_value_by(user,song)
+    Rating.where(user: user, song: song).first
+  end
 end

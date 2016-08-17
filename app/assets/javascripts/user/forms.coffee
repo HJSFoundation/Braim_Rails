@@ -126,7 +126,7 @@ $(document).ready ->
           crosshairs: true
           shared: true
           borderColor: 'rgba(0, 0, 0, 0.83)'
-        legend: enabled: false
+        legend: enabled: true
         series: [
           {
             name: 'Interest'
