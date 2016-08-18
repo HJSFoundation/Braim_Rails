@@ -87,16 +87,16 @@ class User < ActiveRecord::Base
     Neighborhood.new(self)
   end
 
-  def neighborhood_affective(state)
-    NeighborhoodAffective.new(self,state)
+  def neighborhood_affective(state,mode)
+    NeighborhoodAffective.new(self,state,mode)
   end
 
-  def recommendations_affective(state)
-    colab_filtering = ColabFilteringAffective.new(self, state)
+  def recommendations_affective(state,mode)
+    colab_filtering = ColabFilteringAffective.new(self, state,mode)
     unknown_songs = Song.all - songs
     recommendation_list = []
     unknown_songs.each do |song|
-      score = colab_filtering.traditional_prediction(song)
+      score = colab_filtering.prediction(song)
       #byebug
       if score
         recommendation_list << Prediction.new(song,score)
@@ -111,7 +111,7 @@ class User < ActiveRecord::Base
     unknown_songs = Song.all - songs
     recommendation_list = []
     unknown_songs.each do |song|
-      score = colab_filtering.traditional_prediction(song)
+      score = colab_filtering.prediction(song)
       #byebug
       if score
         recommendation_list << Prediction.new(song,score)

@@ -1,6 +1,6 @@
 class Similarity 
   attr_accessor :user_first , :user_second
-  attr_reader :common_items,:ratings_first, :ratings_second , :pearson_correlation
+  attr_reader :common_items,:ratings_first, :ratings_second , :sim_value
 
   def initialize(user1,user2)
     @user_first = user1
@@ -8,7 +8,7 @@ class Similarity
     @common_items = @user_first.songs & @user_second.songs
     @ratings_first = get_ratings(@user_first)
     @ratings_second = get_ratings(@user_second)
-    @pearson_correlation = pearson
+    @sim_value = pearson
   end
 
   private

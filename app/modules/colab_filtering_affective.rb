@@ -1,15 +1,14 @@
 class ColabFilteringAffective
   attr_accessor :user
-  attr_reader :neighborhood
+  attr_reader :neighborhood 
 
-  def initialize(user, state)  
+  def initialize(user, state , mode)  
     @user = user  
-    @neighborhood = user.neighborhood_affective(state)
+    @neighborhood = user.neighborhood_affective(state , mode)
   end 
 
-  def traditional_prediction(song)
+  def prediction(song)
     score = 0.0
-    
     puts "The user already known song" if @user.songs.include? song
     #rating = Rating.search_value_by(@user,song)
     difference = numerator(song) / @neighborhood.neighbors_sum

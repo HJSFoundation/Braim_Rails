@@ -12,7 +12,7 @@ class Neighborhood
     all_users = User.where.not(id: @user.id)
     result = []
     all_users.each do |neighbor|
-      correlation = Similarity.new(@user,neighbor).pearson_correlation
+      correlation = Similarity.new(@user,neighbor).sim_value
       result << Neighbor.new(neighbor, correlation) if correlation
     end
     result.sort_by(&:score).reverse

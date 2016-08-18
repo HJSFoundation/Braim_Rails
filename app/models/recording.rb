@@ -25,5 +25,9 @@ class Recording < ActiveRecord::Base
 
   def self.search_by(song_query,user_query)
      Recording.where(user: user_query, song: song_query).where("duration >= ?", 29).last
+     #r = Recording.select("recordings.*").joins(:entries).group("recordings.id").having("count(entries.id) > ?", 29).where(user: user_query, song: song_query).last
+     #byebug
+     #puts "sd"
+     #r
   end
 end

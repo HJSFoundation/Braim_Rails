@@ -3,12 +3,12 @@ class ColabFiltering
   attr_reader :neighborhood
 
   def initialize(user)  
+      @user = user  
       @neighborhood = user.neighborhood
   end 
 
-  def traditional_prediction(song)
+  def prediction(song)
     score = 0.0
-    
     puts "The user already known song" if @user.songs.include? song
     #rating = Rating.search_value_by(@user,song)
     difference = numerator(song) / @neighborhood.neighbors_sum
