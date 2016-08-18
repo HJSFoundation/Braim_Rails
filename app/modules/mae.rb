@@ -7,7 +7,7 @@ class Mae
 
   def self.calculate
     values = []
-    sections = Rating.all.each_slice(10)
+    sections = Rating.all.in_groups(10,false)
     sections.each do |section|
       values << self.calculate_section(section)
     end 
@@ -21,20 +21,22 @@ class Mae
     #listened_songs = users.collect{|u| u.songs}
 
     total = 0
+    counter = 0
     ratings.each do |rating|
       user = rating.user
       song = rating.song
       colab_filtering = ColabFiltering.new(user)
-      score = colab_filtering.traditional_prediction(song)
+      score = colab_filtering.prediction(song)
       
       # #byebug
       if score
         total = total + (score - rating.value )
+        counter += 1
         #byebug
       end
     end
 
-    mae = total.abs / ratings.count
+    mae = total.abs / counter
   
   end
 end

@@ -38,6 +38,7 @@ class SimilarityAffective
         similarity = Pearson.gsl_pearson(recording_data_first,recording_data_second) if (recording_data_first.any? && recording_data_second.any?)
         #byebug
       end
+      similarity = nil if similarity.nan?
       similarity
     end
   end

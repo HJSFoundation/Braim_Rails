@@ -22,6 +22,7 @@ class Recording < ActiveRecord::Base
   validates :duration, presence: true
   
   scope :all_except, ->(user){where.not(user_id: user.id)}
+  scope :all_min, ->{where("duration > ?", 29)}
 
   def self.search_by(song_query,user_query)
      Recording.where(user: user_query, song: song_query).where("duration >= ?", 29).last
