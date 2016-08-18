@@ -34,6 +34,14 @@ class User < ActiveRecord::Base
   
   accepts_nested_attributes_for :profile
 
+  def recordings_min
+    recordings.where("duration >= ?", 29)#.collect{ |recording| recording.song}
+  end
+
+  def recorded_songs
+    recordings_min.collect{ |recording| recording.song}
+  end
+  
   def full_name
     (self.name || "").capitalize
   end
@@ -77,6 +85,25 @@ class User < ActiveRecord::Base
 
   def neighborhood
     Neighborhood.new(self)
+  end
+
+  def neighborhood_affective(state)
+    NeighborhoodAffective.new(self,state)
+  end
+
+  def recommendations_affective(state)
+    colab_filtering = ColabFilteringAffective.new(self, state)
+    unknown_songs = Song.all - songs
+    recommendation_list = []
+    unknown_songs.each do |song|
+      score = colab_filtering.traditional_prediction(song)
+      #byebug
+      if score
+        recommendation_list << Prediction.new(song,score)
+        #byebug
+      end
+    end
+    recommendation_list.sort_by(&:score).reverse
   end
 
   def recommendations

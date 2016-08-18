@@ -1,9 +1,10 @@
-class ColabFiltering
+class ColabFilteringAffective
   attr_accessor :user
   attr_reader :neighborhood
 
-  def initialize(user)  
-      @neighborhood = user.neighborhood
+  def initialize(user, state)  
+    @user = user  
+    @neighborhood = user.neighborhood_affective(state)
   end 
 
   def traditional_prediction(song)
@@ -25,7 +26,7 @@ class ColabFiltering
   def numerator(song)
     sum = 0.0
     @neighborhood.neighbors.each do |neighbor|
-      if neighbor.score >= 0.4
+      if neighbor.score >= 0.3
         neighbor_rating = Rating.search_value_by(neighbor.user,song)
         if neighbor_rating
           rating_diff = neighbor_rating.value - neighbor.user.rating_average
