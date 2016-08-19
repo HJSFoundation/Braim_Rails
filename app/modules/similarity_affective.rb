@@ -1,6 +1,6 @@
 class SimilarityAffective 
   attr_accessor :user_first , :user_second
-  attr_reader :common_items,:ratings_first, :ratings_second , :sim_value , :mode
+  attr_reader :common_items,:ratings_first, :ratings_second , :sim_value , :mode ,:state
 
   def initialize(user1,user2,state,mode)
     @user_first = user1

@@ -91,6 +91,25 @@ class User < ActiveRecord::Base
     NeighborhoodAffective.new(self,state,mode)
   end
 
+  def neighborhood_increments(state)
+    NeighborhoodIncrements.new(self,state)
+  end
+
+  def recommendations_increments(state)
+    colab_filtering = ColabFilteringIncrements.new(self,state)
+    unknown_songs = Song.all - songs
+    recommendation_list = []
+    unknown_songs.each do |song|
+      score = colab_filtering.prediction(song)
+      #byebug
+      if score
+        recommendation_list << Prediction.new(song,score)
+        #byebug
+      end
+    end
+    recommendation_list.sort_by(&:score).reverse
+  end
+
   def recommendations_affective(state,mode)
     colab_filtering = ColabFilteringAffective.new(self, state,mode)
     unknown_songs = Song.all - songs

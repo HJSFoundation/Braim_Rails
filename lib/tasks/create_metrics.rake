@@ -94,4 +94,39 @@ namespace :create_metrics do
       csv << ["affective filtering (instantaneousExcitement,sum)"].concat(mae_instantaneousExcitement_sum)    
     end
   end
+
+  desc "TODO"
+  task mae_incremental: :environment do
+    mae_incremental = Mae.calculate
+
+    mae_incremental_interest_average = MaeAffective.calculate("interest","average")
+    mae_incremental_interest_sum = MaeAffective.calculate("interest","sum")
+
+    mae_incremental_engagement_average = MaeAffective.calculate("engagement","average")
+   mae_incremental_engagement_sum = MaeAffective.calculate("engagement","sum")
+
+    mae_incremental_focus_average = MaeAffective.calculate("focus","average")
+    mae_incremental_focus_sum = MaeAffective.calculate("focus","sum")
+
+    mae_incremental_relaxation_average = MaeAffective.calculate("relaxation","average")
+    mae_incremental_relaxation_sum = MaeAffective.calculate("relaxation","sum")
+
+    mae_incremental_instantaneousExcitement_average = MaeAffective.calculate("instantaneousExcitement","average")
+   mae_incremental_instantaneousExcitement_sum = MaeAffective.calculate("instantaneousExcitement","sum")
+
+    CSV.open("metrics/mae_incremental_all.csv", "wb") do |csv|
+      csv << ["name"].concat((1..10).to_a)
+      csv << ["Traditional colaborative filtering"].concat(mae_incremental)
+      csv << ["affective filtering (interest,average)"].concat(mae_incremental_interest_average)
+      csv << ["affective filtering (interest,sum)"].concat(mae_incremental_interest_sum)
+      csv << ["affective filtering (engagement,average)"].concat(mae_incremental_engagement_average)
+      csv << ["affective filtering (engagement,sum)"].concat(mae_incremental_engagement_sum)  
+      csv << ["affective filtering (focus,average)"].concat(mae_incremental_focus_average)
+      csv << ["affective filtering (focus,sum)"].concat(mae_incremental_focus_sum)      
+      csv << ["affective filtering (relaxation,average)"].concat(mae_incremental_relaxation_average)
+      csv << ["affective filtering (relaxation,sum)"].concat(mae_incremental_relaxation_sum)    
+      csv << ["affective filtering (instantaneousExcitement,average)"].concat(mae_incremental_instantaneousExcitement_average)
+      csv << ["affective filtering (instantaneousExcitement,sum)"].concat(mae_incremental_instantaneousExcitement_sum)    
+    end
+  end
 end
