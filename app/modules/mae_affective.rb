@@ -7,14 +7,15 @@ class MaeAffective
 
   def self.calculate(state,mode)
     values = []
-    sections = Recording.all_min.in_groups(10,false)
-    sections.each do |section|
+    sections = Rating.all.in_groups(10,false)
+    sections.each_with_index do |section,i|
       values << self.calculate_section(section,state,mode)
+      puts "MAE affective #{state} #{mode} #{(i+1)*10}% complete"
     end 
     values
   end
 
-  def self.calculate_section(recordings,state,mode)
+  def self.calculate_section(ratings,state,mode)
     #total_neighbors = user.neighborhood
     #sum = user.neighbor_sum(total_neighbors)
 
@@ -22,16 +23,14 @@ class MaeAffective
 
     total = 0
     counter = 0
-    recordings.each do |recording|
-      user = recording.user
-      song = recording.song
+    ratings.each do |rating|
+      user = rating.user
+      song = rating.song
       colab_filtering = ColabFilteringAffective.new(user,state,mode)
       score = colab_filtering.prediction(song)
-      user_rating = Rating.search_value_by(user,song)
-      user_rating ? rating = user_rating.value : rating = user.rating_average
       #byebug
       if score
-        total = total + (score - rating)
+        total = total + (score - rating.value)
         counter += 1
         #byebug
       end

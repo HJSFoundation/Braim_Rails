@@ -1,3 +1,4 @@
+require "csv"
 class Mae
   # attr_accessor :user , :score
   # def initialize(user, score)  
@@ -8,8 +9,9 @@ class Mae
   def self.calculate
     values = []
     sections = Rating.all.in_groups(10,false)
-    sections.each do |section|
+    sections.each_with_index do |section,i|
       values << self.calculate_section(section)
+      puts "MAE #{(i+1)*10}% complete"
     end 
     values
   end
