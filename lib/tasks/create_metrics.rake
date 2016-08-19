@@ -96,25 +96,61 @@ namespace :create_metrics do
   end
 
   desc "TODO"
-  task mae_incremental: :environment do
+  task mrse_increments: :environment do
+    mrse = Mrse.calculate
+
+    mrse_interest_average = MrseIncrements.calculate("interest")
+    mrse_interest_sum = MrseIncrements.calculate("interest")
+
+    mrse_engagement_average = MrseIncrements.calculate("engagement")
+    mrse_engagement_sum = MrseIncrements.calculate("engagement")
+
+    mrse_focus_average = MrseIncrements.calculate("focus")
+    mrse_focus_sum = MrseIncrements.calculate("focus")
+
+    mrse_relaxation_average = MrseIncrements.calculate("relaxation")
+    mrse_relaxation_sum = MrseIncrements.calculate("relaxation")
+
+    mrse_instantaneousExcitement_average = MrseIncrements.calculate("instantaneousExcitement")
+    mrse_instantaneousExcitement_sum = MrseIncrements.calculate("instantaneousExcitement")
+
+    CSV.open("metrics/mrse_increments.csv", "wb") do |csv|
+      csv << ["name"].concat((1..10).to_a)
+      csv << ["Traditional colaborative filtering"].concat(mrse)
+      csv << ["affective filtering (interest,average)"].concat(mrse_interest_average)
+      csv << ["affective filtering (interest,sum)"].concat(mrse_interest_sum)
+      csv << ["affective filtering (engagement,average)"].concat(mrse_engagement_average)
+      csv << ["affective filtering (engagement,sum)"].concat(mrse_engagement_sum)  
+      csv << ["affective filtering (focus,average)"].concat(mrse_focus_average)
+      csv << ["affective filtering (focus,sum)"].concat(mrse_focus_sum)      
+      csv << ["affective filtering (relaxation,average)"].concat(mrse_relaxation_average)
+      csv << ["affective filtering (relaxation,sum)"].concat(mrse_relaxation_sum)    
+      csv << ["affective filtering (instantaneousExcitement,average)"].concat(mrse_instantaneousExcitement_average)
+      csv << ["affective filtering (instantaneousExcitement,sum)"].concat(mrse_instantaneousExcitement_sum)    
+    end 
+  end
+
+
+  desc "TODO"
+  task mae_increments: :environment do
     mae_incremental = Mae.calculate
 
-    mae_incremental_interest_average = MaeAffective.calculate("interest","average")
-    mae_incremental_interest_sum = MaeAffective.calculate("interest","sum")
+    mae_incremental_interest_average = MaeIncrements.calculate("interest")
+    mae_incremental_interest_sum = MaeIncrements.calculate("interest")
 
-    mae_incremental_engagement_average = MaeAffective.calculate("engagement","average")
-   mae_incremental_engagement_sum = MaeAffective.calculate("engagement","sum")
+    mae_incremental_engagement_average = MaeIncrements.calculate("engagement")
+    mae_incremental_engagement_sum = MaeIncrements.calculate("engagement")
 
-    mae_incremental_focus_average = MaeAffective.calculate("focus","average")
-    mae_incremental_focus_sum = MaeAffective.calculate("focus","sum")
+    mae_incremental_focus_average = MaeIncrements.calculate("focus")
+    mae_incremental_focus_sum = MaeIncrements.calculate("focus","sum")
 
-    mae_incremental_relaxation_average = MaeAffective.calculate("relaxation","average")
-    mae_incremental_relaxation_sum = MaeAffective.calculate("relaxation","sum")
+    mae_incremental_relaxation_average = MaeIncrements.calculate("relaxation")
+    mae_incremental_relaxation_sum = MaeIncrements.calculate("relaxation")
 
-    mae_incremental_instantaneousExcitement_average = MaeAffective.calculate("instantaneousExcitement","average")
-   mae_incremental_instantaneousExcitement_sum = MaeAffective.calculate("instantaneousExcitement","sum")
+    mae_incremental_instantaneousExcitement_average = MaeIncrements.calculate("instantaneousExcitement")
+    mae_incremental_instantaneousExcitement_sum = MaeIncrements.calculate("instantaneousExcitement")
 
-    CSV.open("metrics/mae_incremental_all.csv", "wb") do |csv|
+    CSV.open("metrics/mae_increments_all.csv", "wb") do |csv|
       csv << ["name"].concat((1..10).to_a)
       csv << ["Traditional colaborative filtering"].concat(mae_incremental)
       csv << ["affective filtering (interest,average)"].concat(mae_incremental_interest_average)
