@@ -32,7 +32,7 @@ class MrseAffective
         #byebug
       end
     end
-    counter = 1 if counter == 0
+
     mrse = Math.sqrt(total / counter)
   
   end

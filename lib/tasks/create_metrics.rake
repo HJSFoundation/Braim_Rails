@@ -99,34 +99,20 @@ namespace :create_metrics do
   task mrse_increments: :environment do
     mrse = Mrse.calculate
 
-    mrse_interest_average = MrseIncrements.calculate("interest")
-    mrse_interest_sum = MrseIncrements.calculate("interest")
-
-    mrse_engagement_average = MrseIncrements.calculate("engagement")
-    mrse_engagement_sum = MrseIncrements.calculate("engagement")
-
-    mrse_focus_average = MrseIncrements.calculate("focus")
-    mrse_focus_sum = MrseIncrements.calculate("focus")
-
-    mrse_relaxation_average = MrseIncrements.calculate("relaxation")
-    mrse_relaxation_sum = MrseIncrements.calculate("relaxation")
-
-    mrse_instantaneousExcitement_average = MrseIncrements.calculate("instantaneousExcitement")
-    mrse_instantaneousExcitement_sum = MrseIncrements.calculate("instantaneousExcitement")
+    mrse_interest = MrseIncrements.calculate("interest")
+    mrse_engagement = MrseIncrements.calculate("engagement")
+    mrse_focus = MrseIncrements.calculate("focus")
+    mrse_relaxation = MrseIncrements.calculate("relaxation")
+    mrse_instantaneousExcitement = MrseIncrements.calculate("instantaneousExcitement")
 
     CSV.open("metrics/mrse_increments.csv", "wb") do |csv|
       csv << ["name"].concat((1..10).to_a)
       csv << ["Traditional colaborative filtering"].concat(mrse)
-      csv << ["affective filtering (interest,average)"].concat(mrse_interest_average)
-      csv << ["affective filtering (interest,sum)"].concat(mrse_interest_sum)
-      csv << ["affective filtering (engagement,average)"].concat(mrse_engagement_average)
-      csv << ["affective filtering (engagement,sum)"].concat(mrse_engagement_sum)  
-      csv << ["affective filtering (focus,average)"].concat(mrse_focus_average)
-      csv << ["affective filtering (focus,sum)"].concat(mrse_focus_sum)      
-      csv << ["affective filtering (relaxation,average)"].concat(mrse_relaxation_average)
-      csv << ["affective filtering (relaxation,sum)"].concat(mrse_relaxation_sum)    
-      csv << ["affective filtering (instantaneousExcitement,average)"].concat(mrse_instantaneousExcitement_average)
-      csv << ["affective filtering (instantaneousExcitement,sum)"].concat(mrse_instantaneousExcitement_sum)    
+      csv << ["affective filtering (interest)"].concat(mrse_interest)
+      csv << ["affective filtering (engagement)"].concat(mrse_engagement)
+      csv << ["affective filtering (focus)"].concat(mrse_focus)      
+      csv << ["affective filtering (relaxation)"].concat(mrse_relaxation)    
+      csv << ["affective filtering (instantaneousExcitement)"].concat(mrse_instantaneousExcitement)    
     end 
   end
 
@@ -135,34 +121,20 @@ namespace :create_metrics do
   task mae_increments: :environment do
     mae_incremental = Mae.calculate
 
-    mae_incremental_interest_average = MaeIncrements.calculate("interest")
-    mae_incremental_interest_sum = MaeIncrements.calculate("interest")
-
-    mae_incremental_engagement_average = MaeIncrements.calculate("engagement")
-    mae_incremental_engagement_sum = MaeIncrements.calculate("engagement")
-
-    mae_incremental_focus_average = MaeIncrements.calculate("focus")
-    mae_incremental_focus_sum = MaeIncrements.calculate("focus","sum")
-
-    mae_incremental_relaxation_average = MaeIncrements.calculate("relaxation")
-    mae_incremental_relaxation_sum = MaeIncrements.calculate("relaxation")
-
-    mae_incremental_instantaneousExcitement_average = MaeIncrements.calculate("instantaneousExcitement")
-    mae_incremental_instantaneousExcitement_sum = MaeIncrements.calculate("instantaneousExcitement")
+    mae_incremental_interest = MaeIncrements.calculate("interest")
+    mae_incremental_engagement = MaeIncrements.calculate("engagement")
+    mae_incremental_focus = MaeIncrements.calculate("focus")
+    mae_incremental_relaxation = MaeIncrements.calculate("relaxation")
+    mae_incremental_instantaneousExcitement = MaeIncrements.calculate("instantaneousExcitement")
 
     CSV.open("metrics/mae_increments_all.csv", "wb") do |csv|
       csv << ["name"].concat((1..10).to_a)
       csv << ["Traditional colaborative filtering"].concat(mae_incremental)
-      csv << ["affective filtering (interest,average)"].concat(mae_incremental_interest_average)
-      csv << ["affective filtering (interest,sum)"].concat(mae_incremental_interest_sum)
-      csv << ["affective filtering (engagement,average)"].concat(mae_incremental_engagement_average)
-      csv << ["affective filtering (engagement,sum)"].concat(mae_incremental_engagement_sum)  
-      csv << ["affective filtering (focus,average)"].concat(mae_incremental_focus_average)
-      csv << ["affective filtering (focus,sum)"].concat(mae_incremental_focus_sum)      
-      csv << ["affective filtering (relaxation,average)"].concat(mae_incremental_relaxation_average)
-      csv << ["affective filtering (relaxation,sum)"].concat(mae_incremental_relaxation_sum)    
-      csv << ["affective filtering (instantaneousExcitement,average)"].concat(mae_incremental_instantaneousExcitement_average)
-      csv << ["affective filtering (instantaneousExcitement,sum)"].concat(mae_incremental_instantaneousExcitement_sum)    
+      csv << ["affective filtering (interest)"].concat(mae_incremental_interest)
+      csv << ["affective filtering (engagement)"].concat(mae_incremental_engagement)  
+      csv << ["affective filtering (focus)"].concat(mae_incremental_focus)      
+      csv << ["affective filtering (relaxation)"].concat(mae_incremental_relaxation)
+      csv << ["affective filtering (instantaneousExcitement)"].concat(mae_incremental_instantaneousExcitement)    
     end
   end
 end

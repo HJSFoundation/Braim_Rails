@@ -9,7 +9,7 @@ class MrseIncrements
     values = []
     sections = Rating.all.in_groups(10)
     sections.each_with_index do |section,i|
-      values << self.calculate_section(section)
+      values << self.calculate_section(section,state)
       puts "MRSE increments #{state} #{(i+1)*10}% complete"
     end 
     values
@@ -32,7 +32,7 @@ class MrseIncrements
         #byebug
       end
     end
-
+    counter = 1 if counter == 0
     mrse = Math.sqrt(total / counter)
   
   end
