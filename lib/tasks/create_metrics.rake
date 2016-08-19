@@ -26,6 +26,41 @@ namespace :create_metrics do
   end
 
   desc "TODO"
+  task mrse_all: :environment do
+    mrse = Mrse.calculate
+
+    mrse_interest_average = MrseAffective.calculate("interest","average")
+    mrse_interest_sum = MrseAffective.calculate("interest","sum")
+
+    mrse_engagement_average = MrseAffective.calculate("engagement","average")
+    mrse_engagement_sum = MrseAffective.calculate("engagement","sum")
+
+    mrse_focus_average = MrseAffective.calculate("focus","average")
+    mrse_focus_sum = MrseAffective.calculate("focus","sum")
+
+    mrse_relaxation_average = MrseAffective.calculate("relaxation","average")
+    mrse_relaxation_sum = MrseAffective.calculate("relaxation","sum")
+
+    mrse_instantaneousExcitement_average = MrseAffective.calculate("instantaneousExcitement","average")
+    mrse_instantaneousExcitement_sum = MrseAffective.calculate("instantaneousExcitement","sum")
+
+    CSV.open("metrics/mrse_all.csv", "wb") do |csv|
+      csv << ["name"].concat((1..10).to_a)
+      csv << ["Traditional colaborative filtering"].concat(mrse)
+      csv << ["affective filtering (interest,average)"].concat(mrse_interest_average)
+      csv << ["affective filtering (interest,sum)"].concat(mrse_interest_sum)
+      csv << ["affective filtering (engagement,average)"].concat(mrse_engagement_average)
+      csv << ["affective filtering (engagement,sum)"].concat(mrse_engagement_sum)  
+      csv << ["affective filtering (focus,average)"].concat(mrse_focus_average)
+      csv << ["affective filtering (focus,sum)"].concat(mrse_focus_sum)      
+      csv << ["affective filtering (relaxation,average)"].concat(mrse_relaxation_average)
+      csv << ["affective filtering (relaxation,sum)"].concat(mrse_relaxation_sum)    
+      csv << ["affective filtering (instantaneousExcitement,average)"].concat(mrse_instantaneousExcitement_average)
+      csv << ["affective filtering (instantaneousExcitement,sum)"].concat(mrse_instantaneousExcitement_sum)    
+    end 
+  end
+
+  desc "TODO"
   task mae_all: :environment do
     mae = Mae.calculate
 
