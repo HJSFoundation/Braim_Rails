@@ -25,7 +25,7 @@ class ColabFilteringIncrements
   def numerator(song)
     sum = 0.0
     @neighborhood.neighbors.each do |neighbor|
-      if neighbor.score >= 0.4
+      if neighbor.score >= 0.2
         neighbor_rating = Rating.search_value_by(neighbor.user,song)
         if neighbor_rating
           rating_diff = neighbor_rating.value - neighbor.user.rating_average

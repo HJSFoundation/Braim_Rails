@@ -2,7 +2,7 @@ namespace :create_metrics do
   desc "TODO"
   task mae: :environment do
     values = Mae.calculate
-    CSV.open("metrics/mae.csv", "wb") do |csv|
+    CSV.open("metrics_prom/mae.csv", "wb") do |csv|
       csv << ["name"].concat((1..10).to_a)
       csv << ["Traditional colaborative filtering"].concat(values)
     end
@@ -11,7 +11,7 @@ namespace :create_metrics do
   desc "TODO"
   task mrse: :environment do
     values = Mrse.calculate
-    CSV.open("metrics/mrse.csv", "wb") do |csv|
+    CSV.open("metrics_prom/mrse.csv", "wb") do |csv|
       csv << ["name"].concat((1..10).to_a)
       csv << ["Traditional colaborative filtering"].concat(values)
     end
@@ -44,7 +44,7 @@ namespace :create_metrics do
     mrse_instantaneousExcitement_average = MrseAffective.calculate("instantaneousExcitement","average")
     mrse_instantaneousExcitement_sum = MrseAffective.calculate("instantaneousExcitement","sum")
 
-    CSV.open("metrics/mrse_all.csv", "wb") do |csv|
+    CSV.open("metrics_prom/mrse_all.csv", "wb") do |csv|
       csv << ["name"].concat((1..10).to_a)
       csv << ["Traditional colaborative filtering"].concat(mrse)
       csv << ["affective filtering (interest,average)"].concat(mrse_interest_average)
@@ -79,7 +79,7 @@ namespace :create_metrics do
     mae_instantaneousExcitement_average = MaeAffective.calculate("instantaneousExcitement","average")
     mae_instantaneousExcitement_sum = MaeAffective.calculate("instantaneousExcitement","sum")
 
-    CSV.open("metrics/mae_all.csv", "wb") do |csv|
+    CSV.open("metrics_prom/mae_all.csv", "wb") do |csv|
       csv << ["name"].concat((1..10).to_a)
       csv << ["Traditional colaborative filtering"].concat(mae)
       csv << ["affective filtering (interest,average)"].concat(mae_interest_average)
@@ -105,7 +105,7 @@ namespace :create_metrics do
     mrse_relaxation = MrseIncrements.calculate("relaxation")
     mrse_instantaneousExcitement = MrseIncrements.calculate("instantaneousExcitement")
 
-    CSV.open("metrics/mrse_increments.csv", "wb") do |csv|
+    CSV.open("metrics_prom/mrse_increments.csv", "wb") do |csv|
       csv << ["name"].concat((1..10).to_a)
       csv << ["Traditional colaborative filtering"].concat(mrse)
       csv << ["affective filtering (interest)"].concat(mrse_interest)
@@ -127,7 +127,7 @@ namespace :create_metrics do
     mae_incremental_relaxation = MaeIncrements.calculate("relaxation")
     mae_incremental_instantaneousExcitement = MaeIncrements.calculate("instantaneousExcitement")
 
-    CSV.open("metrics/mae_increments_all.csv", "wb") do |csv|
+    CSV.open("metrics_prom/mae_increments_all.csv", "wb") do |csv|
       csv << ["name"].concat((1..10).to_a)
       csv << ["Traditional colaborative filtering"].concat(mae_incremental)
       csv << ["affective filtering (interest)"].concat(mae_incremental_interest)
