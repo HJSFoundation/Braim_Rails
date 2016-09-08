@@ -134,7 +134,7 @@ namespace :create_metrics do
       csv << ["affective filtering (engagement)"].concat(mae_incremental_engagement)  
       csv << ["affective filtering (focus)"].concat(mae_incremental_focus)      
       csv << ["affective filtering (relaxation)"].concat(mae_incremental_relaxation)
-      csv << ["affective filtering (instantaneousExcitement)"].concat(mae_incremental_instantaneousExcitement)    
+      csv << ["affective filtering (instantanºeousExcitement)"].concat(mae_incremental_instantaneousExcitement)    
     end
   end
 end

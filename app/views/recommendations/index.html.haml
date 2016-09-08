@@ -15,7 +15,7 @@
           %strong Score:
           =rec.score
 .neighbors-list
-  -current_user.neighborhood.each do |neighbor|
+  -current_user.neighborhood.neighbors.each do |neighbor|
     %h1
       =neighbor.user.name
     %strong

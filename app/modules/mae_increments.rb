@@ -21,9 +21,14 @@ class MaeIncrements
       print "MAE prediction #{state} #{(i*100)/all_ratings.count}% complete"+ "\r"
     end 
 
-    byebug
-    all_prediction_errors.in_groups(10,false).each_with_index do |section,i|
-      values << self.calculate_section(section)
+    if all_prediction_errors.count > 10
+      all_prediction_errors.in_groups(10,false).each_with_index do |section,i|
+        values << self.calculate_section(section)
+      end
+    else
+      all_prediction_errors.each do |prediction_error|
+        values << prediction_error.score - prediction_error.rating.value
+      end
     end
     values
   end
