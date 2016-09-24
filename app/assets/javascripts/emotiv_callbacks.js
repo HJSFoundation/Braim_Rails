@@ -190,16 +190,16 @@ $(document).bind("EmoStateUpdated",function(event,userId,es){
   loadWirelessQuality(wireSignal);
   //**Draw Raw Signal**//
 
-  EdkDll.IEE_DataUpdateHandle(userId);
-  channelData = EdkDll.IEE_DataGet();
-  lpf = 4090;
-  processSignal(channelData.IED_AF3);
+  //EdkDll.IEE_DataUpdateHandle(userId);
+  //channelData = EdkDll.IEE_DataGet();
+  //lpf = 4090;
+  //processSignal(channelData.IED_AF3);
 });
 
 function processSignal(data){
   if (data != undefined)
   {
-    console.log(data.length);
+    //console.log(data.length);
     for (i = 1; i<data.length; i++){
       sam = Number(data[i]); 
       //console.log(sam);
@@ -219,7 +219,7 @@ function processSignal(data){
   }
   else
   {
-    console.log("undefined");
+    //console.log("undefined");
   }
   ctx.stroke();
 }             

@@ -13,7 +13,7 @@ $(window).load ->
     emotiv_relax= null
     emotiv_instantaneousExcitement= null
     emotiv_longExcitement= null
-    emotiv_stress= null
+    #emotiv_stress= null
     data = []
     time= null
     user_recordings= null
@@ -56,7 +56,7 @@ $(window).load ->
       emotiv_relax = chart.series[3].data[chart.series[3].data.length-1].y;
       emotiv_instantaneousExcitement = chart.series[4].data[chart.series[4].data.length-1].y;
       emotiv_longExcitement = chart.series[5].data[chart.series[5].data.length-1].y;
-      emotiv_stress = chart.series[6].data[chart.series[6].data.length-1].y;
+      #emotiv_stress = chart.series[6].data[chart.series[6].data.length-1].y;
       new_date = (new Date()).getTime();
       performance_data = {
         user_id: userID,
@@ -67,7 +67,7 @@ $(window).load ->
         relaxation: emotiv_relax,
         instantaneousExcitement: emotiv_instantaneousExcitement,
         longTermExcitement: emotiv_longExcitement,
-        stress: emotiv_stress,
+        #stress: emotiv_stress,
         timestamp: time,
         date: new_date,
         signal_quality: currentSignalQuality

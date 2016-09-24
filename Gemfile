@@ -33,6 +33,7 @@ gem 'predictionio', '0.9.6'
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'
   gem 'factory_girl_rails'
+  gem 'pry'
 end
 
 group :test do

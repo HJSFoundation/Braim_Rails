@@ -142,7 +142,7 @@ $(document).ready(function () {
       
       var interest =Math.round(es.IS_PerformanceMetricGetInterestScore()*1000000)/1000000;
       var engagement = Math.round(es.IS_PerformanceMetricGetEngagementBoredomScore()*1000000)/1000000;
-      var stress = Math.round(es.IS_PerformanceMetricGetStressScore()*1000000)/1000000;
+      //var stress = Math.round(es.IS_PerformanceMetricGetStressScore()*1000000)/1000000;
       var focus = Math.round(es.IS_PerformanceMetricGetFocusScore()*1000000)/1000000;
       var relax = Math.round(es.IS_PerformanceMetricGetRelaxationScore()*1000000)/1000000;
       var instantaneousExcitement = Math.round(es.IS_PerformanceMetricGetInstantaneousExcitementScore()*1000000)/1000000;
@@ -155,7 +155,7 @@ $(document).ready(function () {
       chart1.series[3].addPoint([currentTime, relax],true,shift);
       chart1.series[4].addPoint([currentTime, instantaneousExcitement],true,shift);
       chart1.series[5].addPoint([currentTime, longExcitement],true,shift);
-      chart1.series[6].addPoint([currentTime, stress],true,shift);
+      //chart1.series[6].addPoint([currentTime, stress],true,shift);
       }
     }
    

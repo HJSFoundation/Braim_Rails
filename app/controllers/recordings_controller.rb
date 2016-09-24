@@ -36,7 +36,7 @@ class RecordingsController < ApplicationController
         entry.relaxation = r['relaxation']
         entry.instantaneousExcitement = r['instantaneousExcitement']
         entry.longTermExcitement = r['longTermExcitement']
-        entry.stress = r['stress']
+        #entry.stress = r['stress']
         entry.timestamp = r['timestamp']
         entry.date = Time.at(r['date'])
         entry.signal_quality = r['signal_quality']

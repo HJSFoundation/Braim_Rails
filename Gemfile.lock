@@ -208,6 +208,7 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
+    method_source (0.8.2)
     mime-types (2.99)
     mini_portile2 (2.0.0)
     minitest (5.8.3)
@@ -237,6 +238,10 @@ GEM
     pg (0.18.4)
     predictionio (0.9.6)
       json (~> 1.8)
+    pry (0.10.3)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
+      slop (~> 3.4)
     quiet_assets (1.1.0)
       railties (>= 3.1, < 5.0)
     rack (1.6.4)
@@ -329,6 +334,7 @@ GEM
       actionpack (> 4, < 5.1)
       activemodel (> 4, < 5.1)
     simple_oauth (0.3.1)
+    slop (3.6.0)
     sort_alphabetical (1.0.2)
       unicode_utils (>= 1.2.2)
     spring (1.6.0)
@@ -404,6 +410,7 @@ DEPENDENCIES
   launchy
   pg
   predictionio (= 0.9.6)
+  pry
   quiet_assets
   rails (= 4.2.3)
   rails_admin

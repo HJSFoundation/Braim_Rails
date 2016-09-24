@@ -33,7 +33,7 @@ class Entry < ActiveRecord::Base
   validates :relaxation , presence: true
   validates :instantaneousExcitement , presence: true
   validates :longTermExcitement , presence: true
-  validates :stress , presence: true
+  #validates :stress , presence: true
   validates :timestamp , presence: true
   validates :date , presence: true
   validates :signal_quality , presence: true
