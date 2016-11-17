@@ -34,6 +34,14 @@ class User < ActiveRecord::Base
   
   accepts_nested_attributes_for :profile
 
+  def recordings_min
+    recordings.where("duration >= ?", 29)#.collect{ |recording| recording.song}
+  end
+
+  def recorded_songs
+    recordings_min.collect{ |recording| recording.song}
+  end
+  
   def full_name
     (self.name || "").capitalize
   end
@@ -73,4 +81,71 @@ class User < ActiveRecord::Base
   validates :name , presence: true
   validates :last_name , presence: true
   validates :country , presence: true
+
+
+  def neighborhood
+    Neighborhood.new(self)
+  end
+
+  def neighborhood_affective(state,mode)
+    NeighborhoodAffective.new(self,state,mode)
+  end
+
+  def neighborhood_increments(state)
+    NeighborhoodIncrements.new(self,state)
+  end
+
+  def recommendations_increments(state)
+    colab_filtering = ColabFilteringIncrements.new(self,state)
+    unknown_songs = Song.all - songs
+    recommendation_list = []
+    unknown_songs.each do |song|
+      score = colab_filtering.prediction(song)
+      #byebug
+      if score
+        recommendation_list << Prediction.new(song,score)
+        #byebug
+      end
+    end
+    recommendation_list.sort_by(&:score).reverse
+  end
+
+  def recommendations_affective(state,mode)
+    colab_filtering = ColabFilteringAffective.new(self, state,mode)
+    unknown_songs = Song.all - songs
+    recommendation_list = []
+    unknown_songs.each do |song|
+      score = colab_filtering.prediction(song)
+      #byebug
+      if score
+        recommendation_list << Prediction.new(song,score)
+        #byebug
+      end
+    end
+    recommendation_list.sort_by(&:score).reverse
+  end
+
+  def recommendations
+    colab_filtering = ColabFiltering.new(self)
+    unknown_songs = Song.all - songs
+    recommendation_list = []
+    unknown_songs.each do |song|
+      score = colab_filtering.prediction(song)
+      #byebug
+      if score
+        recommendation_list << Prediction.new(song,score)
+        #byebug
+      end
+    end
+    recommendation_list.sort_by(&:score).reverse
+  end
+
+  def rating_average
+    if ratings.any?
+      ratings.inject(0){ |sum, n| sum + n.value}.to_f / ratings.size 
+    else
+      0.0
+    end
+  end
+  
 end

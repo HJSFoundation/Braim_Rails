@@ -126,7 +126,7 @@ $(document).ready ->
           crosshairs: true
           shared: true
           borderColor: 'rgba(0, 0, 0, 0.83)'
-        legend: enabled: false
+        legend: enabled: true
         series: [
           {
             name: 'Interest'
@@ -176,13 +176,13 @@ $(document).ready ->
               symbol: 'circle'
             data: longTermExcitement
           }
-          {
-            name: 'Stress'
-            color: 'rgb(255, 255, 0)'
-            marker:
-              enabled: false
-              symbol: 'circle'
-            data: stress
-          }
+          # {
+          #   name: 'Stress'
+          #   color: 'rgb(255, 255, 0)'
+          #   marker:
+          #     enabled: false
+          #     symbol: 'circle'
+          #   data: stress
+          # }
         ])
   

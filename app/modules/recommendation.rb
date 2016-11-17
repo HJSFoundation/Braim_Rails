@@ -5,6 +5,6 @@ class Recommendation
     @score = score_value
   end
   def song
-    Song.find(self.item)
+    Song.find(self.item) 
   end
 end
