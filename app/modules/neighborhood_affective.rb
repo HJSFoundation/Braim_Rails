@@ -8,7 +8,7 @@ class NeighborhoodAffective
     @neighbors_sum  = calculate_sum
   end  
 
-  private
+
 
   def get_neighbors
     all_users = User.where.not(id: @user.id)

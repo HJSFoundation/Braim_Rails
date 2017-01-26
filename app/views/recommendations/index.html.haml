@@ -1,7 +1,7 @@
 %h1 Recommendations
 %br
 .recommendations-list
-  -@recommendations.each do |rec|
+  -current_user.recommendations[0..4].each do |rec|
     =link_to song_path(rec.song.song_spotify_id) do
       .recommendation
         .album
@@ -14,9 +14,15 @@
         .rec-score
           %strong Score:
           =rec.score
-.neighbors-list
-  -current_user.neighborhood.each do |neighbor|
-    %h1
-      =neighbor.user.name
-    %strong
-      =neighbor.score
+.recommendations-list
+  / average sum 
+  %h2 My neighbors
+  -current_user.neighborhood.get_neighbors[0..3].each do |neighbor|
+    .recommendation
+      .album
+        =image_tag gravatar_url(neighbor.user)
+      .song-info
+        %h2 
+          =neighbor.user.full_name
+       
+      
